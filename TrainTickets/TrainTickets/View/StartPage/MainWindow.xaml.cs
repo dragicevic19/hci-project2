@@ -20,9 +20,24 @@ namespace TrainTickets
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
         public MainWindow()
         {
             InitializeComponent();
+            pageLeft.Content = new PageForSignUp(pageLeft, pageRight);
+            pageRight.Content = new LoginPage(pageLeft, pageRight);
+        }
+
+        private void Image_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void pageLeft_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
         }
     }
 }

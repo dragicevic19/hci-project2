@@ -1,0 +1,86 @@
+﻿<Page x:Class="TrainTickets.RegistrationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TrainTickets"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegistrationPage">
+
+    <Grid>
+        <Image Source="/Images/close.png" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+
+        <Border Background="#FFFFFF" CornerRadius="0 10 10 0">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Sign Up" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
+
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/Email.png" Height="20" />
+                        <TextBlock x:Name="textEmail" MouseDown="textEmail_MouseDown" Text="Email" Style="{StaticResource textHint}" />
+                        <TextBox Name="txtEmail" TextChanged="txtEmail_TextChanged" Style="{StaticResource textBox}" />
+                    </Grid>
+                </Border>
+
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/Lock.png" Height="20" />
+                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" />
+                        <PasswordBox x:Name="passwordBox" PasswordChanged="passwordBox_PasswordChanged" Style="{StaticResource textBox}" />
+                    </Grid>
+                </Border>
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/Lock.png" Height="20" />
+                        <TextBlock x:Name="textConfPassword" MouseDown="textConfPassword_MouseDown" Text="Confirm Password" Style="{StaticResource textHint}" />
+                        <PasswordBox x:Name="confPasswordBox" PasswordChanged="confPasswordBox_PasswordChanged" Style="{StaticResource textBox}" />
+                    </Grid>
+                </Border>
+
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/Email.png" Height="20" />
+                        <TextBlock x:Name="textFirstName" MouseDown="textFirstName_MouseDown" Text="First Name" Style="{StaticResource textHint}" />
+                        <TextBox Name="txtFirstName" TextChanged="txtFirstName_TextChanged" Style="{StaticResource textBox}" />
+                    </Grid>
+                </Border>
+
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/Email.png" Height="20" />
+                        <TextBlock x:Name="textLastName" MouseDown="textLastName_MouseDown" Text="Last Name" Style="{StaticResource textHint}" />
+                        <TextBox Name="txtLastName" TextChanged="txtLastName_TextChanged" Style="{StaticResource textBox}" />
+                    </Grid>
+                </Border>
+
+                <Button Content="Sign Up" Click="Button_Click" Style="{StaticResource mainButton}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

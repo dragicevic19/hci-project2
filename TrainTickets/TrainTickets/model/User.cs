@@ -23,7 +23,6 @@ namespace TrainTickets.model
 
         public string LastName { get; set; }
         
-        [Index(IsUnique=true)]
         public string Email { get; set; }
 
         public string Password { get; set; }
