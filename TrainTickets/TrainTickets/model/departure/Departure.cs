@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,15 @@ namespace TrainTickets.model.departure
         [Key]
         public int Id { get; set; }
 
-        public TrainRoute Route { get; set; } 
+        [ForeignKey("Route")]
+        public int RouteId { get; set; }
+        public virtual TrainRoute Route { get; set; }
 
-        public Train Train { get; set; }
+
+        [ForeignKey("Train")]
+        public int TrainId { get; set; }
+        public virtual Train Train { get; set; }
+
 
         public DateTime DepartureTime { get; set; }
     }

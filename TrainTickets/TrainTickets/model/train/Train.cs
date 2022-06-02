@@ -17,6 +17,7 @@ namespace TrainTickets.model.train
 
         public string Name { get; set; }
 
-        public List<TrainSeats> Seats { get; set; }
+        public virtual List<TrainSeats> Seats { get; set; }
+
     }
 }
