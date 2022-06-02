@@ -15,19 +15,13 @@ namespace TrainTickets.model.ticket
         [Key]
         public int Id { get; set; }
 
-        public virtual User User { get; set; }
-
         [ForeignKey("User")]
         public int UserId { get; set; }
+        public virtual User User { get; set; }
 
-        public virtual StationOnRoute StartStation { get; set; }
 
-        [ForeignKey("StartStation")]
         public int StartStationId { get; set; }
 
-        public virtual StationOnRoute EndStation { get; set; }
-
-        [ForeignKey("EndStation")]
         public int EndStationId { get; set; }
 
         public double Price { get; set; }
@@ -35,9 +29,11 @@ namespace TrainTickets.model.ticket
         public bool IsPurchased { get; set; }
 
         public DateTime PurchaseDateTime { get; set; }
-        public virtual OneSeat Seat { get; set; }
+
 
         [ForeignKey("Seat")]
         public int SeatId { get; set; }
+        public virtual OneSeat Seat { get; set; }
+
     }
 }

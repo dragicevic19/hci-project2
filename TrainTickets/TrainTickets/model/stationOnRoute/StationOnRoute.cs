@@ -15,10 +15,10 @@ namespace TrainTickets.model.stationOnRoute
         [Key]
         public int Id { get; set; }
 
-        public virtual Station Station { get; set; }
-
         [ForeignKey("Station")]
         public int StationId { get; set; }
+        public virtual Station Station { get; set; }
+
 
         public DateTime DateTime { get; set; }
 

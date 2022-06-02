@@ -15,15 +15,15 @@ namespace TrainTickets.model.departure
         [Key]
         public int Id { get; set; }
 
-        public virtual TrainRoute Route { get; set; }
-
         [ForeignKey("Route")]
         public int RouteId { get; set; }
+        public virtual TrainRoute Route { get; set; }
 
-        public virtual Train Train { get; set; }
 
         [ForeignKey("Train")]
         public int TrainId { get; set; }
+        public virtual Train Train { get; set; }
+
 
         public DateTime DepartureTime { get; set; }
     }
