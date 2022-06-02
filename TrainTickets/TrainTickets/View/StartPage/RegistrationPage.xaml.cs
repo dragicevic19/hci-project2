@@ -23,6 +23,7 @@ namespace TrainTickets
     public partial class RegistrationPage : Page
     {
         private Frame left_frame, right_frame;
+        private Window mainWindow;
         private UserService userService;
 
         public RegistrationPage()
@@ -30,11 +31,12 @@ namespace TrainTickets
             InitializeComponent();
         }
 
-        public RegistrationPage(Frame l, Frame r)
+        public RegistrationPage(Frame l, Frame r, Window mainWindow)
         {
             InitializeComponent();
             this.left_frame = l;
             this.right_frame = r;
+            this.mainWindow = mainWindow;
             this.userService = new UserService();
         }
 
@@ -55,8 +57,8 @@ namespace TrainTickets
                 if (isRegistered)
                 {
                     MessageBox.Show("Successful registration! You can log in now!");
-                    this.left_frame.Content = new PageForSignUp(left_frame, right_frame);
-                    this.right_frame.Content = new LoginPage(left_frame, right_frame);
+                    this.left_frame.Content = new PageForSignUp(left_frame, right_frame, mainWindow);
+                    this.right_frame.Content = new LoginPage(left_frame, right_frame, mainWindow);
                 }
                 else
                 {

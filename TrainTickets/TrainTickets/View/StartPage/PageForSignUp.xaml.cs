@@ -21,6 +21,7 @@ namespace TrainTickets
     public partial class PageForSignUp : Page
     {
         private Frame page_left, page_right;
+        private Window mainWindow;
 
         public PageForSignUp()
         {
@@ -29,14 +30,14 @@ namespace TrainTickets
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.page_left.Content = new PageForSignIn(this.page_left, this.page_right);
-            this.page_right.Content = new RegistrationPage(page_left, page_right);
+            this.page_left.Content = new PageForSignIn(this.page_left, this.page_right, mainWindow);
+            this.page_right.Content = new RegistrationPage(page_left, page_right, mainWindow);
         }
 
-        public PageForSignUp(Frame pageLeft, Frame pageRight)
+        public PageForSignUp(Frame pageLeft, Frame pageRight, Window mainWindow)
         {
             InitializeComponent();
-
+            this.mainWindow = mainWindow;
             this.page_left = pageLeft;
             this.page_right = pageRight;
         }

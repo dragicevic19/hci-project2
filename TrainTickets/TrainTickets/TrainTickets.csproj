@@ -8,9 +8,59 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Assets\closeBtn_default.png" />
+    <None Remove="Images\Assets\closeBtn_MouseOver.png" />
+    <None Remove="Images\Assets\img_background.png" />
+    <None Remove="Images\Assets\img_contact.png" />
+    <None Remove="Images\Assets\img_home.png" />
+    <None Remove="Images\Assets\img_map.png" />
+    <None Remove="Images\Assets\img_message.png" />
+    <None Remove="Images\Assets\img_setting.png" />
+    <None Remove="Images\Assets\img_signout.png" />
+    <None Remove="Images\Assets\tgBtn_default.png" />
+    <None Remove="Images\Assets\tgBtn_MouseOver.png" />
     <None Remove="Images\close.png" />
     <None Remove="Images\Email.png" />
     <None Remove="Images\Lock.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Assets\closeBtn_default.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Assets\closeBtn_MouseOver.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\img_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\img_contact.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\img_home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\img_map.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\img_message.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\img_setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\img_signout.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\tgBtn_default.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Assets\tgBtn_MouseOver.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +78,10 @@
     <Resource Include="Images\Lock.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>

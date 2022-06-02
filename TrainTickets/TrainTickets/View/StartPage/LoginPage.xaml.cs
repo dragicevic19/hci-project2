@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrainTickets.Services;
+using TrainTickets.View.HomePage;
 
 namespace TrainTickets
 {
@@ -23,6 +24,8 @@ namespace TrainTickets
     {
         private Frame page_left;
         private Frame page_right;
+        private Window mainWindow;
+
         private UserService userService;
 
         public LoginPage()
@@ -30,11 +33,12 @@ namespace TrainTickets
             InitializeComponent();
         }
 
-        public LoginPage(Frame pageLeft, Frame pageRight)
+        public LoginPage(Frame pageLeft, Frame pageRight, Window mainWindow)
         {
             InitializeComponent();
             this.page_left = pageLeft;
             this.page_right = pageRight;
+            this.mainWindow = mainWindow;
             this.userService = new UserService();
         }
 
@@ -63,9 +67,9 @@ namespace TrainTickets
                 }
                 else
                 {
-                    MessageBox.Show("Successful login - " + txtEmail.Text);
-/*                    frame_page.Content = new UserProfilePage(data, frame_page);
-*/
+                    mainWindow.Hide();
+                    Window homeWindow = new HomePageWindow(txtEmail.Text, userService);
+                    homeWindow.Show();
                 }
             }
         }

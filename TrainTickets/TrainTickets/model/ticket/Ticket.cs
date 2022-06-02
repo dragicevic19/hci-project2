@@ -22,5 +22,6 @@ namespace TrainTickets.model.ticket
         public bool IsPurchased { get; set; }
 
         public DateTime PurchaseDateTime { get; set; }
+
     }
 }
