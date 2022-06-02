@@ -12,6 +12,6 @@ namespace TrainTickets.model.trainSeats
         [Key]
         public int Id { get; set; }
 
-        public List<OneSeat> Seats { get; set; }
+        public virtual List<OneSeat> Seats { get; set; }
     }
 }

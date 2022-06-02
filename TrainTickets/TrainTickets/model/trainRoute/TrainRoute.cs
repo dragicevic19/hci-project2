@@ -14,7 +14,7 @@ namespace TrainTickets.model.trainRoute
         [Key]
         public int Id { get; set; } 
 
-        public List<StationOnRoute> Stations { get; set; }
+        public virtual List<StationOnRoute> Stations { get; set; }
 
         public List<TimeOnly> DepartureTimes { get; set; }
 

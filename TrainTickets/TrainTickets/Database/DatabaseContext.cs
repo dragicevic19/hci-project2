@@ -34,5 +34,6 @@ namespace TrainTickets.Database
         public DbSet<Station> Stations { get; set; }
 
         public DbSet<Departure> Departures { get; set; }
+
     }
 }
