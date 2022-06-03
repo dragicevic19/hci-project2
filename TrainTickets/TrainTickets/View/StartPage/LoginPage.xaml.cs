@@ -68,7 +68,7 @@ namespace TrainTickets
                 else
                 {
                     mainWindow.Hide();
-                    Window homeWindow = new HomePageWindow(txtEmail.Text, userService);
+                    Window homeWindow = new HomePageWindow(txtEmail.Text, userService, mainWindow);
                     homeWindow.Show();
                 }
             }

@@ -22,6 +22,15 @@
     <None Remove="Images\close.png" />
     <None Remove="Images\Email.png" />
     <None Remove="Images\Lock.png" />
+    <None Remove="Images\logout1.png" />
+    <None Remove="Images\map1.png" />
+    <None Remove="Images\max_def.png" />
+    <None Remove="Images\max_mo.png" />
+    <None Remove="Images\station1.png" />
+    <None Remove="Images\ticket1.png" />
+    <None Remove="Images\timetable1.png" />
+    <None Remove="Images\train.png" />
+    <None Remove="Images\underground.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,10 +87,33 @@
     <Resource Include="Images\Lock.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
+    <Resource Include="Images\logout1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\map1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\max_def.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\max_mo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\station1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ticket1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\timetable1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\train.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\underground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

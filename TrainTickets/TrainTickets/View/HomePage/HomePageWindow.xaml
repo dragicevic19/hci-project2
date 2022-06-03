@@ -20,8 +20,7 @@
 
         <Style x:Key="font_style" TargetType="TextBlock">
 
-            <Setter Property="FontFamily"
-                    Value="Helvetica"/>
+
 
             <Setter Property="VerticalAlignment"
                     Value="Center"/>
@@ -37,23 +36,86 @@
 
         </Style>
 
+        <ImageBrush x:Key="max_def"
+                ImageSource="../../images/max_def.png"
+                Stretch="None" />
+
+        <ImageBrush x:Key="max_mo"
+                ImageSource="../../images/max_mo.png"
+                Stretch="None" />
+
+
+        <Style x:Key="MaxBtnStyle"
+           TargetType="{x:Type Button}">
+
+            <Setter Property="Height"
+                Value="15" />
+            <Setter Property="Width"
+                Value="15" />
+            <Setter Property="HorizontalAlignment"
+                Value="Right" />
+            <Setter Property="VerticalAlignment"
+                Value="Top" />
+            <Setter Property="Margin"
+                Value="0,20,60,0" />
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="border"
+                            BorderThickness="0"
+                            Background="{StaticResource max_def}" />
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                 Value="True">
+
+                                <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="{StaticResource max_mo}" />
+
+                            </Trigger>
+
+                            <Trigger Property="IsPressed"
+                                 Value="True">
+
+                                <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="{StaticResource max_mo}" />
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+
+        </Style>
+
+
 
         <Style TargetType="ToolTip" x:Key="tt_style">
 
             <Setter Property="Placement" Value="Right"/>
-            <Setter Property="Height" Value="40"/>
+            <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Margin" Value="20,0,0,0"/>
-            <Setter Property="Background" Value="#4a5688"/>
+            <Setter Property="Background" Value="#3aa9ad"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Helvetica"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
             <Setter Property="HorizontalOffset" Value="15"/>
             <Setter Property="HasDropShadow" Value="True"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            
 
         </Style>
         
@@ -79,20 +141,11 @@
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}"/>
 
-                                <Setter Property="BorderBrush" 
-                                        TargetName="border"
-                                        Value="{StaticResource tb_mouse_over}"/>
-
-
                             </Trigger>
 
                             <Trigger Property="IsChecked" Value="True">
 
                                 <Setter Property="Background"
-                                        TargetName="border"
-                                        Value="{StaticResource tb_mouse_over}"/>
-
-                                <Setter Property="BorderBrush"
                                         TargetName="border"
                                         Value="{StaticResource tb_mouse_over}"/>
 
@@ -109,12 +162,30 @@
     
     <Grid>
 
-        <Grid Background="Black">
+        <Grid Background="White">
+
+            <Grid x:Name="BG" PreviewMouseLeftButtonDown="BG_PreviewMouseLeftButtonDown" Background="White">
+               
+                <Button x:Name="MaxBtn"
+                Style="{StaticResource MaxBtnStyle}"
+                Click="MaxBtn_Click" />
+                <Image Source="../../Images/close.png" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+
+                <StackPanel x:Name="StackPanelMain"/>
+
+            </Grid>
+
 
             <Grid x:Name="nav_pnl"
                   HorizontalAlignment="Left"
-                  Width="65"
-                  Background="#2e333a">
+                  Width="65">
+
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#3aa9ad" Offset="0"/>
+                        <GradientStop Color="#3aada1" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
 
                 <StackPanel x:Name="st_pnl">
                     <Grid Height="90">
@@ -129,65 +200,78 @@
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
                                    Style="{StaticResource font_style}">
-
-                            <TextBlock.Effect>
-
-                                <DropShadowEffect BlurRadius="10"
-                                                  ShadowDepth="1"
-                                                  Direction="-90"
-                                                  Color="White">
-                                    
-                                </DropShadowEffect>
-
-                            </TextBlock.Effect>
                         </TextBlock>
-                        
+
                         <ToggleButton x:Name="Tg_Btn"
                                       Grid.Column="0"
                                       VerticalAlignment="Center"
                                       HorizontalAlignment="Left"
-                                      Margin="18, -20, 0, 0"
+                                      Margin="18,-20,0,0"
                                       Height="30"
                                       Width="30"
                                       BorderThickness="0"
-                                      Style="{StaticResource tb_style}">
-                            
+                                      Style="{StaticResource tb_style}" Unchecked="Tg_Btn_Unchecked" Checked="Tg_Btn_Checked">
+
+                            <!--// Toggle button default background image //-->
+
                             <ToggleButton.Background>
-                                <ImageBrush ImageSource="../../Images/Assets/tgBtn_default.png"
+
+                                <ImageBrush ImageSource="../../images/Assets/tgBtn_default.png"
                                             Stretch="None"/>
+
                             </ToggleButton.Background>
 
+                            <!--// Toggle Button - Checked, Unchecked events //-->
+
                             <ToggleButton.Triggers>
+
                                 <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
                                     <BeginStoryboard>
+
                                         <Storyboard x:Name="HideStackPanel">
-                                            <DoubleAnimation
-                                                Storyboard.TargetName="nav_pn1"
+
+                                            <DoubleAnimation    
+                                                
+                                                Storyboard.TargetName="nav_pnl"
                                                 Storyboard.TargetProperty="Width"
                                                 BeginTime="0:0:0"
                                                 From="230" To="65"
                                                 Duration="0:0:0.2">
+
                                             </DoubleAnimation>
+
                                         </Storyboard>
+
                                     </BeginStoryboard>
+
                                 </EventTrigger>
 
                                 <EventTrigger RoutedEvent="ToggleButton.Checked">
+
                                     <BeginStoryboard>
+
                                         <Storyboard x:Name="ShowStackPanel">
+
                                             <DoubleAnimation
+                                                
                                                 Storyboard.TargetName="nav_pnl"
                                                 Storyboard.TargetProperty="Width"
                                                 BeginTime="0:0:0"
                                                 From="65" To="230"
                                                 Duration="0:0:0.3">
-                                                
+
                                             </DoubleAnimation>
+
                                         </Storyboard>
+
                                     </BeginStoryboard>
+
                                 </EventTrigger>
+
                             </ToggleButton.Triggers>
-                            
+
+
                         </ToggleButton>
                     </Grid>
 
@@ -203,11 +287,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="../../Images/Assets/img_home.png"
+                                <Image Source="../../Images/train.png"
                                        Stretch="None"
-                                       Margin="12,0,0,0"/>
+                                       Margin="12,0,0,0" Width="25" Height="25"/>
 
-                                <TextBlock Text="Home"
+                                <TextBlock Text="Vozovi"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -215,7 +299,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_home"
-                                         Content="Home"
+                                         Content="Vozovi"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
                             
@@ -229,11 +313,12 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="../../Images/Assets/img_contact.png"
+                                <Image Source="../../Images/map1.png"
                                        Stretch="None"
-                                       Margin="12,0,0,0"/>
+                                       Margin="12,0,0,0"
+                                       />
 
-                                <TextBlock Text="Contacts"
+                                <TextBlock Text="Vozne linije"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -241,7 +326,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_contacts"
-                                         Content="Contacts"
+                                         Content="Vozne linije"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
@@ -254,11 +339,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="../../Images/Assets/img_message.png"
+                                <Image Source="../../Images/timetable1.png"
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 
-                                <TextBlock Text="Messages"
+                                <TextBlock Text="Red voznje"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -266,7 +351,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_messages"
-                                         Content="Messages"
+                                         Content="Red voznje"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
@@ -280,11 +365,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="../../Images/Assets/img_map.png"
+                                <Image Source="../../Images/station1.png"
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 
-                                <TextBlock Text="Maps"
+                                <TextBlock Text="Stanice"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -292,7 +377,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_maps"
-                                         Content="Maps"
+                                         Content="Stanice"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
@@ -305,11 +390,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="../../Images/Assets/img_setting.png"
+                                <Image Source="../../Images/ticket1.png"
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 
-                                <TextBlock Text="Settings"
+                                <TextBlock Text="Karte"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -317,7 +402,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_settings"
-                                         Content="Settings"
+                                         Content="Karte"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
@@ -331,11 +416,11 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230">
 
-                                <Image Source="../../Images/Assets/img_signout.png"
+                                <Image Source="../../Images/logout1.png"
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 
-                                <TextBlock Text="Sign Out"
+                                <TextBlock Text="Odjava"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -343,7 +428,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_signout"
-                                         Content="Sign Out"
+                                         Content="Odjava"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
