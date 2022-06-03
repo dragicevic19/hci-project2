@@ -13,16 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TrainTickets.View.Trains.ShowTrains
+namespace TrainTickets.View.Trains
 {
     /// <summary>
-    /// Interaction logic for ShowTrainsPage.xaml
+    /// Interaction logic for TrainsPage.xaml
     /// </summary>
-    public partial class ShowTrainsPage : UserControl
+    public partial class TrainsPage : Page
     {
-        public ShowTrainsPage()
+        public Frame MainPage { get; }
+
+
+        public TrainsPage()
         {
             InitializeComponent();
         }
+
+        public TrainsPage(Frame mainPage)
+        {
+            InitializeComponent();
+            MainPage = mainPage;
+        }
+
     }
 }

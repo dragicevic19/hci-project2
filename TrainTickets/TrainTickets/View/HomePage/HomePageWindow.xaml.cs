@@ -13,8 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrainTickets.model;
 using TrainTickets.Services;
-using TrainTickets.View.Trains.AddTrain;
-using TrainTickets.View.Trains.ShowTrains;
+using TrainTickets.View.Stations;
+using TrainTickets.View.Tickets;
+using TrainTickets.View.TimeTable;
+using TrainTickets.View.TrainRoutes;
+using TrainTickets.View.Trains;
 
 namespace TrainTickets.View.HomePage
 {
@@ -39,54 +42,8 @@ namespace TrainTickets.View.HomePage
             this.loginWindow = loginWin;
             this.userService = userService;
             this.user = userService.findByEmail(email);
-
-            var menuTrains = new List<SubItem>();
-            menuTrains.Add(new SubItem("Dodaj novi voz", new AddTrainPage()));
-            menuTrains.Add(new SubItem("Prikazi vozove", new ShowTrainsPage()));
-            var item0 = new ItemMenu("Vozovi", menuTrains, "/Images/train1.png");
-            /*
-            var menuSchedule = new List<SubItem>();
-            menuSchedule.Add(new SubItem("Services"));
-            menuSchedule.Add(new SubItem("Meetings"));
-            var item1 = new ItemMenu("Appointments", menuSchedule, PackIconKind.Schedule);
-
-            var menuReports = new List<SubItem>();
-            menuReports.Add(new SubItem("Customers"));
-            menuReports.Add(new SubItem("Providers"));
-            menuReports.Add(new SubItem("Products"));
-            menuReports.Add(new SubItem("Stock"));
-            menuReports.Add(new SubItem("Sales"));
-            var item2 = new ItemMenu("Reports", menuReports, PackIconKind.FileReport);
-
-            var menuExpenses = new List<SubItem>();
-            menuExpenses.Add(new SubItem("Fixed"));
-            menuExpenses.Add(new SubItem("Variable"));
-            var item3 = new ItemMenu("Expenses", menuExpenses, PackIconKind.ShoppingBasket);
-
-            var menuFinancial = new List<SubItem>();
-            menuFinancial.Add(new SubItem("Cash flow"));
-            var item4 = new ItemMenu("Financial", menuFinancial, PackIconKind.ScaleBalance);
-
-            */
-
-            st_pnl.Children.Add(new UserControlMenuItem(item0, this));
-            //st_pnl.Children.Add(new UserControlMenuItem(item1, this));
-            //st_pnl.Children.Add(new UserControlMenuItem(item2, this));
-            //st_pnl.Children.Add(new UserControlMenuItem(item3, this));
-            //st_pnl.Children.Add(new UserControlMenuItem(item4, this));
+           
         }
-
-        internal void SwitchScreen(object sender)
-        {
-            var screen = ((UserControl)sender);
-
-            if (screen != null)
-            {
-                StackPanelMain.Children.Clear();
-                StackPanelMain.Children.Add(screen);
-            }
-        }
-
 
         private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -113,12 +70,12 @@ namespace TrainTickets.View.HomePage
 
         private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e)
         {
-            //img_bg.Opacity = 1;
+            img_bg.Opacity = 1;
         }
 
         private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
         {
-            //img_bg.Opacity = 0.3;
+            img_bg.Opacity = 0.3;
         }
 
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -146,5 +103,50 @@ namespace TrainTickets.View.HomePage
                 }
             }
         }
+
+        private void Minimize_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (WindowState != WindowState.Minimized) WindowState = WindowState.Minimized;
+        }
+
+        private void VozoviPressedHandler(object sender, MouseButtonEventArgs e)
+        {
+            mainPage.Content = new TrainsPage(mainPage);
+        }
+
+        private void VozneLinijePressedHandler(object sender, MouseButtonEventArgs e)
+        {
+            mainPage.Content = new TrainRoutesPage(mainPage);
+        }
+
+        private void RedVoznjePressedHandler(object sender, MouseButtonEventArgs e)
+        {
+            mainPage.Content = new TimetablePage(mainPage);
+        }
+
+        private void StanicePressedHandler(object sender, MouseButtonEventArgs e)
+        {
+            mainPage.Content = new StationsPage(mainPage);
+        }
+
+        private void KartePressedHandler(object sender, MouseButtonEventArgs e)
+        {
+            mainPage.Content = new TicketsPage(mainPage);
+        }
+
+        private void OdjavaPressedHandler(object sender, MouseButtonEventArgs e)
+        {
+            this.Close();
+            loginWindow.Show();
+        }
+
+        private void BG_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+
+
     }
 }
