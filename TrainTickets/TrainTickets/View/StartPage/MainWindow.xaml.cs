@@ -20,13 +20,13 @@ namespace TrainTickets
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
 
         public MainWindow()
         {
             InitializeComponent();
-            pageLeft.Content = new PageForSignUp(pageLeft, pageRight);
-            pageRight.Content = new LoginPage(pageLeft, pageRight);
+            pageLeft.Content = new PageForSignUp(pageLeft, pageRight, this);
+            pageRight.Content = new LoginPage(pageLeft, pageRight, this);
         }
 
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)

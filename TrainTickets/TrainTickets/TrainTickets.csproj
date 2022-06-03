@@ -11,6 +11,19 @@
     <None Remove="Images\close.png" />
     <None Remove="Images\Email.png" />
     <None Remove="Images\Lock.png" />
+    <None Remove="Images\logout1.png" />
+    <None Remove="Images\map1.png" />
+    <None Remove="Images\maximize.png" />
+    <None Remove="Images\minimize.png" />
+    <None Remove="Images\station1.png" />
+    <None Remove="Images\tgBtn_default.png" />
+    <None Remove="Images\ticket1.png" />
+    <None Remove="Images\timetable1.png" />
+    <None Remove="Images\train.png" />
+    <None Remove="Images\underground.png" />
+    <None Remove="Images\wallpaper1jpg.jpg" />
+    <None Remove="Images\wallpaper2.jpg" />
+    <None Remove="Images\wallpaper3.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +41,49 @@
     <Resource Include="Images\Lock.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\logout1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\map1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\maximize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\minimize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\station1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\tgBtn_default.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ticket1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\timetable1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\train.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\underground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\wallpaper1jpg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\wallpaper2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\wallpaper3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="View\Trains\AddTrain\" />
   </ItemGroup>
 
 </Project>
