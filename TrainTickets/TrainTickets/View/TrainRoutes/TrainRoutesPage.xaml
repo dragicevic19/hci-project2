@@ -38,11 +38,11 @@
             </Border>
 
             <ListView Background="Transparent" x:Name="RoutesList"
-                  MaxHeight="1024" MinHeight="200" Height="1024">
+                  MaxHeight="1024" MinHeight="200" Height="1024" PreviewMouseLeftButtonUp="RouteClicked">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <WrapPanel MouseDown="RouteClicked">
+                        <WrapPanel>
                             <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="260">
                                 <StackPanel Height="50">
                                     <TextBlock Foreground="Red" Text="{Binding Name}"/>

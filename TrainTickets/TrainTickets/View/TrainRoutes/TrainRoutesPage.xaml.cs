@@ -79,7 +79,7 @@ namespace TrainTickets.View.TrainRoutes
             mapView.MaxZoom = 17;
             // whole world zoom
             mapView.Zoom = 7;
-            mapView.Position = new GMap.NET.PointLatLng(44.81583333, 20.45944444);
+            mapView.Position = new GMap.NET.PointLatLng(44.01583333, 20.55944444);
             // lets the map use the mousewheel to zoom
             mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
             // lets the user drag the map
@@ -89,6 +89,7 @@ namespace TrainTickets.View.TrainRoutes
             mapView.ShowCenter = false;
 
             previous = null;
+
             /*(foreach (Station s in stations2)
             {
                 GMap.NET.PointLatLng current = new GMap.NET.PointLatLng(s.Latitude, s.Longitude);
@@ -126,44 +127,64 @@ namespace TrainTickets.View.TrainRoutes
 
         private void RouteClicked(object sender, MouseButtonEventArgs e)
         {
-            setUpMapView();
+            mapView.Markers.Clear();
+            previous = null;
 
-            TrainRoute selectedRoute = TrainRouteService.FindByName(((TrainRouteDTO)RoutesList.SelectedItems[0]).Name);
-
-            if (selectedRoute == null) return;
-
-            foreach (var s in selectedRoute.Stations)
+            using (var db = new DatabaseContext())
             {
-
-                GMap.NET.PointLatLng current = new GMap.NET.PointLatLng(s.Station.Location.X, s.Station.Location.Y);
-                GMap.NET.WindowsPresentation.GMapMarker marker = new GMap.NET.WindowsPresentation.GMapMarker(current);
-
-                marker.Shape = new Ellipse
+                if (RoutesList.SelectedItem == null)
                 {
-                    Width = 10,
-                    Height = 10,
-                    Stroke = Brushes.Firebrick,
-                    StrokeThickness = 1.5,
-                    ToolTip = "Stanica " + s.Station.Name,
-                    Visibility = Visibility.Visible,
-                    Fill = Brushes.Firebrick,
-
-                };
-                mapView.Markers.Add(marker);
-
-                if (previous == null)
-                {
-                    previous = new PointLatLng(current.Lat, current.Lng);
-                    continue;
+                    MessageBox.Show("Linija nije selektovana");
+                    return;
                 }
-                else
+
+                string name = ((TrainRouteDTO)RoutesList.SelectedItem).Name;
+                TrainRoute selectedRoute = null;
+
+                foreach (var route in db.TrainRoutes)
                 {
-                    drawLineBetweenPoints(current, previous, mapView);
-                    previous = new PointLatLng(current.Lat, current.Lng);
+                    if (name == route.Name)
+                    {
+                        selectedRoute = route;
+                        break;
+                    }
+                }
+
+                if (selectedRoute == null) return;
+
+                foreach (var s in selectedRoute.Stations)
+                {
+
+                    GMap.NET.PointLatLng current = new GMap.NET.PointLatLng(s.Station.Location.X, s.Station.Location.Y);
+                    GMap.NET.WindowsPresentation.GMapMarker marker = new GMap.NET.WindowsPresentation.GMapMarker(current);
+
+                    marker.Shape = new Ellipse
+                    {
+                        Width = 10,
+                        Height = 10,
+                        Stroke = Brushes.Firebrick,
+                        StrokeThickness = 1.5,
+                        ToolTip = "Stanica " + s.Station.Name,
+                        Visibility = Visibility.Visible,
+                        Fill = Brushes.Firebrick,
+
+                    };
+                    mapView.Markers.Add(marker);
+
+                    if (previous == null)
+                    {
+                        previous = new PointLatLng(current.Lat, current.Lng);
+                        continue;
+                    }
+                    else
+                    {
+                        drawLineBetweenPoints(current, previous, mapView);
+                        previous = new PointLatLng(current.Lat, current.Lng);
+                    }
                 }
             }
-
         }
+
         private void drawLineBetweenPoints(PointLatLng current, PointLatLng? previous, GMapControl gMapControl)
         {
             double dis = CountDistanceBetweenPoints(current, (PointLatLng)previous);
@@ -177,10 +198,8 @@ namespace TrainTickets.View.TrainRoutes
                 Height = 3,
                 Stroke = Brushes.Goldenrod,
                 StrokeThickness = 1.5,
-                ToolTip = "Put",
                 Visibility = Visibility.Visible,
                 Fill = Brushes.Goldenrod,
-
             };
             mapView.Markers.Add(markerLine);
             drawLineBetweenPoints(current, middle, mapView);
