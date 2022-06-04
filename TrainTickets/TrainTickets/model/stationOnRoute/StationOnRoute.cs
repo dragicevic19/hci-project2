@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrainTickets.model.station;
+using TrainTickets.model.trainRoute;
 
 namespace TrainTickets.model.stationOnRoute
 {
@@ -19,8 +20,12 @@ namespace TrainTickets.model.stationOnRoute
         public int StationId { get; set; }
         public virtual Station Station { get; set; }
 
+        [ForeignKey("Route")]
+        public int TrainRouteId { get; set; }
+        public virtual TrainRoute Route { get; set; }
 
-        public DateTime DateTime { get; set; }
+
+        //public DateTime DateTime { get; set; } ? 
 
         public double AdditionalTime { get; set; }
         public double AdditionalPrice { get; set; }

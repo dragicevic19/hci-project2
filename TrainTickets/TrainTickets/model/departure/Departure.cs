@@ -25,6 +25,7 @@ namespace TrainTickets.model.departure
         public virtual Train Train { get; set; }
 
 
-        public DateTime DepartureTime { get; set; }
+        public DateTime DepartureTime { get; set; } // ovo se odnosi na konkretan polazak npr 23.3.2022. 13:00
+                                                    // a 13.00 se vadi iz TrainRoute->DepartureTimes
     }
 }
