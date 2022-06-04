@@ -34,6 +34,51 @@
         Click="OnClick" ClickMode="Release" Width="80" Height="33" Margin="679,8,41,409">
             Show
         </Button>
+        <DataGrid
+            x:Name="DataGrid"
+            IsReadOnly="True"
+            AutoGenerateColumns="False"
+            ItemsSource ="{Binding RoutesForView, UpdateSourceTrigger=PropertyChanged}"
+            Margin="50" >
+            <DataGrid.Columns> 
+                <DataGridTextColumn
+                    Header="Departure"
+                    MinWidth="80"
+                    Width="*"
+                    Binding="{Binding r}"/>
+                <DataGridTextColumn
+                    Header="Date"
+                    MinWidth="80"
+                    Width="*"
+                    Binding="{Binding r}"/>
+                    <DataGridTextColumn
+                    Header="Arrival"
+                    MinWidth="80"
+                    Width="*"
+                    Binding="{Binding r}"/>
+                <DataGridTextColumn
+                    Header="Travels"
+                    MinWidth="80"
+                    Width="*"
+                    Binding="{Binding r}"/>
+                <DataGridTextColumn
+                    Header="Price"
+                    MinWidth="80"
+                    Width="*"
+                    Binding="{Binding r}"/>
+                <DataGridTextColumn
+                    Header="rezervacija"
+                    MinWidth="80"
+                    Width="*"
+                    Binding="{Binding r}"/>
+                <DataGridTextColumn
+                    Header="kupovina"
+                    MinWidth="80"
+                    Width="*"
+                    Binding="{Binding r}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
 
 
     </Grid>

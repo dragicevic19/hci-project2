@@ -65,6 +65,28 @@ namespace TrainTickets.model.trainRoute
             }
             return price;
         }
+        public double routeTime(Station start, Station end)
+        {
+            bool firstFound = false;
+            double time = 0;
+            foreach (var t in this.Stations)
+            {
+                if (t.Equals(start))
+                {
+                    firstFound = true;
+                    continue;
+                }
+                else if (t.Equals(end))
+                {
+                    time += t.AdditionalTime;
+                    break;
+                }
+                else
+                    time += t.AdditionalTime;
+
+            }
+            return time;
+        }
 
     }
 }
