@@ -20,6 +20,16 @@ namespace TrainTickets.model.trainRoute
 
         public virtual List<DepartureTime> DepartureTimes { get; set; }
 
+        internal bool ContainsStation(string stationName)
+        {
+            foreach(var station in Stations)
+            {
+                if (station.Station.Name.ToLower().Contains(stationName))
+                    return true;
+            }
+            return false;
+        }
+
         // public double Price { get; set; } racunamo kao zbir additionalPrices u StationOnRoute
     }
 }

@@ -49,7 +49,6 @@ namespace TrainTickets
         {
             using (var db = new DatabaseContext())
             {
-                /*
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Aleksinac', 43.533, 21.717)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Apatin', 45.671, 18.985)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Beograd',  44.833, 20.500)");
@@ -71,11 +70,12 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Ruma', 45.008,  19.821)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Smederevo', 44.650,  20.933)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Sombor', 45.774, 19.112)");
+                db.Database.ExecuteSqlCommand("Insert into Stations Values('Subotica', 46.100376, 19.667587)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Sremska Mitrovica', 44.977, 19.615)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Užice', 43.861,  19.843)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Valjevo', 44.272, 19.885)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Zrenjanjnin', 45.383, 20.391)");
-                */
+                
 
                 db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name) Values('BN10A')");
                 db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name) Values('NB10A')");
@@ -125,11 +125,11 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(14, 3, 50, 800)");
 
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(11, 4, 0, 0)");
-                db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(22, 4, 60, 800)");
+                db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(23, 4, 60, 800)");
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(19, 4, 30, 400)");
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(13, 4, 40, 800)");
 
-                db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(20, 5, 0, 0)");
+                db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(22, 5, 0, 0)");
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(13, 5, 85, 1000)");
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(3, 5, 30, 700)");
 

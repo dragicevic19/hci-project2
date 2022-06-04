@@ -3,6 +3,7 @@ using GMap.NET.WindowsPresentation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace TrainTickets.View.TrainRoutes
 
         private TrainRouteService TrainRouteService;
 
-        public List<TrainRouteDTO> Routes = new List<TrainRouteDTO>();
+        public ObservableCollection<TrainRouteDTO> Routes { get; set; }
 
 
         public TrainRoutesPage()
@@ -46,6 +47,7 @@ namespace TrainTickets.View.TrainRoutes
             InitializeComponent();
 
             this.TrainRouteService = new TrainRouteService();
+            this.Routes = new ObservableCollection<TrainRouteDTO>();
 
             using (var db = new DatabaseContext())
             {
@@ -123,8 +125,6 @@ namespace TrainTickets.View.TrainRoutes
             }*/
         }
 
- 
-
         private void RouteClicked(object sender, MouseButtonEventArgs e)
         {
             mapView.Markers.Clear();
@@ -155,18 +155,18 @@ namespace TrainTickets.View.TrainRoutes
                 foreach (var s in selectedRoute.Stations)
                 {
 
-                    GMap.NET.PointLatLng current = new GMap.NET.PointLatLng(s.Station.Location.X, s.Station.Location.Y);
-                    GMap.NET.WindowsPresentation.GMapMarker marker = new GMap.NET.WindowsPresentation.GMapMarker(current);
+                    PointLatLng current = new PointLatLng(s.Station.Location.X, s.Station.Location.Y);
+                    GMapMarker marker = new GMapMarker(current);
 
                     marker.Shape = new Ellipse
                     {
                         Width = 10,
                         Height = 10,
-                        Stroke = Brushes.Firebrick,
+                        Stroke = Brushes.Red,
                         StrokeThickness = 1.5,
                         ToolTip = "Stanica " + s.Station.Name,
                         Visibility = Visibility.Visible,
-                        Fill = Brushes.Firebrick,
+                        Fill = Brushes.Red,
 
                     };
                     mapView.Markers.Add(marker);
@@ -178,32 +178,32 @@ namespace TrainTickets.View.TrainRoutes
                     }
                     else
                     {
-                        drawLineBetweenPoints(current, previous, mapView);
+                        drawLineBetweenPoints(current, previous);
                         previous = new PointLatLng(current.Lat, current.Lng);
                     }
                 }
             }
         }
 
-        private void drawLineBetweenPoints(PointLatLng current, PointLatLng? previous, GMapControl gMapControl)
+        private void drawLineBetweenPoints(PointLatLng current, PointLatLng? previous)
         {
             double dis = CountDistanceBetweenPoints(current, (PointLatLng)previous);
             if (dis < 0.001)
                 return;
             PointLatLng middle = CountMiddlePoint(current, (PointLatLng)previous);
-            GMap.NET.WindowsPresentation.GMapMarker markerLine = new GMap.NET.WindowsPresentation.GMapMarker(middle);
+            GMapMarker markerLine = new GMapMarker(middle);
             markerLine.Shape = new Ellipse
             {
                 Width = 3,
                 Height = 3,
-                Stroke = Brushes.Goldenrod,
+                Stroke = Brushes.YellowGreen,
                 StrokeThickness = 1.5,
                 Visibility = Visibility.Visible,
-                Fill = Brushes.Goldenrod,
+                Fill = Brushes.YellowGreen,
             };
             mapView.Markers.Add(markerLine);
-            drawLineBetweenPoints(current, middle, mapView);
-            drawLineBetweenPoints((PointLatLng)previous, middle, mapView);
+            drawLineBetweenPoints(current, middle);
+            drawLineBetweenPoints((PointLatLng)previous, middle);
         }
 
 
@@ -235,14 +235,30 @@ namespace TrainTickets.View.TrainRoutes
 
         private void textSearch_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            searchBox.Focus();
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(searchBox.Text) && searchBox.Text.Length > 0)
+                textSearch.Visibility = Visibility.Collapsed;
+            else
+                textSearch.Visibility = Visibility.Visible;
 
+            this.Routes.Clear();
+
+            using (var db = new DatabaseContext())
+            {
+                foreach (var route in db.TrainRoutes)
+                {
+                    if (route.Name.ToLower().Contains(searchBox.Text.ToLower()))
+                        this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                    else if (route.ContainsStation(searchBox.Text.ToLower()))
+                        this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+
+                }
+            }
         }
-
 
     }
 }
