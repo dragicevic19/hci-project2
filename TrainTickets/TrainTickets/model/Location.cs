@@ -13,5 +13,11 @@ namespace TrainTickets.model
         //public int Id { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
+
+        public Location(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
     }
 }

@@ -9,14 +9,34 @@
       Title="TicketsPage">
 
     <Grid>
-        <Label HorizontalAlignment="Left" Margin="12,13,0,0" Name="label1" Width="62" Height="24" VerticalAlignment="Top">Station</Label>
-        <ComboBox Height="25" Margin="80,12,12,0" Name="comboBox1" VerticalAlignment="Top" 
-                  ItemsSource="{Binding stations}" IsEditable="False">
+        <Label HorizontalAlignment="Left" Margin="14,5,0,0" x:Name="label1" Width="62" Height="42" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.781,0.548" Content="Start:"/>
+        <ComboBox Height="25" Margin="80,12,497,0" Name="comboBox1" VerticalAlignment="Top"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="0" RenderTransformOrigin="0.541,0.549" Width="220"  >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding name}" />
+                    <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+
+        <Label HorizontalAlignment="Left" Margin="338,5,0,0" x:Name="label2" Width="62" Height="51" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.539,0.608" Content="End:"/>
+        <ComboBox Height="25" Margin="400,13,180,0" Name="comboBox2" VerticalAlignment="Top" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Stations}" Grid.Row="0" Width="220"  >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button Name="btn" 
+        Click="OnClick" ClickMode="Release" Width="80" Height="33" Margin="679,8,41,409">
+            Show
+        </Button>
+
+
     </Grid>
+
+
 </Page>

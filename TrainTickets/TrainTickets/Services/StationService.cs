@@ -14,8 +14,14 @@ namespace TrainTickets.Services
 
         public List<Station> AllStations()
         {
-            var db = new DatabaseContext();
-            List<Station> stations = db.Stations.ToList();
+
+            List<Station> stations;
+
+            using (var db = new DatabaseContext())
+            {
+               stations = db.Stations.ToList();
+
+            }
 
             return stations;
 
