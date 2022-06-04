@@ -31,6 +31,12 @@ namespace TrainTickets.View.Stations
         {
             InitializeComponent();
             this.mainPage = mainPage;
+
+        }
+
+        private async void MapControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //BasicGeoposition inGeoposition = new BasicGeoposition() { Latitude = 20.5937, Longitude = 78.9629 };
         }
     }
 }

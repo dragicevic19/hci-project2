@@ -9,6 +9,22 @@
       Title="StationsPage">
 
     <Grid>
-        <Button>STANICE</Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1">
+            
+            
+        </StackPanel>
+
+        <StackPanel x:Name="mapPanel" Grid.Row="2" Grid.Column="2">
+            
+        </StackPanel>
     </Grid>
 </Page>

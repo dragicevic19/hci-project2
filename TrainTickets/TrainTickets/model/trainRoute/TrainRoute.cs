@@ -15,9 +15,11 @@ namespace TrainTickets.model.trainRoute
         [Key]
         public int Id { get; set; } 
 
+        public string Name { get; set; }
+
         public virtual List<StationOnRoute> Stations { get; set; }
 
-        public List<TimeOnly> DepartureTimes { get; set; }
+        public virtual List<DepartureTime> DepartureTimes { get; set; }
 
         // public double Price { get; set; } racunamo kao zbir additionalPrices u StationOnRoute
 

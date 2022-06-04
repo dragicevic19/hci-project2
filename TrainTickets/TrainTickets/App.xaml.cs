@@ -13,5 +13,6 @@ namespace TrainTickets
     /// </summary>
     public partial class App : Application
     {
+        public static string token => "A9gIZAsgqO4Et4IP72w2~NeJYtePdW6Td9igBM-iqeg~AlwY6pivg8iTsb12ddh5KnrvkoIPu79KKbF_vYkCzfsa4HHYOdkWnWG9u82mXWsX";
     }
 }

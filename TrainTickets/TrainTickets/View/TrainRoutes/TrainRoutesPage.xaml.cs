@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GMap.NET;
+using GMap.NET.WindowsPresentation;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TrainTickets.Database;
+using TrainTickets.dto;
+using TrainTickets.model.stationOnRoute;
+using TrainTickets.model.trainRoute;
+using TrainTickets.Services;
 
 namespace TrainTickets.View.TrainRoutes
 {
@@ -21,6 +29,12 @@ namespace TrainTickets.View.TrainRoutes
     public partial class TrainRoutesPage : Page
     {
         private Frame mainPage;
+        public PointLatLng? previous { get; set; }
+
+        private TrainRouteService TrainRouteService;
+
+        public List<TrainRouteDTO> Routes = new List<TrainRouteDTO>();
+
 
         public TrainRoutesPage()
         {
@@ -30,7 +44,186 @@ namespace TrainTickets.View.TrainRoutes
         public TrainRoutesPage(Frame mainPage)
         {
             InitializeComponent();
+
+            this.TrainRouteService = new TrainRouteService();
+
+            using (var db = new DatabaseContext())
+            {
+                foreach (var route in db.TrainRoutes)
+                {
+                    this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                }
+            }
+            RoutesList.ItemsSource = this.Routes;
             this.mainPage = mainPage;
         }
+
+        private void mapView_Loaded(object sender, RoutedEventArgs e)
+        {
+            setUpMapView();
+
+        }
+
+        public void setUpMapView()
+        {
+
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            // choose your provider here
+            mapView.MapProvider = GMap.NET.MapProviders.OpenStreetMapProvider.Instance;
+            mapView.Markers.Clear();
+
+            // don't forget to add the marker to the map
+            //mapView.Markers.Add(routeMarker);
+
+            mapView.MinZoom = 3;
+            mapView.MaxZoom = 17;
+            // whole world zoom
+            mapView.Zoom = 7;
+            mapView.Position = new GMap.NET.PointLatLng(44.81583333, 20.45944444);
+            // lets the map use the mousewheel to zoom
+            mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            // lets the user drag the map
+            mapView.CanDragMap = true;
+            // lets the user drag the map with the left mouse button
+            mapView.DragButton = MouseButton.Left;
+            mapView.ShowCenter = false;
+
+            previous = null;
+            /*(foreach (Station s in stations2)
+            {
+                GMap.NET.PointLatLng current = new GMap.NET.PointLatLng(s.Latitude, s.Longitude);
+                GMap.NET.WindowsPresentation.GMapMarker marker = new GMap.NET.WindowsPresentation.GMapMarker(current);
+
+                marker.Shape = new Ellipse
+                {
+                    Width = 10,
+                    Height = 10,
+                    Stroke = Brushes.Firebrick,
+                    StrokeThickness = 1.5,
+                    ToolTip = "Stanica",
+                    Visibility = Visibility.Visible,
+                    Fill = Brushes.Firebrick,
+
+                };
+                mapView.Markers.Add(marker);
+
+
+                if (previous == null)
+                {
+                    previous = new PointLatLng(current.Lat, current.Lng);
+                    continue;
+                }
+                else
+                {
+                    drawLineBetweenPoints(current, previous, mapView);
+                    previous = new PointLatLng(current.Lat, current.Lng);
+                }
+
+            }*/
+        }
+
+ 
+
+        private void RouteClicked(object sender, MouseButtonEventArgs e)
+        {
+            setUpMapView();
+
+            TrainRoute selectedRoute = TrainRouteService.FindByName(((TrainRouteDTO)RoutesList.SelectedItems[0]).Name);
+
+            if (selectedRoute == null) return;
+
+            foreach (var s in selectedRoute.Stations)
+            {
+
+                GMap.NET.PointLatLng current = new GMap.NET.PointLatLng(s.Station.Location.X, s.Station.Location.Y);
+                GMap.NET.WindowsPresentation.GMapMarker marker = new GMap.NET.WindowsPresentation.GMapMarker(current);
+
+                marker.Shape = new Ellipse
+                {
+                    Width = 10,
+                    Height = 10,
+                    Stroke = Brushes.Firebrick,
+                    StrokeThickness = 1.5,
+                    ToolTip = "Stanica " + s.Station.Name,
+                    Visibility = Visibility.Visible,
+                    Fill = Brushes.Firebrick,
+
+                };
+                mapView.Markers.Add(marker);
+
+                if (previous == null)
+                {
+                    previous = new PointLatLng(current.Lat, current.Lng);
+                    continue;
+                }
+                else
+                {
+                    drawLineBetweenPoints(current, previous, mapView);
+                    previous = new PointLatLng(current.Lat, current.Lng);
+                }
+            }
+
+        }
+        private void drawLineBetweenPoints(PointLatLng current, PointLatLng? previous, GMapControl gMapControl)
+        {
+            double dis = CountDistanceBetweenPoints(current, (PointLatLng)previous);
+            if (dis < 0.001)
+                return;
+            PointLatLng middle = CountMiddlePoint(current, (PointLatLng)previous);
+            GMap.NET.WindowsPresentation.GMapMarker markerLine = new GMap.NET.WindowsPresentation.GMapMarker(middle);
+            markerLine.Shape = new Ellipse
+            {
+                Width = 3,
+                Height = 3,
+                Stroke = Brushes.Goldenrod,
+                StrokeThickness = 1.5,
+                ToolTip = "Put",
+                Visibility = Visibility.Visible,
+                Fill = Brushes.Goldenrod,
+
+            };
+            mapView.Markers.Add(markerLine);
+            drawLineBetweenPoints(current, middle, mapView);
+            drawLineBetweenPoints((PointLatLng)previous, middle, mapView);
+        }
+
+
+        private double CountDistanceBetweenPoints(PointLatLng p1, PointLatLng p2)
+        {
+            return Math.Sqrt(Math.Pow(p1.Lat - p2.Lat, 2) + Math.Pow(p1.Lng - p2.Lng, 2));
+        }
+
+        private PointLatLng CountMiddlePoint(PointLatLng p1, PointLatLng p2)
+        {
+            return new PointLatLng((p1.Lat + p2.Lat) / 2, (p1.Lng + p2.Lng) / 2);
+        }
+
+
+        private void mapView_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void mapView_Drop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void NewRouteBtnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void textSearch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+
     }
 }
