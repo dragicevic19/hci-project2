@@ -21,6 +21,25 @@ namespace TrainTickets.model.trainRoute
 
         public virtual List<DepartureTime> DepartureTimes { get; set; }
 
+        public bool Deleted { get; set; }
+
+        internal bool ContainsStation(string stationName)
+        {
+            foreach(var station in Stations)
+            {
+                if (station.Station.Name.ToLower().Contains(stationName))
+                    return true;
+            }
+            return false;
+        }
+
+        public TrainRoute()
+        {
+            this.Stations = new List<StationOnRoute>();
+            this.DepartureTimes = new List<DepartureTime>();
+            this.Deleted = false;
+        }
+
         // public double Price { get; set; } racunamo kao zbir additionalPrices u StationOnRoute
 
 

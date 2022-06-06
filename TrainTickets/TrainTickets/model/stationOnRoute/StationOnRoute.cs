@@ -30,5 +30,28 @@ namespace TrainTickets.model.stationOnRoute
         public double AdditionalTime { get; set; }
         public double AdditionalPrice { get; set; }
 
+
+        public StationOnRoute() { }
+
+        public StationOnRoute(Station station)
+        {
+            Station = station;
+        }
+
+        public StationOnRoute(int stationId, int routeId, double time, double price)
+        {
+            StationId = stationId;
+            TrainRouteId = routeId;
+            AdditionalTime = time;
+            AdditionalPrice = price;
+        }
+
+        public StationOnRoute(int stationId, TrainRoute route, double time, double price)
+        {
+            StationId = stationId;
+            Route = route;
+            AdditionalTime = time;
+            AdditionalPrice = price;
+        }
     }
 }

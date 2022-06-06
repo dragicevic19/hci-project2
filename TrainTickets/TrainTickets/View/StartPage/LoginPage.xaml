@@ -13,7 +13,7 @@
 
         <Border Background="#FFFFFF" CornerRadius="0 10 10 0">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Sign in" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
+                <TextBlock Text="Prijava" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
 
                 <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
                     <Grid Margin="7 9">
@@ -36,12 +36,12 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Source="/Images/Lock.png" Height="20" />
-                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" />
+                        <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Lozinka" Style="{StaticResource textHint}" />
                         <PasswordBox x:Name="passwordBox" PasswordChanged="PasswordBox_PasswordChanged" Style="{StaticResource textBox}" />
                     </Grid>
                 </Border>
 
-                <Button Content="Sign In" Click="Button_Click" Style="{StaticResource mainButton}" />
+                <Button Content="Prijavi se" Click="Button_Click" Style="{StaticResource mainButton}" />
             </StackPanel>
         </Border>
         

@@ -16,5 +16,13 @@ namespace TrainTickets.model.trainRoute
         [ForeignKey("TrainRoute")]
         public int RouteId { get; set; }
         public virtual TrainRoute TrainRoute { get; set; }
+
+
+        public DepartureTime() { }
+
+        public DepartureTime(TimeSpan ts)
+        {
+            Time = ts;
+        }
     }
 }

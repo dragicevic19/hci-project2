@@ -8,9 +8,9 @@
         Title="HomePageWindow"
         Height="600" Width="800"
         ResizeMode="NoResize"
-        Topmost="True"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
+        >
 
     <Window.Resources>
 
@@ -78,14 +78,14 @@
                 <Grid.Background>
 
                     <ImageBrush x:Name="img_bg"
-                                ImageSource="../../Images/wallpaper1jpg.jpg"
-                                Stretch="Fill"/>
+                                ImageSource="../../Images/wallpaper4.jpg"
+                                Stretch="UniformToFill"/>
 
                 </Grid.Background>
 
-                <Image Source="../../Images/minimize.png" Panel.ZIndex="2" MouseUp="Minimize_MouseUp" Style="{StaticResource imgMinimize}"/>
-                <Image Source="../../Images/maximize.png" Panel.ZIndex="2" MouseUp="MaxBtn_Click" Style="{StaticResource imgMaximize}"/>
-                <Image Source="../../Images/close.png" Panel.ZIndex="2" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+                <Image Source="../../Images/minimize.png" Panel.ZIndex="1" MouseUp="Minimize_MouseUp" Style="{StaticResource imgMinimize}"/>
+                <Image Source="../../Images/maximize.png" Panel.ZIndex="1" MouseUp="MaxBtn_Click" Style="{StaticResource imgMaximize}"/>
+                <Image Source="../../Images/close.png" Panel.ZIndex="1" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
 
                 <Frame x:Name="mainPage" Grid.Column="1" NavigationUIVisibility="Hidden" />
 
