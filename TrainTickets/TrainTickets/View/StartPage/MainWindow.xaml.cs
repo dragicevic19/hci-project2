@@ -77,11 +77,11 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Zrenjanjnin', 45.383, 20.391)");
                 
 
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name) Values('BN10A')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name) Values('NB10A')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name) Values('NN10')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name) Values('LN20C')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name) Values('SB10')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('BN10A', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('NB10A', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('NN10', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('LN20C', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('SB10', 'false')");
 
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 1)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 1)");

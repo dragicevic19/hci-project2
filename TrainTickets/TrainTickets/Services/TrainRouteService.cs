@@ -20,7 +20,7 @@ namespace TrainTickets.Services
             {
                 foreach (var route in db.TrainRoutes)
                 {
-                    if (name == route.Name)
+                    if (name == route.Name && !route.Deleted)
                     {
                         return route;
                     }
@@ -29,7 +29,7 @@ namespace TrainTickets.Services
             return null;
         }
 
-        internal bool addRoute(ObservableCollection<StationOnRouteDTO> selectedStations, string name, List<DepartureTime> departureTimes)
+        public bool addRoute(ObservableCollection<StationOnRouteDTO> selectedStations, string name, List<DepartureTime> departureTimes)
         {
             if (FindByName(name) != null)
             {
@@ -67,6 +67,53 @@ namespace TrainTickets.Services
             {
                 return false;
             }
+        }
+
+        public bool deleteRoute(TrainRouteDTO row)
+        {
+            try
+            {
+                TrainRoute route = FindByName(row.Name);
+                if (route == null) return false;
+
+                using (var db = new DatabaseContext())
+                {
+                    IList<TrainRoute> routes = (from tr in db.TrainRoutes select tr).ToList();
+
+                    foreach(var r in routes)
+                    {
+                        if (r.Id == route.Id)
+                        {
+                            r.Deleted = true;
+                            db.SaveChanges();
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
+        public ObservableCollection<TrainRouteDTO> allRoutesToDTO()
+        {
+            ObservableCollection<TrainRouteDTO> retList = new ObservableCollection<TrainRouteDTO>();
+
+            using(var db = new DatabaseContext())
+            {
+                foreach(var route in db.TrainRoutes)
+                {
+                    if (!route.Deleted)
+                    {
+                        retList.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                    }
+                }
+            }
+
+            return retList;
         }
     }
 }

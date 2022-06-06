@@ -60,14 +60,10 @@ namespace TrainTickets.View.TrainRoutes
             this.Routes = new ObservableCollection<TrainRouteDTO>();
             this.selectedStations = new ObservableCollection<StationOnRouteDTO>();
 
+            this.Routes.Clear();
+            foreach (var r in TrainRouteService.allRoutesToDTO())
+                this.Routes.Add(r);
 
-            using (var db = new DatabaseContext())
-            {
-                foreach (var route in db.TrainRoutes)
-                {
-                    this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
-                }
-            }
             RoutesList.ItemsSource = this.Routes;
             DataContext = this;
         }
@@ -142,10 +138,7 @@ namespace TrainTickets.View.TrainRoutes
 
             using (var db = new DatabaseContext())
             {
-                if (RoutesList.SelectedItem == null)
-                {
-                    return;
-                }
+                if (RoutesList.SelectedItem == null) return;
 
                 string name = ((TrainRouteDTO)RoutesList.SelectedItem).Name;
                 TrainRoute selectedRoute = null;
@@ -160,6 +153,9 @@ namespace TrainTickets.View.TrainRoutes
                 }
 
                 if (selectedRoute == null) return;
+
+                btn_deleteLine.Visibility = Visibility.Visible;
+                btn_editLine.Visibility = Visibility.Visible;
 
                 foreach (var s in selectedRoute.Stations)
                 {
@@ -249,6 +245,31 @@ namespace TrainTickets.View.TrainRoutes
             this.StationsList.ItemsSource = this.allStations;
         }
 
+        private void btn_deleteLine_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Da li ste sigurni da želite da obrišete liniju?", "Brisanje", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                return;
+
+            TrainRouteDTO row = (TrainRouteDTO) RoutesList.SelectedItem;
+            if (!TrainRouteService.deleteRoute(row))
+            {
+                MessageBox.Show("Greška pri brisanju linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            this.Routes.Clear();
+            foreach(var r in TrainRouteService.allRoutesToDTO())
+                this.Routes.Add(r);
+
+            mapView.Markers.Clear();
+            previous = null;
+        }
+
+        private void btn_editLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         #region dodavanje nove linije
 
         private void textSearch_MouseDown(object sender, MouseButtonEventArgs e)
@@ -269,11 +290,13 @@ namespace TrainTickets.View.TrainRoutes
             {
                 foreach (var route in db.TrainRoutes)
                 {
-                    if (route.Name.ToLower().Contains(searchBox.Text.ToLower()))
-                        this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
-                    else if (route.ContainsStation(searchBox.Text.ToLower()))
-                        this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
-
+                    if (!route.Deleted)
+                    {
+                        if (route.Name.ToLower().Contains(searchBox.Text.ToLower()))
+                            this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                        else if (route.ContainsStation(searchBox.Text.ToLower()))
+                            this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                    }
                 }
             }
         }
@@ -470,12 +493,10 @@ namespace TrainTickets.View.TrainRoutes
 
                 this.addRoutePanel.Visibility = Visibility.Hidden;
                 this.Routes.Clear();
+                foreach (var r in TrainRouteService.allRoutesToDTO())
+                    this.Routes.Add(r);
                 this.selectedStations.Clear();
-                using (var db = new DatabaseContext())
-                {
-                    foreach(var route in db.TrainRoutes)
-                        this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
-                }
+                
                 MessageBox.Show("Uspešno ste dodali novu liniju!");
             }
         }
@@ -497,7 +518,10 @@ namespace TrainTickets.View.TrainRoutes
             this.selectedStations.Remove(row);
             setUpMapView();
         }
+        #endregion
+
+
     }
 
-    #endregion
+    
 }

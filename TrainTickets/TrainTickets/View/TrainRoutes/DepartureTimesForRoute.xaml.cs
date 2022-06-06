@@ -64,6 +64,7 @@ namespace TrainTickets.View.TrainRoutes
         {
             try
             {
+                departureTimes.Clear();
                 string input = depTimesBox.Text;
 
                 foreach(var i in input.Split(';'))

@@ -8,7 +8,9 @@
         Title="HomePageWindow"
         Height="600" Width="800"
         ResizeMode="NoResize"
-        WindowStyle="None">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        >
 
     <Window.Resources>
 
