@@ -21,12 +21,12 @@ namespace TrainTickets
     /// </summary>
     public partial class MainWindow : Window
     {
-        
 
         public MainWindow()
         {
             InitializeComponent();
             //FillDB();
+            using(var db = new DatabaseContext()) { }
             pageLeft.Content = new PageForSignUp(pageLeft, pageRight, this);
             pageRight.Content = new LoginPage(pageLeft, pageRight, this);
         }

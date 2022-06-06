@@ -25,7 +25,7 @@ namespace TrainTickets.dto
             DepartureTimes = "";
             foreach(var time in departureTimes)
             {
-                DepartureTimes += time.Time.Hours + "." + time.Time.Minutes + "; ";
+                DepartureTimes += time.Time.Hours + ":" + time.Time.Minutes + "; ";
             }
         }
     }

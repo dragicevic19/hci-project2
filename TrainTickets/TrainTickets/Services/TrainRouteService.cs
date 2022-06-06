@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using TrainTickets.Database;
 using TrainTickets.dto;
+using TrainTickets.model.station;
 using TrainTickets.model.stationOnRoute;
 using TrainTickets.model.trainRoute;
 
@@ -40,7 +41,8 @@ namespace TrainTickets.Services
 
             foreach(var s in selectedStations)
             {
-                newRoute.Stations.Add(new StationOnRoute(s.Station, newRoute, s.AdditionalTime, s.AdditionalPrice));
+                Station st = findStationByName(s.Station.Name);
+                newRoute.Stations.Add(new StationOnRoute(st.Id, newRoute, s.AdditionalTime, s.AdditionalPrice));
             }
             foreach(var d in departureTimes)
             {
@@ -50,6 +52,21 @@ namespace TrainTickets.Services
 
             return save(newRoute);
 
+        }
+
+        private Station findStationByName(string name)
+        {
+            using (var db = new DatabaseContext())
+            {
+                foreach(var station in db.Stations)
+                {
+                    if (station.Name == name)
+                    {
+                        return station;
+                    }
+                }
+            }
+            return null;
         }
 
         public bool save(TrainRoute newRoute)
@@ -112,8 +129,49 @@ namespace TrainTickets.Services
                     }
                 }
             }
-
             return retList;
+        }
+
+        internal bool editRoute(ObservableCollection<StationOnRouteDTO> selectedStations, string name, List<DepartureTime> departureTimes)
+        {
+            try
+            {
+                TrainRoute route = FindByName(name);
+                if (route == null) return false;
+
+                using (var db = new DatabaseContext())
+                {
+                    IList<TrainRoute> routes = (from tr in db.TrainRoutes select tr).ToList();
+
+                    foreach (var r in routes)
+                    {
+                        if (r.Id == route.Id)
+                        {
+                            db.StationOnRoutes.RemoveRange(r.Stations);
+                            r.Stations.Clear();
+
+                            foreach (var s in selectedStations)
+                            {
+                                Station st = findStationByName(s.Station.Name);
+                                r.Stations.Add(new StationOnRoute(st.Id, r.Id, s.AdditionalTime, s.AdditionalPrice));
+                            }
+                            db.DepartureTimes.RemoveRange(r.DepartureTimes);
+                            r.DepartureTimes.Clear();
+                            foreach(var dt in departureTimes)
+                            {
+                                r.DepartureTimes.Add(dt);
+                            }
+                            db.SaveChanges();
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

@@ -38,9 +38,17 @@ namespace TrainTickets.model.stationOnRoute
             Station = station;
         }
 
-        public StationOnRoute(Station station, TrainRoute route, double time, double price)
+        public StationOnRoute(int stationId, int routeId, double time, double price)
         {
-            Station = station;
+            StationId = stationId;
+            TrainRouteId = routeId;
+            AdditionalTime = time;
+            AdditionalPrice = price;
+        }
+
+        public StationOnRoute(int stationId, TrainRoute route, double time, double price)
+        {
+            StationId = stationId;
             Route = route;
             AdditionalTime = time;
             AdditionalPrice = price;

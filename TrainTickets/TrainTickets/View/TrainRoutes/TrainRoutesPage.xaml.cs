@@ -45,6 +45,7 @@ namespace TrainTickets.View.TrainRoutes
         public DepartureTimesForRoute nameAndDepTimesControl;
 
         private TrainRoute newTrainRoute;
+        private bool editFlag = false;
 
         public TrainRoutesPage()
         {
@@ -75,8 +76,7 @@ namespace TrainTickets.View.TrainRoutes
 
         public void setUpMapView()
         {
-
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            GMaps.Instance.Mode = AccessMode.ServerAndCache;
             // choose your provider here
             mapView.MapProvider = GMap.NET.MapProviders.OpenStreetMapProvider.Instance;
             mapView.Markers.Clear();
@@ -88,9 +88,9 @@ namespace TrainTickets.View.TrainRoutes
             mapView.MaxZoom = 17;
             // whole world zoom
             mapView.Zoom = 8;
-            mapView.Position = new GMap.NET.PointLatLng(44.01583333, 20.55944444);
+            mapView.Position = new PointLatLng(44.01583333, 20.55944444);
             // lets the map use the mousewheel to zoom
-            mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
             // lets the user drag the map
             mapView.CanDragMap = true;
             // lets the user drag the map with the left mouse button
@@ -103,18 +103,19 @@ namespace TrainTickets.View.TrainRoutes
             {
 
                 PointLatLng current = new PointLatLng(s.Station.Location.X, s.Station.Location.Y);
-                GMapMarker marker = new GMapMarker(current);
-
-                marker.Shape = new Ellipse
+                GMapMarker marker = new GMapMarker(current)
                 {
-                    Width = 10,
-                    Height = 10,
-                    Stroke = Brushes.Red,
-                    StrokeThickness = 1.5,
-                    ToolTip = "Stanica " + s.Station.Name,
-                    Visibility = Visibility.Visible,
-                    Fill = Brushes.Red,
+                    Shape = new Ellipse
+                    {
+                        Width = 10,
+                        Height = 10,
+                        Stroke = Brushes.Red,
+                        StrokeThickness = 1.5,
+                        ToolTip = "Stanica " + s.Station.Name,
+                        Visibility = Visibility.Visible,
+                        Fill = Brushes.Red,
 
+                    }
                 };
                 mapView.Markers.Add(marker);
 
@@ -267,7 +268,51 @@ namespace TrainTickets.View.TrainRoutes
 
         private void btn_editLine_Click(object sender, RoutedEventArgs e)
         {
+            this.editFlag = true;
+            TrainRouteDTO selectedRoute = (TrainRouteDTO)RoutesList.SelectedItem;
 
+            this.addNewRouteBtn.Visibility = Visibility.Collapsed;
+            this.showRoutesPanel.Visibility = Visibility.Hidden;
+            mapView.Markers.Clear();
+            previous = null;
+
+            //newTrainRoute = new TrainRoute();
+
+            this.addRoutePanel.Visibility = Visibility.Visible;
+            this.nameAndDepTimesControl = new DepartureTimesForRoute(this);
+            this.nameAndDepTimesControl.nameBox.Text = selectedRoute.Name;
+            this.nameAndDepTimesControl.nameBox.IsReadOnly = true;
+            this.nameAndDepTimesControl.nameBox.ToolTip = "Ne možete izmeniti naziv linije";
+
+            this.nameAndDepTimesControl.depTimesBox.Text = selectedRoute.DepartureTimes;
+            this.NameAndDepartureFrame.Content = nameAndDepTimesControl;
+
+            this.allStations = new ObservableCollection<Station>();
+            using (var db = new DatabaseContext())
+            {
+                this.allStations = new ObservableCollection<Station>(db.Stations.ToList());
+            }
+
+            this.StationsList.ItemsSource = this.allStations;
+            TrainRoute t = TrainRouteService.FindByName(selectedRoute.Name);
+            this.selectedStations.Clear();
+
+            using(var db = new DatabaseContext())
+            {
+                foreach(var r in db.TrainRoutes)
+                {
+                    if (r.Deleted) continue;
+                    if (r.Name == selectedRoute.Name)
+                    {
+                        foreach(var s in r.Stations)
+                        {
+                            this.selectedStations.Add(new StationOnRouteDTO(s.Station, s.AdditionalTime, s.AdditionalPrice));
+                        }
+                    }
+                }
+            }
+
+            setUpMapView();
         }
 
         #region dodavanje nove linije
@@ -479,13 +524,34 @@ namespace TrainTickets.View.TrainRoutes
             }
             else
             {
-                bool saved = TrainRouteService.addRoute(selectedStations, DepartureTimesForRoute.name, DepartureTimesForRoute.departureTimes);
-                if (!saved)
+                if (editFlag)
                 {
-                    MessageBox.Show("Linija sa unetim imenom već postoji!");
-                    return;
+                    if (TrainRouteService.editRoute(selectedStations, DepartureTimesForRoute.name, DepartureTimesForRoute.departureTimes))
+                    {
+                        MessageBox.Show("Uspešno ste izmenili liniju!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Greška pri izmeni linije!");
+                        return;
+                    }
+                }
+                else
+                {
+                    if (!TrainRouteService.addRoute(selectedStations, DepartureTimesForRoute.name, DepartureTimesForRoute.departureTimes))
+                    {
+                        MessageBox.Show("Linija sa unetim imenom već postoji!");
+                        return;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Uspešno ste dodali novu liniju!");
+                    }
                 }
 
+                editFlag = false;
+                this.nameAndDepTimesControl.nameBox.IsReadOnly = false;
+                this.nameAndDepTimesControl.nameBox.ToolTip = "Unesite naziv nove linije";
                 this.addNewRouteBtn.Visibility = Visibility.Visible;
                 this.showRoutesPanel.Visibility = Visibility.Visible;
                 mapView.Markers.Clear();
@@ -496,8 +562,6 @@ namespace TrainTickets.View.TrainRoutes
                 foreach (var r in TrainRouteService.allRoutesToDTO())
                     this.Routes.Add(r);
                 this.selectedStations.Clear();
-                
-                MessageBox.Show("Uspešno ste dodali novu liniju!");
             }
         }
 

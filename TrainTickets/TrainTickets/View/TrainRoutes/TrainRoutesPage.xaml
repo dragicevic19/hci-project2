@@ -44,7 +44,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="320">
+                            <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="315">
                                 <StackPanel Height="55" ToolTip="Selektujte liniju kako biste videli mrezni prikaz">
                                     <TextBlock Foreground="Red" Text="{Binding Name}"/>
                                     <StackPanel Orientation="Horizontal">

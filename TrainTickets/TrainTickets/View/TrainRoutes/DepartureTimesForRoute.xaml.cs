@@ -66,9 +66,10 @@ namespace TrainTickets.View.TrainRoutes
             {
                 departureTimes.Clear();
                 string input = depTimesBox.Text;
-
+                input = input.Trim();
                 foreach(var i in input.Split(';'))
                 {
+                    if (i == "") continue;
                     string[] hoursAndMins = i.Split(':');
                     int hours = int.Parse(hoursAndMins[0]);
                     int minutes = int.Parse(hoursAndMins[1]);

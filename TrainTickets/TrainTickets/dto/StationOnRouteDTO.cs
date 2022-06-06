@@ -56,6 +56,14 @@ namespace TrainTickets.dto
             Station = s;
         }
 
+        public StationOnRouteDTO(Station s, double time, double price)
+        {
+            Station = s;
+            AdditionalTime = time;
+            AdditionalPrice = price;
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string property)
