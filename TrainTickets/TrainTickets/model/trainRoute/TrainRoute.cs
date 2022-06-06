@@ -30,6 +30,12 @@ namespace TrainTickets.model.trainRoute
             return false;
         }
 
+        public TrainRoute()
+        {
+            this.Stations = new List<StationOnRoute>();
+            this.DepartureTimes = new List<DepartureTime>();
+        }
+
         // public double Price { get; set; } racunamo kao zbir additionalPrices u StationOnRoute
     }
 }

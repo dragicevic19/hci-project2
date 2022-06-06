@@ -17,8 +17,14 @@ namespace TrainTickets.model.station
 
         public Location Location { get; set; }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         //[ForeignKey("Location")]
         //public int LocationId { get; set; }
+
 
     }
 }

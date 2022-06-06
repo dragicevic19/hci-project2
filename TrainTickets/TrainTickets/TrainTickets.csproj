@@ -15,16 +15,20 @@
     <None Remove="Images\map1.png" />
     <None Remove="Images\maximize.png" />
     <None Remove="Images\minimize.png" />
+    <None Remove="Images\price.png" />
     <None Remove="Images\search.png" />
     <None Remove="Images\station1.png" />
     <None Remove="Images\tgBtn_default.png" />
     <None Remove="Images\ticket1.png" />
+    <None Remove="Images\time.png" />
     <None Remove="Images\timetable1.png" />
+    <None Remove="Images\title.png" />
     <None Remove="Images\train.png" />
     <None Remove="Images\underground.png" />
     <None Remove="Images\wallpaper1jpg.jpg" />
     <None Remove="Images\wallpaper2.jpg" />
     <None Remove="Images\wallpaper3.jpg" />
+    <None Remove="Images\wallpaper4.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +59,9 @@
     <Resource Include="Images\minimize.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\price.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\search.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -67,7 +74,13 @@
     <Resource Include="Images\ticket1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\time.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\timetable1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\title.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\train.png">
@@ -83,6 +96,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\wallpaper3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\wallpaper4.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrainTickets.Database;
 using TrainTickets.dto;
+using TrainTickets.model.station;
 using TrainTickets.model.stationOnRoute;
 using TrainTickets.model.trainRoute;
 using TrainTickets.Services;
@@ -36,6 +38,13 @@ namespace TrainTickets.View.TrainRoutes
 
         public ObservableCollection<TrainRouteDTO> Routes { get; set; }
 
+        Point startPoint = new Point();
+        private ObservableCollection<Station> allStations;
+        public ObservableCollection<StationOnRouteDTO> selectedStations { get; set; }
+
+        public DepartureTimesForRoute nameAndDepTimesControl;
+
+        private TrainRoute newTrainRoute;
 
         public TrainRoutesPage()
         {
@@ -45,9 +54,12 @@ namespace TrainTickets.View.TrainRoutes
         public TrainRoutesPage(Frame mainPage)
         {
             InitializeComponent();
+            this.mainPage = mainPage;
 
             this.TrainRouteService = new TrainRouteService();
             this.Routes = new ObservableCollection<TrainRouteDTO>();
+            this.selectedStations = new ObservableCollection<StationOnRouteDTO>();
+
 
             using (var db = new DatabaseContext())
             {
@@ -57,13 +69,12 @@ namespace TrainTickets.View.TrainRoutes
                 }
             }
             RoutesList.ItemsSource = this.Routes;
-            this.mainPage = mainPage;
+            DataContext = this;
         }
 
         private void mapView_Loaded(object sender, RoutedEventArgs e)
         {
             setUpMapView();
-
         }
 
         public void setUpMapView()
@@ -80,7 +91,7 @@ namespace TrainTickets.View.TrainRoutes
             mapView.MinZoom = 3;
             mapView.MaxZoom = 17;
             // whole world zoom
-            mapView.Zoom = 7;
+            mapView.Zoom = 8;
             mapView.Position = new GMap.NET.PointLatLng(44.01583333, 20.55944444);
             // lets the map use the mousewheel to zoom
             mapView.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
@@ -92,24 +103,24 @@ namespace TrainTickets.View.TrainRoutes
 
             previous = null;
 
-            /*(foreach (Station s in stations2)
+            foreach (var s in selectedStations) // kad se obrise stanica pozivam ovu metodu da mi nacrta novu putanju
             {
-                GMap.NET.PointLatLng current = new GMap.NET.PointLatLng(s.Latitude, s.Longitude);
-                GMap.NET.WindowsPresentation.GMapMarker marker = new GMap.NET.WindowsPresentation.GMapMarker(current);
+
+                PointLatLng current = new PointLatLng(s.Station.Location.X, s.Station.Location.Y);
+                GMapMarker marker = new GMapMarker(current);
 
                 marker.Shape = new Ellipse
                 {
                     Width = 10,
                     Height = 10,
-                    Stroke = Brushes.Firebrick,
+                    Stroke = Brushes.Red,
                     StrokeThickness = 1.5,
-                    ToolTip = "Stanica",
+                    ToolTip = "Stanica " + s.Station.Name,
                     Visibility = Visibility.Visible,
-                    Fill = Brushes.Firebrick,
+                    Fill = Brushes.Red,
 
                 };
                 mapView.Markers.Add(marker);
-
 
                 if (previous == null)
                 {
@@ -118,11 +129,10 @@ namespace TrainTickets.View.TrainRoutes
                 }
                 else
                 {
-                    drawLineBetweenPoints(current, previous, mapView);
+                    drawLineBetweenPoints(current, previous);
                     previous = new PointLatLng(current.Lat, current.Lng);
                 }
-
-            }*/
+            }
         }
 
         private void RouteClicked(object sender, MouseButtonEventArgs e)
@@ -134,7 +144,6 @@ namespace TrainTickets.View.TrainRoutes
             {
                 if (RoutesList.SelectedItem == null)
                 {
-                    MessageBox.Show("Linija nije selektovana");
                     return;
                 }
 
@@ -196,10 +205,10 @@ namespace TrainTickets.View.TrainRoutes
             {
                 Width = 3,
                 Height = 3,
-                Stroke = Brushes.YellowGreen,
+                Stroke = Brushes.Green,
                 StrokeThickness = 1.5,
                 Visibility = Visibility.Visible,
-                Fill = Brushes.YellowGreen,
+                Fill = Brushes.Green,
             };
             mapView.Markers.Add(markerLine);
             drawLineBetweenPoints(current, middle);
@@ -218,20 +227,29 @@ namespace TrainTickets.View.TrainRoutes
         }
 
 
-        private void mapView_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void mapView_Drop(object sender, DragEventArgs e)
-        {
-
-        }
-
         private void NewRouteBtnClick(object sender, RoutedEventArgs e)
         {
+            this.addNewRouteBtn.Visibility = Visibility.Collapsed;
+            this.showRoutesPanel.Visibility = Visibility.Hidden;
+            mapView.Markers.Clear();
+            previous = null;
 
+            newTrainRoute = new TrainRoute();
+
+            this.addRoutePanel.Visibility = Visibility.Visible;
+            this.nameAndDepTimesControl = new DepartureTimesForRoute(this);
+            this.NameAndDepartureFrame.Content = nameAndDepTimesControl;
+
+            this.allStations = new ObservableCollection<Station>();
+            using(var db = new DatabaseContext())
+            {
+                this.allStations = new ObservableCollection<Station>(db.Stations.ToList());
+            }
+
+            this.StationsList.ItemsSource = this.allStations;
         }
+
+        #region dodavanje nove linije
 
         private void textSearch_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -260,5 +278,226 @@ namespace TrainTickets.View.TrainRoutes
             }
         }
 
+        private void textSearchStations_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            searchBoxStations.Focus();
+        }
+
+        private void searchBoxStations_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(searchBoxStations.Text) && searchBoxStations.Text.Length > 0)
+                textSearchStations.Visibility = Visibility.Collapsed;
+            else
+                textSearchStations.Visibility = Visibility.Visible;
+
+
+            allStations.Clear();
+
+            using (var db = new DatabaseContext())
+            {
+                foreach (var station in db.Stations)
+                {
+                    if (station.Name.ToLower().Contains(searchBoxStations.Text.ToLower()))
+                    {
+                        allStations.Add(station);
+                    }
+                }
+            }
+        }
+
+        private void StationsClicked(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+        }
+
+        private void ListView_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                Point mousePos = e.GetPosition(null);
+                Vector diff = startPoint - mousePos;
+
+                if (e.LeftButton == MouseButtonState.Pressed &&
+                    (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+                {
+                    // Get the dragged ListViewItem
+                    ListView listView = sender as ListView;
+                    ListViewItem listViewItem =
+                        FindAncestor<ListViewItem>((DependencyObject)e.OriginalSource);
+
+                    // Find the data behind the ListViewItem
+                    Station station = (Station)listView.ItemContainerGenerator.ItemFromContainer(listViewItem);
+
+                    // Initialize the drag & drop operation
+                    DataObject dragData = new DataObject("myFormat", station);
+                    DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T)
+                {
+                    return (T)current;
+                }
+                current = VisualTreeHelper.GetParent(current);
+            }
+            while (current != null);
+            return null;
+        }
+
+        private void mapView_DragEnter(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("myFormat") || sender == e.Source)
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+        private bool IsStationInSelectedStations(Station station)
+        {
+            foreach(var s in selectedStations)
+            {
+                if (s.Station.Id == station.Id) return true;
+            }
+            return false;
+        }
+
+        private void mapView_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("myFormat"))
+            {
+                Station station = e.Data.GetData("myFormat") as Station;
+                if (IsStationInSelectedStations(station))
+                {
+                    MessageBox.Show("Ovu stanicu ste vec dodali!");
+                    return;
+                }
+
+                StationOnRouteDTO newStationOnRoute = new StationOnRouteDTO(station);
+
+                if (selectedStations.Count > 0) // ako nije pocetna stanica
+                {
+                    AdditionalDataForRouteModal modal = new AdditionalDataForRouteModal(this);
+                    modal.ShowDialog();
+
+                    if (modal.canceled) return;
+
+                    newStationOnRoute.AdditionalTime = modal.additionalTime;
+                    newStationOnRoute.AdditionalPrice = modal.additionalPrice;
+                }
+
+                this.selectedStations.Add(newStationOnRoute);
+                addNewMarker(station);
+                this.allStations.Remove(station);
+            }
+        }
+
+
+        private double calcMinutesFromTimeSpan(TimeSpan additionalTime)
+        {
+            int hours = additionalTime.Hours;
+            int minutes = additionalTime.Minutes;
+            return (hours == 0) ? minutes : hours * 60 + minutes;
+        }
+
+        private void addNewMarker(Station s)
+        {
+            PointLatLng current = new PointLatLng(s.Location.X, s.Location.Y);
+            GMapMarker marker = new GMapMarker(current)
+            {
+                Shape = new Ellipse
+                {
+                    Width = 10,
+                    Height = 10,
+                    Stroke = Brushes.Red,
+                    StrokeThickness = 1.5,
+                    ToolTip = "Stanica " + s.Name,
+                    Visibility = Visibility.Visible,
+                    Fill = Brushes.Red,
+                }
+            };
+            mapView.Markers.Add(marker);
+
+
+            if (previous == null)
+            {
+                previous = new PointLatLng(current.Lat, current.Lng);
+            }
+            else
+            {
+                drawLineBetweenPoints(current, previous);
+                previous = new PointLatLng(current.Lat, current.Lng);
+            }
+        }
+
+        private void addRoute_Click(object sender, RoutedEventArgs e)
+        {
+            nameAndDepTimesControl.ParseDepTimes();
+
+            if (DepartureTimesForRoute.name == null || DepartureTimesForRoute.name.Length == 0)
+            {
+                MessageBox.Show("Ime linije je obavezno!");
+            }
+            else if (DepartureTimesForRoute.departureTimes.Count == 0)
+            {
+                MessageBox.Show("Vreme polazaka je obavezno!");
+            }
+            else if (selectedStations.Count == 0)
+            {
+                MessageBox.Show("Morate odabrati stanice za liniju");
+            }
+            else
+            {
+                bool saved = TrainRouteService.addRoute(selectedStations, DepartureTimesForRoute.name, DepartureTimesForRoute.departureTimes);
+                if (!saved)
+                {
+                    MessageBox.Show("Linija sa unetim imenom već postoji!");
+                    return;
+                }
+
+                this.addNewRouteBtn.Visibility = Visibility.Visible;
+                this.showRoutesPanel.Visibility = Visibility.Visible;
+                mapView.Markers.Clear();
+                previous = null;
+
+                this.addRoutePanel.Visibility = Visibility.Hidden;
+                this.Routes.Clear();
+                this.selectedStations.Clear();
+                using (var db = new DatabaseContext())
+                {
+                    foreach(var route in db.TrainRoutes)
+                        this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                }
+                MessageBox.Show("Uspešno ste dodali novu liniju!");
+            }
+        }
+
+        private void btn_delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Da li ste sigurni da želite da obrišete stanicu?", "Brisanje", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                return;
+
+            StationOnRouteDTO row = (StationOnRouteDTO) DataGrid.SelectedItem;
+            if (selectedStations[0].Station.Id == row.Station.Id)
+            {
+                if (selectedStations.Count > 1)
+                {
+                    selectedStations[1].AdditionalTime = 0;
+                    selectedStations[1].AdditionalPrice = 0;
+                }
+            }
+            this.selectedStations.Remove(row);
+            setUpMapView();
+        }
     }
+
+    #endregion
 }
