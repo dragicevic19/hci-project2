@@ -26,9 +26,9 @@
                 </Canvas>
 
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Sign Up" Style="{StaticResource TitleText}"/>
-                    <TextBlock Text="Enter your personal info and create new account to connect us" Style="{StaticResource NormalText}" Opacity="0.8" Margin="20 30 20 30"/>
-                    <Button Content="Sign Up" Style="{StaticResource button}" Click="Button_Click"/>
+                    <TextBlock Text="Registracija" Style="{StaticResource TitleText}"/>
+                    <TextBlock Text="Unesite lične informacije i koristite naše usluge!" Style="{StaticResource NormalText}" Opacity="0.8" Margin="20 30 20 30"/>
+                    <Button Content="Registruj se" Style="{StaticResource button}" Click="Button_Click"/>
                 </StackPanel>
             </Grid>
         </Border>

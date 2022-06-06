@@ -1,0 +1,52 @@
+﻿<Window x:Class="TrainTickets.View.TrainRoutes.AdditionalDataForRouteModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainTickets.View.TrainRoutes"
+        mc:Ignorable="d"
+        Title="AdditionalDataForRouteModal" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
+        Background="White">
+    <Grid>
+
+        <Image Source="/Images/close.png" Panel.ZIndex="1" Height="20" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+
+        <Border Background="#FFFFFF" CornerRadius="0 10 10 0">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Dodatne informacije o izabranoj stanici" FontSize="20" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
+
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/time.png" Height="20" />
+                        <TextBlock x:Name="textAddTime" MouseDown="textAddTime_MouseDown" Text="Potrebno vreme do stanice" Style="{StaticResource textHint}" 
+                                   ToolTip="Unesite vreme koje je vozu potrebno da stigne od prethodne do ove stanice.\nFormat: HH:mm (00:50)"/>
+                        <TextBox Name="txtAddTime" TextChanged="txtAddTime_TextChanged" Style="{StaticResource textBox}" />
+                    </Grid>
+                </Border>
+
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Images/price.png" Height="20" />
+                        <TextBlock x:Name="textAddPrice" MouseDown="textAddPrice_MouseDown" Text="Cena od prethodne stanice" Style="{StaticResource textHint}"
+                                   ToolTip="Unesite cenu karte u dinarima od prethodne do ove stanice."/>
+                        <TextBox x:Name="addPriceBox" TextChanged="addPriceBox_TextChanged" Style="{StaticResource textBox}" />
+                    </Grid>
+                </Border>
+
+                <Button Content="OK" Click="Button_Click" Style="{StaticResource mainButton}" />
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

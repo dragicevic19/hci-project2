@@ -39,6 +39,7 @@ namespace TrainTickets.View.HomePage
         public HomePageWindow(string email, UserService userService, Window loginWin)
         {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
             this.loginWindow = loginWin;
             this.userService = userService;
             this.user = userService.findByEmail(email);

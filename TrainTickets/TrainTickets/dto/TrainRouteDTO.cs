@@ -10,6 +10,7 @@ namespace TrainTickets.dto
         public string Name { get; set; }
 
         public string From { get; set; }
+
         public string To { get; set; }
 
         public string DepartureTimes { get; set; }
@@ -24,7 +25,7 @@ namespace TrainTickets.dto
             DepartureTimes = "";
             foreach(var time in departureTimes)
             {
-                DepartureTimes += time.Time.Hours + "." + time.Time.Minutes + "; ";
+                DepartureTimes += time.Time.Hours + ":" + time.Time.Minutes + "; ";
             }
         }
     }
