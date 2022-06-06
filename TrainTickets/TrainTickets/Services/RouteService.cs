@@ -22,7 +22,7 @@ namespace TrainTickets.Services
                     {
                         foreach(var time in route.DepartureTimes)
                         {
-                            routes.Add(new RoutesForViewWithPriceDTO(route, start, end, route.routePrice(start, end), time, route.routeTime(start, end)));
+                            routes.Add(new RoutesForViewWithPriceDTO(route, start, end, route.routePrice(start, end), time.Time, route.routeTime(start, end)));
                         }    
 
                     }

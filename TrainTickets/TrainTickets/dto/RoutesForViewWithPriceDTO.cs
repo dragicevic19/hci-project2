@@ -19,7 +19,7 @@ namespace TrainTickets.dto
 
         double price { get; set; }
 
-        TimeOnly startTime { get; set; }
+        TimeSpan startTime { get; set; }
 
         double time { get; set; }
 
@@ -27,7 +27,7 @@ namespace TrainTickets.dto
         {
         }
 
-        public RoutesForViewWithPriceDTO(TrainRoute tr, Station start, Station end, double price, TimeOnly startTime, double time)
+        public RoutesForViewWithPriceDTO(TrainRoute tr, Station start, Station end, double price, TimeSpan startTime, double time)
         {
             Tr = tr;
             this.start = start;
