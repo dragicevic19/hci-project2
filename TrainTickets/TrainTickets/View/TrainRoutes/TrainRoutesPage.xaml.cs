@@ -286,7 +286,6 @@ namespace TrainTickets.View.TrainRoutes
             mapView.Markers.Clear();
             previous = null;
 
-            //newTrainRoute = new TrainRoute();
 
             this.addRoutePanel.Visibility = Visibility.Visible;
             this.nameAndDepTimesControl = new DepartureTimesForRoute(this);
@@ -306,7 +305,9 @@ namespace TrainTickets.View.TrainRoutes
                 }
             }
 
-            comboTrain.IsEditable = false;
+            comboTrain.IsEnabled = false;
+            comboTrain.ToolTip = "Ne možete izmeniti voz!";
+
 
             this.allStations = new ObservableCollection<Station>();
             using (var db = new DatabaseContext())
@@ -539,11 +540,10 @@ namespace TrainTickets.View.TrainRoutes
             {
                 MessageBox.Show("Vreme polazaka je obavezno!");
             }
-            else if (selectedStations.Count == 0)
+            else if (selectedStations.Count < 2)
             {
-                MessageBox.Show("Morate odabrati stanice za liniju");
+                MessageBox.Show("Morate odabrati bar 2 stanice za liniju");
             }
-            
             else
             {
                 if (editFlag)
@@ -560,7 +560,8 @@ namespace TrainTickets.View.TrainRoutes
                 }
                 else
                 {
-                    if (!TrainRouteService.addRoute(selectedStations, DepartureTimesForRoute.name, DepartureTimesForRoute.departureTimes))
+                    Train train = (Train) comboTrain.SelectedItem;
+                    if (!TrainRouteService.addRoute(selectedStations, DepartureTimesForRoute.name, DepartureTimesForRoute.departureTimes, train))
                     {
                         MessageBox.Show("Linija sa unetim imenom već postoji!");
                         return;
@@ -579,7 +580,7 @@ namespace TrainTickets.View.TrainRoutes
                 mapView.Markers.Clear();
                 previous = null;
 
-                comboTrain.IsEditable = true;
+                comboTrain.IsEnabled = true;
 
                 this.addRoutePanel.Visibility = Visibility.Hidden;
                 this.Routes.Clear();
@@ -608,8 +609,6 @@ namespace TrainTickets.View.TrainRoutes
         }
         #endregion
 
-
     }
-
     
 }
