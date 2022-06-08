@@ -108,4 +108,10 @@
     <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="View\HomePageUser\HomePageWindowUser.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+  </ItemGroup>
+
 </Project>

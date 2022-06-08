@@ -67,9 +67,20 @@ namespace TrainTickets
                 }
                 else
                 {
-                    mainWindow.Hide();
-                    Window homeWindow = new HomePageWindow(txtEmail.Text, userService, mainWindow);
-                    homeWindow.Show();
+              
+                    if (userService.findByEmail(txtEmail.Text).UserType == model.UserType.Manager)
+                    {
+                        mainWindow.Hide();
+                        Window homeWindow = new HomePageWindow( userService, mainWindow);
+                        homeWindow.Show();
+                    }
+                    else
+                    {
+
+                        mainWindow.Hide();
+                        Window homeWindow = new HomePageWindowUser( userService, mainWindow);
+                        homeWindow.Show();
+                    }
                 }
             }
         }

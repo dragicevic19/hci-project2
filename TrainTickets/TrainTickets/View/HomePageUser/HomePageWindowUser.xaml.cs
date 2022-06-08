@@ -24,25 +24,27 @@ namespace TrainTickets.View.HomePage
     /// <summary>
     /// Interaction logic for HomePageWindow.xaml
     /// </summary>
-    public partial class HomePageWindow : Window
+    public partial class HomePageWindowUser : Window
     {
-        private User user;
+       
         private UserService userService;
+        private User user { get; set; }
 
         private Window loginWindow;
 
-        public HomePageWindow()
+        public HomePageWindowUser()
         {
             InitializeComponent();
         }
 
-        public HomePageWindow( UserService userService, Window loginWin)
+        public HomePageWindowUser( UserService userService, Window loginWin)
         {
             InitializeComponent();
             WindowState = WindowState.Maximized;
             this.loginWindow = loginWin;
             this.userService = userService;
             this.user = userService.logUser;
+  
            
         }
 
@@ -133,7 +135,7 @@ namespace TrainTickets.View.HomePage
         private void KartePressedHandler(object sender, MouseButtonEventArgs e)
         {
             img_bg.Opacity = 0.3;
-            mainPage.Content = new TicketsPageForAdmin(mainPage);
+            mainPage.Content = new TicketsPage(mainPage);
         }
 
         private void OdjavaPressedHandler(object sender, MouseButtonEventArgs e)

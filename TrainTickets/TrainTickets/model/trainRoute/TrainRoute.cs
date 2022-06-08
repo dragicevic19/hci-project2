@@ -95,12 +95,12 @@ namespace TrainTickets.model.trainRoute
             double time = 0;
             foreach (var t in this.Stations)
             {
-                if (t.Equals(start))
+                if (t.Station.Name.Equals(start.Name))
                 {
                     firstFound = true;
                     continue;
                 }
-                else if (t.Equals(end))
+                else if (t.Station.Name.Equals(end.Name))
                 {
                     time += t.AdditionalTime;
                     break;
