@@ -125,7 +125,7 @@ namespace TrainTickets.Services
                 {
                     if (!route.Deleted)
                     {
-                        retList.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                        retList.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes, route.Train.Name));
                     }
                 }
             }

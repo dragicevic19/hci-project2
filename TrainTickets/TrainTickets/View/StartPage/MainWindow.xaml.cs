@@ -76,13 +76,17 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Užice', 43.861,  19.843)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Valjevo', 44.272, 19.885)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Zrenjanjnin', 45.383, 20.391)");
-                
 
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('BN10A', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('NB10A', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('NN10', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('LN20C', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('SB10', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains Values (5, 'TestVoz', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains Values (6, 'TestVoz2', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains Values (7, 'TestVoz3', 'false')");
+
+
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('BN10A', 1, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('NB10A', 2, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('NN10', 3, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('LN20C', 1, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('SB10', 2, 'false')");
 
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 1)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 1)");

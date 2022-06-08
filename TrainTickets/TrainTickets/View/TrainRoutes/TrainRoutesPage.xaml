@@ -45,7 +45,7 @@
                     <DataTemplate>
                         <WrapPanel>
                             <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="315">
-                                <StackPanel Height="55" ToolTip="Selektujte liniju kako biste videli mrezni prikaz">
+                                <StackPanel Height="65" ToolTip="Selektujte liniju kako biste videli mrezni prikaz">
                                     <TextBlock Foreground="Red" Text="{Binding Name}"/>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding From}" FontWeight="Bold"/>
@@ -53,6 +53,9 @@
                                         <TextBlock Text="{Binding To}" FontWeight="Bold"/>
                                     </StackPanel>
                                     <TextBlock Text="{Binding DepartureTimes}"/>
+                                    
+                                    <TextBlock Text="Voz: "/>
+                                    <TextBlock Text="{Binding TrainName}"/>
                                 </StackPanel>
                             </Border>
                         </WrapPanel>
@@ -71,6 +74,17 @@
                     ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
 
             <Frame x:Name="NameAndDepartureFrame" NavigationUIVisibility="Hidden"/>
+
+            <TextBlock Text="Voz:" FontSize="16" Foreground="#3AB19B" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Style="{StaticResource TitleText}" />
+
+            <ComboBox Height="25" Margin="20" Name="comboTrain"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Trains}" Background="Transparent">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <TextBlock Text="Stanice:" FontSize="16" Foreground="#3AB19B" Margin="5, 30, 10, 10" HorizontalAlignment="Left" Style="{StaticResource TitleText}" />
 
@@ -108,7 +122,7 @@
 
             <DataGrid
                 ToolTip="Selektujte ćeliju da biste izmenili vreme ili cenu"
-                Height="330"
+                Height="300"
                 CanUserSortColumns="False"
                 x:Name="DataGrid"
                 ItemsSource="{Binding selectedStations}"

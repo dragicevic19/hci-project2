@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TrainTickets.model.stationOnRoute;
 using TrainTickets.model.train;
 using TrainTickets.model.station;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrainTickets.model.trainRoute
 {
@@ -21,7 +22,13 @@ namespace TrainTickets.model.trainRoute
 
         public virtual List<DepartureTime> DepartureTimes { get; set; }
 
+        [ForeignKey("Train")]
+        public int TrainId { get; set; }
+        public virtual Train Train { get; set; }
+
         public bool Deleted { get; set; }
+
+
 
         internal bool ContainsStation(string stationName)
         {

@@ -1,4 +1,5 @@
-﻿using GMap.NET;
+﻿using Caliburn.Micro;
+using GMap.NET;
 using GMap.NET.WindowsPresentation;
 using System;
 using System.Collections;
@@ -21,6 +22,7 @@ using TrainTickets.Database;
 using TrainTickets.dto;
 using TrainTickets.model.station;
 using TrainTickets.model.stationOnRoute;
+using TrainTickets.model.train;
 using TrainTickets.model.trainRoute;
 using TrainTickets.Services;
 
@@ -36,6 +38,8 @@ namespace TrainTickets.View.TrainRoutes
 
         private TrainRouteService TrainRouteService;
 
+        public BindableCollection<Train> Trains { get; set; }
+
         public ObservableCollection<TrainRouteDTO> Routes { get; set; }
 
         Point startPoint = new Point();
@@ -47,6 +51,8 @@ namespace TrainTickets.View.TrainRoutes
         private TrainRoute newTrainRoute;
         private bool editFlag = false;
 
+        private TrainService trainService;
+
         public TrainRoutesPage()
         {
             InitializeComponent();
@@ -57,11 +63,15 @@ namespace TrainTickets.View.TrainRoutes
             InitializeComponent();
             this.mainPage = mainPage;
 
+            this.trainService = new TrainService();
             this.TrainRouteService = new TrainRouteService();
             this.Routes = new ObservableCollection<TrainRouteDTO>();
             this.selectedStations = new ObservableCollection<StationOnRouteDTO>();
 
-            this.Routes.Clear();
+            Trains = new BindableCollection<Train>(trainService.getAll());
+
+            comboTrain.SelectedItem = Trains[0];
+
             foreach (var r in TrainRouteService.allRoutesToDTO())
                 this.Routes.Add(r);
 
@@ -194,7 +204,7 @@ namespace TrainTickets.View.TrainRoutes
         private void drawLineBetweenPoints(PointLatLng current, PointLatLng? previous)
         {
             double dis = CountDistanceBetweenPoints(current, (PointLatLng)previous);
-            if (dis < 0.001)
+            if (dis < 0.01)
                 return;
             PointLatLng middle = CountMiddlePoint(current, (PointLatLng)previous);
             GMapMarker markerLine = new GMapMarker(middle);
@@ -287,6 +297,17 @@ namespace TrainTickets.View.TrainRoutes
             this.nameAndDepTimesControl.depTimesBox.Text = selectedRoute.DepartureTimes;
             this.NameAndDepartureFrame.Content = nameAndDepTimesControl;
 
+            foreach(var train in Trains)
+            {
+                if (train.Name == trainService.findByName(selectedRoute.TrainName).Name)
+                {
+                    comboTrain.SelectedItem = train;
+                    break;
+                }
+            }
+
+            comboTrain.IsEditable = false;
+
             this.allStations = new ObservableCollection<Station>();
             using (var db = new DatabaseContext())
             {
@@ -338,9 +359,9 @@ namespace TrainTickets.View.TrainRoutes
                     if (!route.Deleted)
                     {
                         if (route.Name.ToLower().Contains(searchBox.Text.ToLower()))
-                            this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                            this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes, route.Train.Name));
                         else if (route.ContainsStation(searchBox.Text.ToLower()))
-                            this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes));
+                            this.Routes.Add(new TrainRouteDTO(route.Name, route.Stations[0].Station.Name, route.Stations[^1].Station.Name, route.DepartureTimes, route.Train.Name));
                     }
                 }
             }
@@ -522,6 +543,7 @@ namespace TrainTickets.View.TrainRoutes
             {
                 MessageBox.Show("Morate odabrati stanice za liniju");
             }
+            
             else
             {
                 if (editFlag)
@@ -556,6 +578,8 @@ namespace TrainTickets.View.TrainRoutes
                 this.showRoutesPanel.Visibility = Visibility.Visible;
                 mapView.Markers.Clear();
                 previous = null;
+
+                comboTrain.IsEditable = true;
 
                 this.addRoutePanel.Visibility = Visibility.Hidden;
                 this.Routes.Clear();
