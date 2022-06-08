@@ -9,9 +9,21 @@
       Title="TicketsPage">
 
     <Grid>
-        <Label HorizontalAlignment="Left" Margin="14,5,0,0" x:Name="label1" Width="62" Height="42" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.781,0.548" Content="Start:"/>
-        <ComboBox Height="25" Margin="80,12,497,0" Name="comboBox1" VerticalAlignment="Top"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="0" RenderTransformOrigin="0.541,0.549" Width="220"  >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Margin="20" x:Name="label1" Width="62" Height="42" FontSize="20"  Content="Start:"  Grid.Row="0" Grid.Column="0"/>
+        <ComboBox Height="25" Margin="20" Name="comboBox1"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="1"   Width="220"  >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -20,9 +32,9 @@
         </ComboBox>
 
 
-        <Label HorizontalAlignment="Left" Margin="338,5,0,0" x:Name="label2" Width="62" Height="51" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.539,0.608" Content="End:"/>
-        <ComboBox Height="25" Margin="400,13,180,0" Name="comboBox2" VerticalAlignment="Top" IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  ItemsSource="{Binding Stations}" Grid.Row="0" Width="220"  >
+        <Label  Margin="20" x:Name="label2" Width="62" Height="51"  FontSize="20"   Content="End:"  Grid.Row="0" Grid.Column="2"/>
+        <ComboBox Height="25" Margin="20" Name="comboBox2"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Stations}" Grid.Row="0" Grid.Column="3" Width="220"  >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -31,54 +43,40 @@
         </ComboBox>
 
         <Button Name="btn" 
-        Click="OnClick" ClickMode="Release" Width="80" Height="33" Margin="679,8,41,409">
+        Click="OnClick" ClickMode="Release" Width="80" Height="33"  Margin="20"  Grid.Row="0" Grid.Column="4">
             Show
         </Button>
-        <DataGrid
-            x:Name="DataGrid"
-            IsReadOnly="True"
-            AutoGenerateColumns="False"
-            ItemsSource ="{Binding RoutesForView, UpdateSourceTrigger=PropertyChanged}"
-            Margin="50" >
-            <DataGrid.Columns> 
-                <DataGridTextColumn
-                    Header="Departure"
-                    MinWidth="80"
-                    Width="*"
-                    Binding="{Binding r}"/>
-                <DataGridTextColumn
-                    Header="Date"
-                    MinWidth="80"
-                    Width="*"
-                    Binding="{Binding r}"/>
-                    <DataGridTextColumn
-                    Header="Arrival"
-                    MinWidth="80"
-                    Width="*"
-                    Binding="{Binding r}"/>
-                <DataGridTextColumn
-                    Header="Travels"
-                    MinWidth="80"
-                    Width="*"
-                    Binding="{Binding r}"/>
-                <DataGridTextColumn
-                    Header="Price"
-                    MinWidth="80"
-                    Width="*"
-                    Binding="{Binding r}"/>
-                <DataGridTextColumn
-                    Header="rezervacija"
-                    MinWidth="80"
-                    Width="*"
-                    Binding="{Binding r}"/>
-                <DataGridTextColumn
-                    Header="kupovina"
-                    MinWidth="80"
-                    Width="*"
-                    Binding="{Binding r}"/>
-            </DataGrid.Columns>
+        <ListView
+             Grid.Row="1"
+            Grid.ColumnSpan="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            x:Name="LV"
+  
+            ItemsSource="{Binding RoutesForView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Start" Width="120" DisplayMemberBinding="{Binding start}" />
+                    <GridViewColumn Header="End" Width="50" DisplayMemberBinding="{Binding end}" />
+                    <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding price}" />
+                    <GridViewColumn Header="time" Width="120" DisplayMemberBinding="{Binding time}" />
+                    <GridViewColumn Header="Start time" Width="50" DisplayMemberBinding="{Binding startTime}" />
+                    <GridViewColumn Header="Kupi">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Button_Click">
+                                    prikazi
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
 
-        </DataGrid>
+        </ListView>
+        
+        
+     
 
 
     </Grid>

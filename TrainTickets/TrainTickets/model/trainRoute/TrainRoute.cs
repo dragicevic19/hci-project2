@@ -48,17 +48,20 @@ namespace TrainTickets.model.trainRoute
             if (start == null || end == null || start.Equals(end))
                 return false;
             bool firstFound = false;
-            foreach(var t in this.Stations)
+            foreach (var t in this.Stations)
             {
-                if (t.Equals(start))
+                 
+                if (t.Station.Name.Equals(start.Name))
                     firstFound = true;
-                if(t.Equals(end))
+                else
                 {
-                    if (firstFound)
-                        return true;
-                    return false;
-                }
-                    
+                    if (t.Station.Name.Equals(end.Name))
+                    {
+                        if (firstFound)
+                            return true;
+                        return false;
+                    }
+                } 
             }
             return false;
 
@@ -70,12 +73,12 @@ namespace TrainTickets.model.trainRoute
             double price = 0;
             foreach(var t in this.Stations)
             {
-                if (t.Equals(start))
+                if (t.Station.Name.Equals(start.Name))
                 {
                     firstFound = true;
                     continue;
                 }
-                else if (t.Equals(end))
+                else if (t.Station.Name.Equals(end.Name) && firstFound)
                 {
                     price += t.AdditionalPrice;
                     break;

@@ -8,23 +8,29 @@ using TrainTickets.model.trainRoute;
 
 namespace TrainTickets.dto
 {
-    internal class RoutesForViewWithPriceDTO
+    public class RoutesForViewWithPriceDTO
     {
         
 
-        TrainRoute Tr { get; set; }
-        Station start { get; set; }
+        public TrainRoute Tr { get; set; }
+        public Station start { get; set; }
 
-        Station end { get; set; }
+        public Station end { get; set; }
 
-        double price { get; set; }
+        public double price { get; set; }
 
-        TimeSpan startTime { get; set; }
+        public TimeSpan startTime { get; set; }
 
-        double time { get; set; }
+        public double time { get; set; }
 
         public RoutesForViewWithPriceDTO()
         {
+        }
+
+        public override string ToString()
+        {
+            return start + " " + " " +
+                end + " " + price + " " + time;
         }
 
         public RoutesForViewWithPriceDTO(TrainRoute tr, Station start, Station end, double price, TimeSpan startTime, double time)

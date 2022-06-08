@@ -26,7 +26,9 @@ namespace TrainTickets.model.station
         public Station() { }
 
  
-        public override string ToString()
+       
+
+        public override string? ToString()
  
         {
             return Name;

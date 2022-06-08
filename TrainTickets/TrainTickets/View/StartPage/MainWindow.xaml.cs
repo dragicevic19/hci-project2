@@ -49,6 +49,7 @@ namespace TrainTickets
         {
             using (var db = new DatabaseContext())
             {
+ 
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Aleksinac', 43.533, 21.717)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Apatin', 45.671, 18.985)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Beograd',  44.833, 20.500)");
