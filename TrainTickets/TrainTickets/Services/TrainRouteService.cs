@@ -176,5 +176,15 @@ namespace TrainTickets.Services
                 return false;
             }
         }
+
+        public bool CanEditOrDelete(TrainRouteDTO row)
+        {
+            TrainRoute route = FindByName(row.Name);
+            return false;
+            // ovo ispraviti
+            using(var db = new DatabaseContext())
+            {
+            }
+        }
     }
 }

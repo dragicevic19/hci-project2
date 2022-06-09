@@ -79,68 +79,19 @@ namespace TrainTickets.View.Trains
             }
         }
 
-        private void textSearchStations_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            searchBoxStations.Focus();
-        }
-
-        private void ListView_MouseMove(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                Point mousePos = e.GetPosition(null);
-                Vector diff = startPoint - mousePos;
-
-                if (e.LeftButton == MouseButtonState.Pressed &&
-                    (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
-                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
-                {
-                    // Get the dragged ListViewItem
-                    ListView listView = sender as ListView;
-                    ListViewItem listViewItem =
-                        FindAncestor<ListViewItem>((DependencyObject)e.OriginalSource);
-
-                    // Find the data behind the ListViewItem
-                    Train train = (Train)listView.ItemContainerGenerator.ItemFromContainer(listViewItem);
-
-                    // Initialize the drag & drop operation
-                    DataObject dragData = new DataObject("myFormat", train);
-                    DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
-        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
-        {
-            do
-            {
-                if (current is T)
-                {
-                    return (T)current;
-                }
-                current = VisualTreeHelper.GetParent(current);
-            }
-            while (current != null);
-            return null;
-        }
-
+        
         private void btn_editTrain_Click(object sender, RoutedEventArgs e)
         {
-            this.editFlag = true;
             TrainDTO selectedTrain = (TrainDTO)TrainList.SelectedItem;
-
-            MainPage.Content = new AddOrEditTrain(MainPage, this.editFlag, selectedTrain);
-
-            using (var db = new DatabaseContext())
+            if (TrainService.CanEditOrDeleteTrain(selectedTrain))
             {
-                foreach (var t in db.Trains)
-                {
-                    if (t.Deleted) continue;
-                }
+                this.editFlag = true;
+                MainPage.Content = new AddOrEditTrain(MainPage, this.editFlag, selectedTrain);
+            }
+            else
+            {
+                MessageBox.Show("Voz je izabran u nekoj od voznih linija i ne moze se menjati!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
 
@@ -150,9 +101,17 @@ namespace TrainTickets.View.Trains
                 return;
 
             TrainDTO row = (TrainDTO)TrainList.SelectedItem;
-            if (!TrainService.deleteTrain(row))
+            if (TrainService.CanEditOrDeleteTrain(row))
             {
-                MessageBox.Show("Greška pri brisanju linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (!TrainService.deleteTrain(row))
+                {
+                    MessageBox.Show("Greška pri brisanju linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Voz je izabran u nekoj od voznih linija! Morate prvo obrisati tu liniju!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -161,25 +120,6 @@ namespace TrainTickets.View.Trains
                 this.Trains.Add(t);
         }
 
-        private void searchBoxStations_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void StationsClicked(object sender, MouseButtonEventArgs e)
-        {
-            startPoint = e.GetPosition(null);
-        }
-
-        private void addRoute_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btn_delete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void TrainClicked(object sender, MouseButtonEventArgs e)
         {
@@ -235,7 +175,6 @@ namespace TrainTickets.View.Trains
                         break;
 
                 }
-
             }
         }
 

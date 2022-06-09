@@ -18,10 +18,18 @@ namespace TrainTickets.Services
     {
         public List<Train> getAll()
         {
+            List<Train> list = new List<Train>();
             using(var db = new DatabaseContext())
             {
-                return db.Trains.ToList();
+                foreach(var t in db.Trains)
+                {
+                    if (!t.Deleted)
+                    {
+                        list.Add(t);
+                    }
+                }
             }
+            return list;
         }
 
         public Train findByName(string trainName)
@@ -162,6 +170,21 @@ namespace TrainTickets.Services
             newTrain.Capacity = Int32.Parse(capacity);
 
             return save(newTrain);
+        }
+
+        public bool CanEditOrDeleteTrain(TrainDTO row)
+        {
+            Train train = findByName(row.Name);
+
+            using(var db = new DatabaseContext())
+            {
+                foreach(var route in db.TrainRoutes)
+                {
+                    if (route.Deleted) continue;
+                    if (route.Train.Id == train.Id) return false;
+                }
+            }
+            return true;
         }
     }
 }

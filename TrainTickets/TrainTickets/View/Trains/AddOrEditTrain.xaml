@@ -46,7 +46,6 @@
             </WrapPanel>
             <TextBlock FontSize="26" FontWeight="Bold" Width="320" Height="31"/>
             <TextBlock FontSize="26" FontWeight="Bold" Text="Izaberite raspored sedišta" Width="359" Height="31"/>
-            <TextBlock FontSize="14" FontWeight="Bold" Text="(Prevucite sliku na glavni prikaz sa desne strane)" Width="360" Height="31" Foreground="Red"/>
             <WrapPanel Width="486">
                 <Border x:Name="layout24Border" BorderThickness="3" BorderBrush="Aqua">
                     <Image x:Name="layout24Preview" Height="230" MouseEnter="layout24Preview_MouseEnter" MouseLeave="layout24Preview_MouseLeave" MouseDown="layout24Preview_MouseDown" Source="/Images/Layout24.png" Stretch="Fill" Width="212" />

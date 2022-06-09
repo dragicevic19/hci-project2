@@ -262,18 +262,26 @@ namespace TrainTickets.View.TrainRoutes
                 return;
 
             TrainRouteDTO row = (TrainRouteDTO) RoutesList.SelectedItem;
-            if (!TrainRouteService.deleteRoute(row))
+            if (TrainRouteService.CanEditOrDelete(row))
             {
-                MessageBox.Show("Greška pri brisanju linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (!TrainRouteService.deleteRoute(row))
+                {
+                    MessageBox.Show("Greška pri brisanju linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                this.Routes.Clear();
+                foreach (var r in TrainRouteService.allRoutesToDTO())
+                    this.Routes.Add(r);
+
+                mapView.Markers.Clear();
+                previous = null;
+            }
+            else
+            {
+                MessageBox.Show("Trenutno je nemoguće izbrisati liniju jer je rezervisana od strane klijenta!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            this.Routes.Clear();
-            foreach(var r in TrainRouteService.allRoutesToDTO())
-                this.Routes.Add(r);
-
-            mapView.Markers.Clear();
-            previous = null;
         }
 
         private void btn_editLine_Click(object sender, RoutedEventArgs e)
@@ -596,6 +604,7 @@ namespace TrainTickets.View.TrainRoutes
                 return;
 
             StationOnRouteDTO row = (StationOnRouteDTO) DataGrid.SelectedItem;
+
             if (selectedStations[0].Station.Id == row.Station.Id)
             {
                 if (selectedStations.Count > 1)

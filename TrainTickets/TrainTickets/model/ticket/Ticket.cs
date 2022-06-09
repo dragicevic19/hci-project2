@@ -19,7 +19,6 @@ namespace TrainTickets.model.ticket
         public int UserId { get; set; }
         public virtual User User { get; set; }
 
-
         public int StartStationId { get; set; }
 
         public int EndStationId { get; set; }
