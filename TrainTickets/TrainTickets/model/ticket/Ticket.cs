@@ -19,11 +19,13 @@ namespace TrainTickets.model.ticket
         [ForeignKey("User")]
         public int UserId { get; set; }
         public virtual User User { get; set; }
-
+ 
         [ForeignKey("Departure")]
         public int DepartureID { get; set; }
         public virtual Departure Departure { get; set; }
 
+ 
+ 
         public int StartStationId { get; set; }
 
         public int EndStationId { get; set; }

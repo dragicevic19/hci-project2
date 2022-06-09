@@ -7,6 +7,7 @@ using TrainTickets.Database;
 using TrainTickets.dto;
 using TrainTickets.model.station;
 using TrainTickets.model.stationOnRoute;
+using TrainTickets.model.train;
 using TrainTickets.model.trainRoute;
 
 namespace TrainTickets.Services
@@ -30,7 +31,7 @@ namespace TrainTickets.Services
             return null;
         }
 
-        public bool addRoute(ObservableCollection<StationOnRouteDTO> selectedStations, string name, List<DepartureTime> departureTimes)
+        public bool addRoute(ObservableCollection<StationOnRouteDTO> selectedStations, string name, List<DepartureTime> departureTimes, Train train)
         {
             if (FindByName(name) != null)
             {
@@ -48,6 +49,8 @@ namespace TrainTickets.Services
             {
                 newRoute.DepartureTimes.Add(d);
             }
+
+            newRoute.TrainId = train.Id;
             newRoute.Name = name;
 
             return save(newRoute);
@@ -171,6 +174,16 @@ namespace TrainTickets.Services
             catch (Exception e)
             {
                 return false;
+            }
+        }
+
+        public bool CanEditOrDelete(TrainRouteDTO row)
+        {
+            TrainRoute route = FindByName(row.Name);
+            return false;
+            // ovo ispraviti
+            using(var db = new DatabaseContext())
+            {
             }
         }
     }

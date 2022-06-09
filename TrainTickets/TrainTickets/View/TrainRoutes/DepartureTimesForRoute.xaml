@@ -11,9 +11,9 @@
 
         <Border Background="#FFFFFF" CornerRadius="0 10 10 0">
             <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Unesite naziv i vremena polazaka ove linije" FontSize="16" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
+                <TextBlock Text="Unesite naziv i vremena polazaka ove linije:" Margin="5, 10, 5, 10" HorizontalAlignment="Left" FontSize="16" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
 
-                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="45 7" CornerRadius="5">
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="20 7" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
@@ -28,7 +28,7 @@
                 </Border>
 
 
-                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="45 7" CornerRadius="5">
+                <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="20 7" CornerRadius="5">
                     <Grid Margin="7 9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />

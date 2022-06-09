@@ -20,13 +20,8 @@ namespace TrainTickets.Services
             using (var db = new DatabaseContext())
             {
                 stations = db.Stations.ToList();
-                
-                
-
             }
-
             return stations;
-
         }
     }
 }   
