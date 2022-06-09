@@ -17,7 +17,14 @@ namespace TrainTickets.model.train
 
         public string Name { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual List<TrainSeats> Seats { get; set; }
+
+        public Train()
+        {
+            this.IsDeleted = false;
+        }
 
     }
 }
