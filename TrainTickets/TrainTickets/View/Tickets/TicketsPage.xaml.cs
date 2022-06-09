@@ -98,11 +98,13 @@ namespace TrainTickets.View.Tickets
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-          //  var rowItem = (sender as Button).DataContext as RoutesForViewWithPriceDTO;
+            //  var rowItem = (sender as Button).DataContext as RoutesForViewWithPriceDTO;
             //string name = rowItem.ToString();
-           // MessageBox.Show(name);
-            
-            BuyTicket model = new BuyTicket(this.userService.logUser);
+            // MessageBox.Show(name);
+
+
+            var rowItem = (sender as Button).DataContext as RoutesForViewWithPriceDTO;
+            BuyTicket model = new BuyTicket(this.userService.logUser, rowItem);
             model.ShowDialog();
             
 

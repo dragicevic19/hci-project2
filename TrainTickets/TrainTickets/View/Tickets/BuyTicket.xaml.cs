@@ -10,8 +10,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TrainTickets.dto;
 using TrainTickets.model;
 using TrainTickets.model.departure;
+using TrainTickets.Services;
 
 namespace TrainTickets.View.Tickets
 {
@@ -24,10 +26,13 @@ namespace TrainTickets.View.Tickets
         private Departure dep;
         private User u;
         private List<DateTime> times;
+        private RoutesForViewWithPriceDTO rfv;
+        private DepartureService departureService = new DepartureService();
+        private TicketService ticService = new TicketService();
   
 
 
-        public BuyTicket(User u)
+        public BuyTicket(User u,RoutesForViewWithPriceDTO rfv)
         {
             InitializeComponent();
             DateTime d = DateTime.Today;
@@ -36,7 +41,7 @@ namespace TrainTickets.View.Tickets
                 comboBox1.Items.Add(d.AddDays(i).ToString("dd/MM/yyyy"));
                
             }
- 
+            this.rfv = rfv;
       
 
             this.u = u;
@@ -44,21 +49,41 @@ namespace TrainTickets.View.Tickets
             
         }
 
-        public BuyTicket(Departure d, User u)
-        {
-            this.dep = d;
-            this.u = u;
-            
-            InitializeComponent();
-        }
+       
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
             this.Close();
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //dodati rezervaciju
+            String t = comboBox1.SelectedItem.ToString() + " " + rfv.startTime.ToString(@"hh\:mm");
+            MessageBox.Show(t);
+
+             
+            DateTime dt = DateTime.ParseExact(t, "g", new System.Globalization.CultureInfo("fr-FR"));
+            Departure dwp =new Departure();
+            dwp = (Departure)departureService.findDeparture(rfv.Tr,dt);
+            if(dwp == null)
+            {
+                departureService.createDeparture(rfv.Tr, dt);
+                dwp = departureService.findDeparture(rfv.Tr, dt);
+            }
+            if (ticService.createTicket(rfv, u, dwp.Id, true))
+            {
+                MessageBox.Show("Uspesno kupljena karta");
+            }
+            else
+            {
+                MessageBox.Show("Greska");
+
+            }
+            
+            
+
+
+
         }
     }
 }

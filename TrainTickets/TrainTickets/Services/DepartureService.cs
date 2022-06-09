@@ -19,7 +19,7 @@ namespace TrainTickets.Services
                 foreach (var departure in db.Departures)
                 {
 
-                    if (departure.Route.Equals(tr) && departure.Route.Equals(dt))
+                    if (departure.Route.Equals(tr) && departure.DepartureTime.Equals(dt))
                         return departure;
                     
 

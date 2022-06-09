@@ -96,6 +96,13 @@ namespace TrainTickets.model.trainRoute
             }
             return price;
         }
+        public double sumAddTime(Station s)
+        {
+            return this.routeTime(Stations[0].Station, s);
+        }
+
+      
+
         public double routeTime(Station start, Station end)
         {
             bool firstFound = false;
@@ -122,13 +129,7 @@ namespace TrainTickets.model.trainRoute
         public override bool Equals(object obj)
         {
             return obj is TrainRoute route &&
-                   Id == route.Id &&
-                   Name == route.Name &&
-                   EqualityComparer<List<StationOnRoute>>.Default.Equals(Stations, route.Stations) &&
-                   EqualityComparer<List<DepartureTime>>.Default.Equals(DepartureTimes, route.DepartureTimes) &&
-                   TrainId == route.TrainId &&
-                   EqualityComparer<Train>.Default.Equals(Train, route.Train) &&
-                   Deleted == route.Deleted;
+                   Id == route.Id;
         }
     }
 }

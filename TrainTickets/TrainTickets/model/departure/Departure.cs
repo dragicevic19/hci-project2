@@ -25,7 +25,18 @@ namespace TrainTickets.model.departure
 
         public DateTime DepartureTime { get; set; } // ovo se odnosi na konkretan polazak npr 23.3.2022. 13:00
 
-       
+        public override bool Equals(object obj)
+        {
+            return obj is Departure departure &&
+                   RouteId == departure.RouteId &&
+                   DepartureTime.ToString("dd/MM/yyyy hh:mm").Equals(departure.DepartureTime.ToString("dd/MM/yyyy hh:mm"));
+        }
+
+
+
+
+
+
         // a 13.00 se vadi iz TrainRoute->DepartureTimes
 
 
