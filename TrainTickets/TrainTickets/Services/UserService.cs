@@ -11,7 +11,7 @@ namespace TrainTickets.Services
 {
     public class UserService
     {
-
+        public User logUser { get; set; }
         public User findByEmail(string email)
         {
             if (email == null) return null;
@@ -22,6 +22,7 @@ namespace TrainTickets.Services
                 {
                     if (email == user.Email)
                     {
+
                         return user;
                     }
                 }
@@ -37,7 +38,9 @@ namespace TrainTickets.Services
 
             if (user.Password == password)
             {
+                logUser = user;
                 Console.WriteLine("User successfully logged in: " + email);
+
                 return true;
             }
 

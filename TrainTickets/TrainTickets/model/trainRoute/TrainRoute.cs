@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TrainTickets.model.stationOnRoute;
 using TrainTickets.model.train;
+using TrainTickets.model.station;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TrainTickets.model.trainRoute
 {
@@ -20,7 +22,13 @@ namespace TrainTickets.model.trainRoute
 
         public virtual List<DepartureTime> DepartureTimes { get; set; }
 
+        [ForeignKey("Train")]
+        public int TrainId { get; set; }
+        public virtual Train Train { get; set; }
+
         public bool Deleted { get; set; }
+
+
 
         internal bool ContainsStation(string stationName)
         {
@@ -40,5 +48,76 @@ namespace TrainTickets.model.trainRoute
         }
 
         // public double Price { get; set; } racunamo kao zbir additionalPrices u StationOnRoute
+
+
+        public bool containsRoute(Station start, Station end)
+        {
+            if (start == null || end == null || start.Equals(end))
+                return false;
+            bool firstFound = false;
+            foreach (var t in this.Stations)
+            {
+                 
+                if (t.Station.Name.Equals(start.Name))
+                    firstFound = true;
+                else
+                {
+                    if (t.Station.Name.Equals(end.Name))
+                    {
+                        if (firstFound)
+                            return true;
+                        return false;
+                    }
+                } 
+            }
+            return false;
+
+        }
+
+        public double routePrice(Station start, Station end)
+        {
+            bool firstFound = false;
+            double price = 0;
+            foreach(var t in this.Stations)
+            {
+                if (t.Station.Name.Equals(start.Name))
+                {
+                    firstFound = true;
+                    continue;
+                }
+                else if (t.Station.Name.Equals(end.Name) && firstFound)
+                {
+                    price += t.AdditionalPrice;
+                    break;
+                }
+                else
+                    price += t.AdditionalPrice;
+
+            }
+            return price;
+        }
+        public double routeTime(Station start, Station end)
+        {
+            bool firstFound = false;
+            double time = 0;
+            foreach (var t in this.Stations)
+            {
+                if (t.Station.Name.Equals(start.Name))
+                {
+                    firstFound = true;
+                    continue;
+                }
+                else if (t.Station.Name.Equals(end.Name))
+                {
+                    time += t.AdditionalTime;
+                    break;
+                }
+                else
+                    time += t.AdditionalTime;
+
+            }
+            return time;
+        }
+
     }
 }

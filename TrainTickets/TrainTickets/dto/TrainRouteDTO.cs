@@ -15,9 +15,11 @@ namespace TrainTickets.dto
 
         public string DepartureTimes { get; set; }
 
+        public string TrainName { get; set; }
+
         public TrainRouteDTO() { }
 
-        public TrainRouteDTO(string name, string from, string to, List<DepartureTime> departureTimes)
+        public TrainRouteDTO(string name, string from, string to, List<DepartureTime> departureTimes, string train)
         {
             Name = name;
             From = from;
@@ -27,6 +29,7 @@ namespace TrainTickets.dto
             {
                 DepartureTimes += time.Time.Hours + ":" + time.Time.Minutes + "; ";
             }
+            TrainName = train;
         }
     }
 }

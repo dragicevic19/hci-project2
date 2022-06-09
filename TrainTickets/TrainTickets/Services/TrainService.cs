@@ -7,20 +7,32 @@ using TrainTickets.Database;
 using TrainTickets.dto;
 using TrainTickets.model.train;
 using TrainTickets.model.trainSeats;
+using System.Linq;
+using System.Text;
+using TrainTickets.Database;
+using TrainTickets.model.train;
 
 namespace TrainTickets.Services
 {
     public class TrainService
     {
-        public Train FindByName(string name)
+        public List<Train> getAll()
         {
-            if (name == null) return null;
+            using(var db = new DatabaseContext())
+            {
+                return db.Trains.ToList();
+            }
+        }
+
+        public Train findByName(string trainName)
+        {
+            if (trainName == null) return null;
 
             using (var db = new DatabaseContext())
             {
                 foreach (var train in db.Trains)
                 {
-                    if (name == train.Name && !train.IsDeleted)
+                    if (trainName == train.Name && !train.Deleted)
                     {
                         return train;
                     }
@@ -35,7 +47,7 @@ namespace TrainTickets.Services
             {
                 foreach (var train in db.Trains)
                 {
-                    if (id == train.Id && !train.IsDeleted)
+                    if (id == train.Id && !train.Deleted)
                     {
                         return train;
                     }
@@ -69,7 +81,7 @@ namespace TrainTickets.Services
             {
                 foreach (var train in db.Trains)
                 {
-                    if (!train.IsDeleted)
+                    if (!train.Deleted)
                     {
                         retList.Add(new TrainDTO(train.Name, train.Capacity));
                     }
@@ -83,7 +95,7 @@ namespace TrainTickets.Services
         {
             try
             {
-                Train train = FindByName(row.Name);
+                Train train = findByName(row.Name);
                 if (train == null) return false;
 
                 using (var db = new DatabaseContext())
@@ -94,7 +106,7 @@ namespace TrainTickets.Services
                     {
                         if (t.Id == train.Id)
                         {
-                            t.IsDeleted = true;
+                            t.Deleted = true;
                             db.SaveChanges();
                             return true;
                         }
@@ -112,7 +124,7 @@ namespace TrainTickets.Services
         {
             try
             {
-                Train train = FindByName(name);
+                Train train = findByName(name);
                 if (train == null) return false;
 
                 using (var db = new DatabaseContext())
@@ -139,7 +151,7 @@ namespace TrainTickets.Services
 
         public bool addTrain(string name, string capacity)
         {
-            if (FindByName(name) != null)
+            if (findByName(name) != null)
             {
                 return false;
             }
@@ -151,6 +163,5 @@ namespace TrainTickets.Services
 
             return save(newTrain);
         }
-
     }
 }

@@ -46,6 +46,11 @@ namespace TrainTickets.model.stationOnRoute
             AdditionalPrice = price;
         }
 
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
         public StationOnRoute(int stationId, TrainRoute route, double time, double price)
         {
             StationId = stationId;

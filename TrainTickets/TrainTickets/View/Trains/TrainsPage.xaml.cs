@@ -139,7 +139,7 @@ namespace TrainTickets.View.Trains
             {
                 foreach (var t in db.Trains)
                 {
-                    if (t.IsDeleted) continue;
+                    if (t.Deleted) continue;
                 }
             }
         }
@@ -249,7 +249,7 @@ namespace TrainTickets.View.Trains
             {
                 foreach (var t in db.Trains)
                 {
-                    if (t.IsDeleted) continue;
+                    if (t.Deleted) continue;
                 }
             }
         }

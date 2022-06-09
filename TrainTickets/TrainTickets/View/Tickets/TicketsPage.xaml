@@ -9,6 +9,77 @@
       Title="TicketsPage">
 
     <Grid>
-        <Button>KARTE</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Margin="20" x:Name="label1" Width="62" Height="42" FontSize="20"  Content="Start:"  Grid.Row="0" Grid.Column="0"/>
+        <ComboBox Height="25" Margin="20" Name="comboBox1"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="1"   Width="220"  >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+
+        <Label  Margin="20" x:Name="label2" Width="62" Height="51"  FontSize="20"   Content="End:"  Grid.Row="0" Grid.Column="2"/>
+        <ComboBox Height="25" Margin="20" Name="comboBox2"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Stations}" Grid.Row="0" Grid.Column="3" Width="220"  >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button Name="btn" 
+        Click="OnClick" ClickMode="Release" Width="80" Height="33"  Margin="20"  Grid.Row="0" Grid.Column="4">
+            Show
+        </Button>
+        <ListView
+             Grid.Row="1"
+            Grid.ColumnSpan="5"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            x:Name="LV"
+  
+            ItemsSource="{Binding RoutesForView}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Start" Width="120" DisplayMemberBinding="{Binding start}" />
+                    <GridViewColumn Header="End" Width="50" DisplayMemberBinding="{Binding end}" />
+                    <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding price}" />
+                    <GridViewColumn Header="time" Width="120" DisplayMemberBinding="{Binding time}" />
+                    <GridViewColumn Header="Start time" Width="50" DisplayMemberBinding="{Binding startTime}" />
+                    <GridViewColumn Header="Kupi">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Button_Click">
+                                    prikazi
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+
+        </ListView>
+        
+        
+     
+
+
     </Grid>
+
+
 </Page>

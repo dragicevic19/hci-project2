@@ -45,7 +45,7 @@
                     <DataTemplate>
                         <WrapPanel>
                             <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="315">
-                                <StackPanel Height="55" ToolTip="Selektujte liniju kako biste videli mrezni prikaz">
+                                <StackPanel Height="70" ToolTip="Selektujte liniju kako biste videli mrezni prikaz">
                                     <TextBlock Foreground="Red" Text="{Binding Name}"/>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding From}" FontWeight="Bold"/>
@@ -53,6 +53,10 @@
                                         <TextBlock Text="{Binding To}" FontWeight="Bold"/>
                                     </StackPanel>
                                     <TextBlock Text="{Binding DepartureTimes}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Voz: "/>
+                                        <TextBlock Text="{Binding TrainName}"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </Border>
                         </WrapPanel>
@@ -72,9 +76,20 @@
 
             <Frame x:Name="NameAndDepartureFrame" NavigationUIVisibility="Hidden"/>
 
-            <TextBlock Text="Stanice:" FontSize="16" Foreground="#3AB19B" Margin="5, 30, 10, 10" HorizontalAlignment="Left" Style="{StaticResource TitleText}" />
+            <TextBlock Text="Izaberite voz:" FontSize="16" Foreground="#3AB19B" Margin="5, 5, 5, 5" HorizontalAlignment="Left" Style="{StaticResource TitleText}" />
 
-            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="20 7" CornerRadius="5">
+            <ComboBox Height="25" Margin="20, 5, 20, 10" Name="comboTrain"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding Trains}" Background="White">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" FontSize="14"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Text="Stanice:" FontSize="16" Foreground="#3AB19B" Margin="5, 10, 5, 5" HorizontalAlignment="Left" Style="{StaticResource TitleText}" />
+
+            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="20 5" CornerRadius="5">
                 <Grid Margin="7 9">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
@@ -108,13 +123,13 @@
 
             <DataGrid
                 ToolTip="Selektujte ćeliju da biste izmenili vreme ili cenu"
-                Height="330"
+                Height="333"
                 CanUserSortColumns="False"
                 x:Name="DataGrid"
                 ItemsSource="{Binding selectedStations}"
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
-                Margin="10">
+                >
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Header="Stanica"
@@ -145,7 +160,7 @@
             </DataGrid>
 
 
-            <Button x:Name="addRoute" Background="Green" Foreground="White" FontWeight="Bold" Height="40" Click="addRoute_Click" Margin="0, 10, 0, 0">Završi</Button>
+            <Button x:Name="addRoute" Background="Green" Foreground="White" FontWeight="Bold" Height="40" Click="addRoute_Click" Margin="0, 0, 0, 0">Završi</Button>
 
 
         </StackPanel>

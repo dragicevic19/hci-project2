@@ -49,6 +49,7 @@ namespace TrainTickets
         {
             using (var db = new DatabaseContext())
             {
+ 
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Aleksinac', 43.533, 21.717)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Apatin', 45.671, 18.985)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Beograd',  44.833, 20.500)");
@@ -75,13 +76,17 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Užice', 43.861,  19.843)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Valjevo', 44.272, 19.885)");
                 db.Database.ExecuteSqlCommand("Insert into Stations Values('Zrenjanjnin', 45.383, 20.391)");
-                
 
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('BN10A', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('NB10A', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('NN10', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('LN20C', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, Deleted) Values('SB10', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains Values (5, 'TestVoz', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains Values (6, 'TestVoz2', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains Values (7, 'TestVoz3', 'false')");
+
+
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('BN10A', 1, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('NB10A', 2, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('NN10', 3, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('LN20C', 1, 'false')");
+                db.Database.ExecuteSqlCommand("Insert into TrainRoutes (Name, TrainId, Deleted) Values('SB10', 2, 'false')");
 
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 1)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 1)");
@@ -133,11 +138,11 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(13, 5, 85, 1000)");
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(3, 5, 30, 700)");
 
-                db.Database.ExecuteSqlCommand("Insert into Trains (Id, Capacity, Name, IsDeleted) Values(24, 'Soko', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into Trains (Id, Capacity, Name, IsDeleted) Values(26, 'Jastreb', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into Trains (Id, Capacity, Name, IsDeleted) Values(27, 'Orao', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into Trains (Id, Capacity, Name, IsDeleted) Values(31, 'Flamingo', 'false')");
-                db.Database.ExecuteSqlCommand("Insert into Trains (Id, Capacity, Name, IsDeleted) Values(26, 'Golub', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(24, 'Soko', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(26, 'Jastreb', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(27, 'Orao', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(31, 'Flamingo', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(26, 'Golub', 'false')");
 
                 db.SaveChanges();
             }

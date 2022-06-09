@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.173" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="GMap.NET.Core" Version="2.1.6" />
     <PackageReference Include="GMap.NET.WinPresentation" Version="2.1.6" />
@@ -128,11 +129,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="View\Trains\AddTrain\" />
+    <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.0.7" />
+    <Page Update="View\HomePageUser\HomePageWindowUser.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>
