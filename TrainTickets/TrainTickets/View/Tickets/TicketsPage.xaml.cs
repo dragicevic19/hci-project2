@@ -32,6 +32,7 @@ namespace TrainTickets.View.Tickets
 
         private StationService stationService = new StationService();
         private RouteService routeService = new RouteService();
+        private UserService userService;
 
         public BindableCollection<Station> Stations { get; set; }
         public ObservableCollection<RoutesForViewWithPriceDTO> Lista { get; set; }
@@ -46,13 +47,13 @@ namespace TrainTickets.View.Tickets
 
         }
 
-        public TicketsPage(Frame mainPage)
+        public TicketsPage(Frame mainPage, UserService userService)
         {
             //ovo sve je za brisanje
             InitializeComponent();
 
             Stations = new BindableCollection<Station>(stationService.AllStations());
-
+            this.userService = userService;
 
             Lista = new ObservableCollection<RoutesForViewWithPriceDTO>();
             foreach (var l in routeService.allRoutes())
@@ -97,9 +98,23 @@ namespace TrainTickets.View.Tickets
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var rowItem = (sender as Button).DataContext as RoutesForViewWithPriceDTO;
-            string name = rowItem.ToString();
-            MessageBox.Show(name);
+          //  var rowItem = (sender as Button).DataContext as RoutesForViewWithPriceDTO;
+            //string name = rowItem.ToString();
+           // MessageBox.Show(name);
+            
+            BuyTicket model = new BuyTicket(this.userService.logUser);
+            model.ShowDialog();
+            
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
 
         }
     }

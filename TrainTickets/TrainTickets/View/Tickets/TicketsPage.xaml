@@ -61,11 +61,29 @@
                     <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding price}" />
                     <GridViewColumn Header="time" Width="120" DisplayMemberBinding="{Binding time}" />
                     <GridViewColumn Header="Start time" Width="50" DisplayMemberBinding="{Binding startTime}" />
-                    <GridViewColumn Header="Kupi">
+                    <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Click="Button_Click">
-                                    prikazi
+                                    kupi
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Button_Click_1">
+                                    rezervisi
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="Button_Click_2">
+                                    Detalji
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

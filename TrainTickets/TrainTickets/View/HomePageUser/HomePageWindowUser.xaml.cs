@@ -135,7 +135,7 @@ namespace TrainTickets.View.HomePage
         private void KartePressedHandler(object sender, MouseButtonEventArgs e)
         {
             img_bg.Opacity = 0.3;
-            mainPage.Content = new TicketsPage(mainPage);
+            mainPage.Content = new TicketsPage(mainPage,userService);
         }
 
         private void OdjavaPressedHandler(object sender, MouseButtonEventArgs e)
