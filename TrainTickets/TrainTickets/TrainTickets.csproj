@@ -9,12 +9,18 @@
 
   <ItemGroup>
     <None Remove="Images\close.png" />
+    <None Remove="Images\download.png" />
     <None Remove="Images\Email.png" />
+    <None Remove="Images\Layout24.png" />
+    <None Remove="Images\Layout26.png" />
+    <None Remove="Images\Layout27.png" />
+    <None Remove="Images\Layout31.png" />
     <None Remove="Images\Lock.png" />
     <None Remove="Images\logout1.png" />
     <None Remove="Images\map1.png" />
     <None Remove="Images\maximize.png" />
     <None Remove="Images\minimize.png" />
+    <None Remove="Images\PeopleAbout-Icon-Transparent-300x300.png" />
     <None Remove="Images\price.png" />
     <None Remove="Images\search.png" />
     <None Remove="Images\station1.png" />
@@ -42,7 +48,22 @@
     <Resource Include="Images\close.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\download.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Email.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Layout24.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Layout26.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Layout27.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Layout31.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Lock.png">
@@ -58,6 +79,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\minimize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\PeopleAbout-Icon-Transparent-300x300.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\price.png">

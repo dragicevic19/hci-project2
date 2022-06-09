@@ -138,6 +138,12 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(13, 5, 85, 1000)");
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(3, 5, 30, 700)");
 
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(24, 'Soko', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(26, 'Jastreb', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(27, 'Orao', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(31, 'Flamingo', 'false')");
+                db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(26, 'Golub', 'false')");
+
                 db.SaveChanges();
             }
         }
