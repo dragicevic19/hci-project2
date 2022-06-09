@@ -24,7 +24,7 @@ namespace TrainTickets
         public MainWindow()
         {
             InitializeComponent();
-            //FillDB();
+           //FillDB();
             using(var db = new DatabaseContext()) { }
             pageLeft.Content = new PageForSignUp(pageLeft, pageRight, this);
             pageRight.Content = new LoginPage(pageLeft, pageRight, this);

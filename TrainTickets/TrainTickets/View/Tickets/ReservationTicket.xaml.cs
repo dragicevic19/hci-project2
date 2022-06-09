@@ -1,5 +1,4 @@
-﻿using Caliburn.Micro;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,34 +17,39 @@ using TrainTickets.Services;
 namespace TrainTickets.View.Tickets
 {
     /// <summary>
-    /// Interaction logic for BuyTicket.xaml
+    /// Interaction logic for ReservationTicket.xaml
     /// </summary>
-    public partial class BuyTicket : Window
+    public partial class ReservationTicket : Window
     {
-       
+
         private Departure dep;
         private User u;
         private List<DateTime> times;
         private RoutesForViewWithPriceDTO rfv;
         private DepartureService departureService = new DepartureService();
         private TicketService ticService = new TicketService();
-  
 
 
-        public BuyTicket(User u,RoutesForViewWithPriceDTO rfv)
+
+        public ReservationTicket(User u, RoutesForViewWithPriceDTO rfv)
         {
             InitializeComponent();
             DateTime d = DateTime.Today;
-            for(int i = 0; i<7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 comboBox1.Items.Add(d.AddDays(i).ToString("dd/MM/yyyy"));
+
             }
             this.rfv = rfv;
+            Textblock.Text = "Rezervisi kartu za: " + rfv.start + " - " + rfv.end + " u " + rfv.startTime + ".\n" + "Izaberi datum:";
+
+
             this.u = u;
-            textBlock.Text = "Kupi kartu za: " + rfv.start + " - " + rfv.end + " u " + rfv.startTime + ".\n"+"Izaberi datum:";
+
+
         }
 
-       
+
         private void Image_MouseUp(object sender, MouseButtonEventArgs e)
         {
             this.Close();
@@ -65,14 +69,14 @@ namespace TrainTickets.View.Tickets
                     departureService.createDeparture(rfv.Tr, dt);
                     dwp = departureService.findDeparture(rfv.Tr, dt);
                 }
-
-                if (ticService.createTicket(rfv, u, dwp.Id, true))
+                if (ticService.createTicket(rfv, u, dwp.Id, false))
                 {
-                    MessageBox.Show("Uspesno kupljena karta.");
+                    MessageBox.Show("Uspesno rezervisana karta");
                 }
                 else
                 {
-                    MessageBox.Show("Greska pri kupovini.");
+                    MessageBox.Show("Greska pri rezervaciji");
+
                 }
             }
             else
@@ -81,6 +85,7 @@ namespace TrainTickets.View.Tickets
 
 
             }
+
         }
     }
 }

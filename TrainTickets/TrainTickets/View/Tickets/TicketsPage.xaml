@@ -42,8 +42,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Name="btn" 
-        Click="OnClick" ClickMode="Release" Width="80" Height="33"  Margin="20"  Grid.Row="0" Grid.Column="4">
+        <Button Name="btn" Click="OnClick" ClickMode="Release" Width="80" Height="33"  Margin="20"  Grid.Row="0" Grid.Column="4" Style="{StaticResource mainButton}">
             Show
         </Button>
         <ListView
@@ -52,19 +51,24 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             x:Name="LV"
-  
-            ItemsSource="{Binding RoutesForView}">
+            ItemsSource="{Binding RoutesForView}"
+            FontSize ="25"
+            FontWeight="Bold"
+            HorizontalContentAlignment="Center"
+            
+            >
+            
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Start" Width="120" DisplayMemberBinding="{Binding start}" />
-                    <GridViewColumn Header="End" Width="50" DisplayMemberBinding="{Binding end}" />
-                    <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding price}" />
+                    <GridViewColumn Header="Start" Width="120"  DisplayMemberBinding="{Binding start}" />
+                    <GridViewColumn Header="End" Width="120" DisplayMemberBinding="{Binding end}" />
+                    <GridViewColumn Header="Price" Width="120" DisplayMemberBinding="{Binding price}" />
                     <GridViewColumn Header="time" Width="120" DisplayMemberBinding="{Binding time}" />
-                    <GridViewColumn Header="Start time" Width="50" DisplayMemberBinding="{Binding startTime}" />
+                    <GridViewColumn Header="Start time" Width="120" DisplayMemberBinding="{Binding startTime}" />
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Click="Button_Click">
+                                <Button Click="Button_Click" Style="{StaticResource mainButton}">
                                     kupi
                                 </Button>
                             </DataTemplate>
@@ -73,7 +77,7 @@
                     <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Click="Button_Click_1">
+                                <Button Click="Button_Click_1" Style="{StaticResource mainButton}">
                                     rezervisi
                                 </Button>
                             </DataTemplate>
@@ -82,7 +86,7 @@
                     <GridViewColumn >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Click="Button_Click_2">
+                                <Button Click="Button_Click_2" Style="{StaticResource mainButton}">
                                     Detalji
                                 </Button>
                             </DataTemplate>

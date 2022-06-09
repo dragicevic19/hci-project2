@@ -112,6 +112,9 @@ namespace TrainTickets.View.Tickets
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            var rowItem = (sender as Button).DataContext as RoutesForViewWithPriceDTO;
+            ReservationTicket model = new ReservationTicket(this.userService.logUser, rowItem);
+            model.ShowDialog();
 
         }
 
