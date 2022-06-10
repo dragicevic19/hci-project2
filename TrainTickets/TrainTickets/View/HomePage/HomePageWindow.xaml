@@ -262,7 +262,7 @@
 
                                 <Image Source="../../Images/timetable1.png"
                                        Stretch="None"
-                                       Margin="12,0,0,0"/>
+                                       Margin="12,0,0,0" RenderTransformOrigin="0.5,0.53"/>
 
                                 <TextBlock Text="Red voznje"
                                            Margin="25,0,0,0"

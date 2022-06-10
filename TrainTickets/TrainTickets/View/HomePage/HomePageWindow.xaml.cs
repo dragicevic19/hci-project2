@@ -122,7 +122,7 @@ namespace TrainTickets.View.HomePage
 
         private void RedVoznjePressedHandler(object sender, MouseButtonEventArgs e)
         {
-            mainPage.Content = new TimetablePage(mainPage);
+            mainPage.Content = new UserTicket(mainPage,userService);
         }
 
         private void StanicePressedHandler(object sender, MouseButtonEventArgs e)

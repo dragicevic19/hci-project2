@@ -18,6 +18,7 @@ using TrainTickets.View.Tickets;
 using TrainTickets.View.TimeTable;
 using TrainTickets.View.TrainRoutes;
 using TrainTickets.View.Trains;
+using TrainTickets.View.UserTickets;
 
 namespace TrainTickets.View.HomePage
 {
@@ -124,18 +125,19 @@ namespace TrainTickets.View.HomePage
 
         private void RedVoznjePressedHandler(object sender, MouseButtonEventArgs e)
         {
-            mainPage.Content = new TimetablePage(mainPage);
+            img_bg.Opacity = 0.3;
+            mainPage.Content = new TicketsPage(mainPage, userService);
+          
         }
 
         private void StanicePressedHandler(object sender, MouseButtonEventArgs e)
         {
-            mainPage.Content = new StationsPage(mainPage);
+            mainPage.Content = new UserReservations(mainPage, userService);
         }
 
         private void KartePressedHandler(object sender, MouseButtonEventArgs e)
         {
-            img_bg.Opacity = 0.3;
-            mainPage.Content = new TicketsPage(mainPage,userService);
+            mainPage.Content = new UserTicket(mainPage,userService);
         }
 
         private void OdjavaPressedHandler(object sender, MouseButtonEventArgs e)
