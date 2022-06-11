@@ -21,7 +21,7 @@
 
             <WrapPanel>
                 <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="480" Height="185">
-                    <StackPanel Height="80" ToolTip="Selektujte liniju kako biste videli mrezni prikaz">
+                    <StackPanel Height="80" ToolTip="Ime voza je jedinstveno i ne može se menjati!">
                         <TextBlock FontSize="26" FontWeight="Bold" Text="Ime voza" Width="165" Height="37">
                             <Image Source="/Images/download.png" Height="22" Width="66"></Image>
                         </TextBlock>
@@ -33,7 +33,7 @@
 
             <WrapPanel>
                 <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="480" Height="214">
-                    <StackPanel Height="80" ToolTip="Selektujte liniju kako biste videli mrezni prikaz">
+                    <StackPanel Height="80">
                         <TextBlock FontSize="26" FontWeight="Bold" Text="Kapacitet voza" Width="220" Height="39">
                             <Image Source="/Images/PeopleAbout-Icon-Transparent-300x300.png" Height="22" Width="57"></Image>
                         </TextBlock>
@@ -41,11 +41,18 @@
                         <TextBox x:Name="TrainCapacity" FontWeight="Bold" IsEnabled="False" TextAlignment="Center" BorderThickness="1" BorderBrush="Black" Height="41" Width="220" FontSize="26">
 
                         </TextBox>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="5" TextWrapping="Wrap" MaxWidth="100">
+                                        Kapacitet voza podešavate izborom jednog od navedenih rasporeda sedišta dole
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
                 </Border>
             </WrapPanel>
             <TextBlock FontSize="26" FontWeight="Bold" Width="320" Height="31"/>
-            <TextBlock FontSize="26" FontWeight="Bold" Text="Izaberite raspored sedišta" Width="359" Height="31"/>
+            <TextBlock FontSize="26" FontWeight="Bold" Text="Izaberite raspored sedišta" Width="358" Height="48"/>
             <WrapPanel Width="486">
                 <Border x:Name="layout24Border" BorderThickness="3" BorderBrush="Aqua">
                     <Image x:Name="layout24Preview" Height="230" MouseEnter="layout24Preview_MouseEnter" MouseLeave="layout24Preview_MouseLeave" MouseDown="layout24Preview_MouseDown" Source="/Images/Layout24.png" Stretch="Fill" Width="212" />
@@ -62,6 +69,15 @@
                 <Border x:Name="layout31Border" BorderThickness="3" BorderBrush="Aqua">
                     <Image x:Name="layout31Preview" Height="230" MouseEnter="layout31Preview_MouseEnter" MouseLeave="layout31Preview_MouseLeave" MouseDown="layout31Preview_MouseDown" Source="/Images/Layout31.png" Stretch="Fill" Width="212" />
                 </Border>
+
+                <WrapPanel.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" TextWrapping="Wrap" MaxWidth="100">
+                        Levim klikom izaberite raspored
+                        </TextBlock>
+                    </StackPanel>
+                </WrapPanel.ToolTip>
+
             </WrapPanel>
 
         </StackPanel>

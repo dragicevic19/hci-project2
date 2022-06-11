@@ -21,9 +21,9 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Margin="20" x:Name="label1" Width="62" Height="42" FontSize="20"  Content="Start:"  Grid.Row="0" Grid.Column="0"/>
+        <Label Margin="20" x:Name="label1" Width="62" Height="42" FontSize="20"  Content="Start:"  Grid.Row="0" Grid.Column="0" ToolTip="Ovde unesite početnu stanicu (prikazaće i usputne stanice koje se nalaze od početne do krajnje stanice)"/>
         <ComboBox Height="25" Margin="20" Name="comboBox1"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="1"   Width="220"  >
+                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="1"   Width="220"  ToolTip="Ovde unesite početnu stanicu (prikazaće i usputne stanice koje se nalaze od početne do krajnje stanice)">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -32,9 +32,9 @@
         </ComboBox>
 
 
-        <Label  Margin="20" x:Name="label2" Width="62" Height="51"  FontSize="20"   Content="End:"  Grid.Row="0" Grid.Column="2"/>
+        <Label  Margin="20" x:Name="label2" Width="62" Height="51"  FontSize="20"   Content="End:"  Grid.Row="0" Grid.Column="2" ToolTip="Ovde unesite krajnju stanicu (prikazaće i usputne stanice koje se nalaze od početne do krajnje stanice)"/>
         <ComboBox Height="25" Margin="20" Name="comboBox2"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  ItemsSource="{Binding Stations}" Grid.Row="0" Grid.Column="3" Width="220"  >
+                  ItemsSource="{Binding Stations}" Grid.Row="0" Grid.Column="3" Width="220" ToolTip="Ovde unesite krajnju stanicu (prikazaće i usputne stanice koje se nalaze od početne do krajnje stanice)" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />

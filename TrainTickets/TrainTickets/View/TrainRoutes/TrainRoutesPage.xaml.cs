@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using GMap.NET;
 using GMap.NET.WindowsPresentation;
+using HelpSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ using TrainTickets.model.stationOnRoute;
 using TrainTickets.model.train;
 using TrainTickets.model.trainRoute;
 using TrainTickets.Services;
+
 
 namespace TrainTickets.View.TrainRoutes
 {
@@ -312,7 +314,7 @@ namespace TrainTickets.View.TrainRoutes
                     break;
                 }
             }
-
+            
             comboTrain.IsEnabled = false;
             comboTrain.ToolTip = "Ne možete izmeniti voz!";
 
@@ -343,6 +345,15 @@ namespace TrainTickets.View.TrainRoutes
             }
 
             setUpMapView();
+        }
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, this);
+            }
         }
 
         #region dodavanje nove linije
