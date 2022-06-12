@@ -30,9 +30,6 @@ namespace TrainTickets.Services
                     db.SaveChanges();
                     return true;
                 }
-
-               
-
             }
             catch (Exception ex)
             {

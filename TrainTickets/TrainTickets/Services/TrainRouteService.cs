@@ -180,11 +180,16 @@ namespace TrainTickets.Services
         public bool CanEditOrDelete(TrainRouteDTO row)
         {
             TrainRoute route = FindByName(row.Name);
-            return false;
-            // ovo ispraviti
+            if (route == null) return false;
+
             using(var db = new DatabaseContext())
             {
+                foreach(var dep in db.Departures)
+                {
+                    if (dep.Route.Id == route.Id && dep.DepartureTime > DateTime.Now) return false;
+                }
             }
+            return true;
         }
     }
 }

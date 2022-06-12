@@ -31,5 +31,10 @@ namespace TrainTickets.dto
             }
             TrainName = train;
         }
+
+        public TrainRouteDTO(string name)
+        {
+            Name = name;
+        }
     }
 }

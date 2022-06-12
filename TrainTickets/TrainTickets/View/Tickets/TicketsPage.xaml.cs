@@ -39,12 +39,7 @@ namespace TrainTickets.View.Tickets
 
         public TicketsPage()
         {
-
-
-
             InitializeComponent();
-
-
         }
 
         public TicketsPage(Frame mainPage, UserService userService)
@@ -71,11 +66,10 @@ namespace TrainTickets.View.Tickets
             Station end = (Station)comboBox2.SelectedItem;
             if (start == null || end == null)
             {
-                MessageBox.Show("popuni oba polja");
-
+                MessageBox.Show("Popuni oba polja!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (start.Equals(end))
-                MessageBox.Show("pocetno i krajnje ne mogu biti isti");
+                MessageBox.Show("Početna i krajnja stanica ne mogu biti iste", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
 

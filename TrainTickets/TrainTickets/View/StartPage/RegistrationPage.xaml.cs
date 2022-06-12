@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,29 +44,64 @@ namespace TrainTickets
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(passwordBox.Password) && !string.IsNullOrEmpty(confPasswordBox.Password) &&
-                !string.IsNullOrEmpty(txtFirstName.Text) && !string.IsNullOrEmpty(txtLastName.Text))
+            
+            if (validation(txtEmail.Text, passwordBox.Password, confPasswordBox.Password, txtFirstName.Text, txtLastName.Text))
             {
-                if (confPasswordBox.Password != passwordBox.Password)   // ubaciti neke poruke u .xaml fajl pa ih ovde prikazati samo
-                {
-                    MessageBox.Show("Passwords don't match!");
-                    return;
-                }
-
                 RegisterUserDTO user = new RegisterUserDTO(txtEmail.Text, passwordBox.Password, txtFirstName.Text, txtLastName.Text);
                 bool isRegistered = userService.Register(user);
 
                 if (isRegistered)
                 {
-                    MessageBox.Show("Successful registration! You can log in now!");
+                    MessageBox.Show("Registracija uspešna. Sada se možete prijaviti!", "Registracija", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.left_frame.Content = new PageForSignUp(left_frame, right_frame, mainWindow);
                     this.right_frame.Content = new LoginPage(left_frame, right_frame, mainWindow);
                 }
                 else
                 {
-                    MessageBox.Show("Email already exists!");
+                    MessageBox.Show("Uneta email adresa već postoji u sistemu!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        } 
+        
+
+        private bool validation(string email, string password, string confPassword, string name, string lastName)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confPassword) ||
+                string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName))
+            {
+                MessageBox.Show("Sva polja su obavezna!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            try
+            {
+                MailAddress m = new MailAddress(email);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Neispravan format email adrese!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if (confPassword != password)   // ubaciti neke poruke u .xaml fajl pa ih ovde prikazati samo
+            {
+                MessageBox.Show("Lozinke se ne poklapaju!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
+            {
+                MessageBox.Show("U polje <ime> je moguće uneti samo slova!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if (!Regex.IsMatch(lastName, @"^[a-zA-Z]+$"))
+            {
+                MessageBox.Show("U polje <prezime> je moguće uneti samo slova!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void textFirstName_MouseDown(object sender, MouseButtonEventArgs e)
