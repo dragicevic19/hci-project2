@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrainTickets.model;
 using TrainTickets.Services;
+using TrainTickets.View.Departures;
 using TrainTickets.View.Tickets;
 using TrainTickets.View.TimeTable;
 using TrainTickets.View.TrainRoutes;
@@ -131,7 +132,7 @@ namespace TrainTickets.View.HomePage
         private void KartePressedHandler(object sender, MouseButtonEventArgs e)
         {
             img_bg.Opacity = 0.3;
-            mainPage.Content = new MonthlyReview(mainPage, userService);
+            mainPage.Content = new DeparturesPage(mainPage, userService);
         }
         
         private void ProsliMesecHandler(object sender, MouseButtonEventArgs e)
@@ -151,8 +152,5 @@ namespace TrainTickets.View.HomePage
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-
-
-
     }
 }

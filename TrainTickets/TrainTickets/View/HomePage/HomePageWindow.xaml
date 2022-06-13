@@ -289,7 +289,7 @@
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 
-                                <TextBlock Text="Karte"
+                                <TextBlock Text="Karte po vožnji"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -297,7 +297,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_settings"
-                                         Content="Karte"
+                                         Content="Karte po vožnji"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
@@ -315,7 +315,7 @@
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 
-                                <TextBlock Text="Karte"
+                                <TextBlock Text="Karte po mesecu"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -323,13 +323,12 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_map"
-                                         Content="Karte"
+                                         Content="Karte po mesecu"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
 
                         </ListViewItem>
-
 
                         <ListViewItem HorizontalAlignment="Left"
                                       Margin="0, 0, 0, 15" MouseEnter="ListViewItem_MouseEnter">

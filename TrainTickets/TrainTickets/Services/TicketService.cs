@@ -50,15 +50,28 @@ namespace TrainTickets.Services
                     if (ticket.UserId == user.Id)
                     {      
                         ticketList.Add(ticket);
-                         
                      }
-
-            }
+                }
             }
             return ticketList;
         }
 
+        public List<Ticket> allTicketsForDeparture(int departureId)
+        {
+            List<Ticket> retList = new List<Ticket>();
 
+            using (var db = new DatabaseContext())
+            {
+                foreach(var ticket in db.Tickets)
+                {
+                    if (ticket.DepartureID == departureId)
+                    {
+                        retList.Add(ticket);
+                    }
+                }
+            }
+            return retList;
+        }
 
         public List<Ticket> allTicketsMon(Station start, Station end, bool kupljena)
         {
@@ -89,8 +102,6 @@ namespace TrainTickets.Services
                     
                         if(d && ticket.IsPurchased)
                             ticketList.Add(ticket);
-
-
                     }
                    
                 }

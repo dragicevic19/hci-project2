@@ -24,7 +24,6 @@ namespace TrainTickets.View.Tickets
     public partial class TicketDetails : Window
     {
         private RoutesForViewWithPriceDTO selectedRoute { get; set; }
-
         public ObservableCollection<StationOnRouteDTO> selectedStations { get; set; }
         public PointLatLng? previous { get; set; }
 
@@ -66,23 +65,15 @@ namespace TrainTickets.View.Tickets
         public void setUpMapView()
         {
             GMaps.Instance.Mode = AccessMode.ServerAndCache;
-            // choose your provider here
             mapView.MapProvider = GMap.NET.MapProviders.OpenStreetMapProvider.Instance;
             mapView.Markers.Clear();
 
-            // don't forget to add the marker to the map
-            //mapView.Markers.Add(routeMarker);
-
             mapView.MinZoom = 3;
             mapView.MaxZoom = 17;
-            // whole world zoom
             mapView.Zoom = 7;
             mapView.Position = new PointLatLng(44.01583333, 20.55944444);
-            // lets the map use the mousewheel to zoom
             mapView.MouseWheelZoomType = MouseWheelZoomType.MousePositionAndCenter;
-            // lets the user drag the map
             mapView.CanDragMap = true;
-            // lets the user drag the map with the left mouse button
             mapView.DragButton = MouseButton.Left;
             mapView.ShowCenter = false;
 
@@ -91,7 +82,7 @@ namespace TrainTickets.View.Tickets
             bool startStation = selectedRoute.start.Id == selectedStations[0].Station.Id;
             bool endStation = false;
 
-            foreach (var s in selectedStations) // kad se obrise stanica pozivam ovu metodu da mi nacrta novu putanju
+            foreach (var s in selectedStations)
             {
 
                 PointLatLng current = new PointLatLng(s.Station.Location.X, s.Station.Location.Y);

@@ -58,6 +58,7 @@ namespace TrainTickets.View.HomePage
                 tt_messages.Visibility = Visibility.Collapsed;
                 tt_settings.Visibility = Visibility.Collapsed;
                 tt_signout.Visibility = Visibility.Collapsed;
+                tt_map.Visibility = Visibility.Collapsed;
             }
 
             else
@@ -67,6 +68,7 @@ namespace TrainTickets.View.HomePage
                 tt_messages.Visibility = Visibility.Visible;
                 tt_settings.Visibility = Visibility.Visible;
                 tt_signout.Visibility = Visibility.Visible;
+                tt_map.Visibility = Visibility.Visible;
             }
         }
 
@@ -125,23 +127,18 @@ namespace TrainTickets.View.HomePage
         {
             img_bg.Opacity = 0.3;
             mainPage.Content = new TicketsPage(mainPage, userService);
-
         }
 
         private void KartePressedHandler(object sender, MouseButtonEventArgs e)
         {
-
             img_bg.Opacity = 0.3;
-            mainPage.Content = new UserTicket(mainPage,userService);   // ovde stranica sa kartama koje je korisnik kupio/rez?
-
+            mainPage.Content = new UserTicket(mainPage,userService);
         }
 
         private void RezervisaneKarteHandler(object sender, MouseButtonEventArgs e)
         {
-
             img_bg.Opacity = 0.3;
-            mainPage.Content = new UserReservations(mainPage, userService);   // ovde stranica sa kartama koje je korisnik kupio/rez?
-
+            mainPage.Content = new UserReservations(mainPage, userService);  
         }
 
         private void OdjavaPressedHandler(object sender, MouseButtonEventArgs e)
@@ -155,8 +152,6 @@ namespace TrainTickets.View.HomePage
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
-
-
 
     }
 }

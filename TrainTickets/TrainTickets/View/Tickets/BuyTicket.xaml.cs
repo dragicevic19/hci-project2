@@ -68,18 +68,16 @@ namespace TrainTickets.View.Tickets
 
                 if (ticService.createTicket(rfv, u, dwp.Id, true))
                 {
-                    MessageBox.Show("Uspesno kupljena karta.");
+                    MessageBox.Show("Uspešno kupljena karta.", "Kupljena karta", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Greska pri kupovini.");
+                    MessageBox.Show("Greška pri kupovini.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Ova ruta je vec prosla.");
-
-
+                MessageBox.Show("Ovaj ruta je vec prošla!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

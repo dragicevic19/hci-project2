@@ -16,41 +16,39 @@ using TrainTickets.dto;
 using TrainTickets.model.station;
 using TrainTickets.Services;
 
-namespace TrainTickets.View.Tickets
+namespace TrainTickets.View.Departures
 {
     /// <summary>
-    /// Interaction logic for MonthlyReview.xaml
+    /// Interaction logic for DeparturesPage.xaml
     /// </summary>
-    public partial class MonthlyReview : Page
+    public partial class DeparturesPage : Page
     {
-        private Frame mainPage;
-        private TicketService ticketService = new TicketService();
-        public ObservableCollection<TicketViewDTO> Lista { get; set; }
-        private UserService userService;
-       
+        private DepartureService departureService = new DepartureService();
+        public ObservableCollection<DepartureDTO> Lista { get; set; }
         public BindableCollection<Station> Stations { get; set; }
-
         private StationService stationService = new StationService();
-        public MonthlyReview()
+        private Frame mainPage;
+        private UserService userService;
+
+        public DeparturesPage()
         {
             InitializeComponent();
         }
 
-        public MonthlyReview(Frame mainPage, UserService userService)
+        public DeparturesPage(Frame mainPage, UserService userService)
         {
             InitializeComponent();
             this.mainPage = mainPage;
             this.userService = userService;
-            textBlock.Text = "Sve kupljene karte za izabrani mesec: ";
-            
+            textBlock.Text = "Pregled svih vožnji";
+
             Stations = new BindableCollection<Station>(stationService.AllStations());
-    
-             
-            Lista = new ObservableCollection<TicketViewDTO>();
-            foreach (var l in ticketService.listToDTOList(ticketService.allTicketsMon(null,null,true)))
-                Lista.Add(l);
+
+            Lista = new ObservableCollection<DepartureDTO>();
+            foreach (var d in departureService.allDeparturesToDTO())
+                Lista.Add(d);
             LV.ItemsSource = Lista;
-            
+
             DataContext = this;
         }
 
@@ -60,13 +58,23 @@ namespace TrainTickets.View.Tickets
             Station end = (Station)comboBox2.SelectedItem;
 
             Lista.Clear();
-            foreach (var v in ticketService.listToDTOList(ticketService.allTicketsMon(start, end, true)))
+
+            foreach (var v in departureService.departuresThatContainsStations(start, end))
                 Lista.Add(v);
-            DataContext = this;
 
             LV.Items.Refresh();
             comboBox1.SelectedItem = null;
-            comboBox2.SelectedItem  = null;
+            comboBox2.SelectedItem = null;
+        }
+
+        private void KupljeneKarte_Click(object sender, RoutedEventArgs e)
+        {
+
+            var rowItem = (sender as Button).DataContext as DepartureDTO;
+            TicketsForDeparture model = new TicketsForDeparture(rowItem);
+            model.ShowDialog();
+
+            // novi popup sa tabelom kupljnih karata za dati polazak
         }
     }
 }
