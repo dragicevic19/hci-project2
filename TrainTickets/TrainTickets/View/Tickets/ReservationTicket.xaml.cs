@@ -53,6 +53,12 @@ namespace TrainTickets.View.Tickets
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Morate izabrati vreme polaska", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             String t = comboBox1.SelectedItem.ToString() + " " + rfv.startTime.ToString(@"hh\:mm");
             DateTime dt = DateTime.ParseExact(t, "g", new System.Globalization.CultureInfo("fr-FR"));
             if (dt > DateTime.Now)

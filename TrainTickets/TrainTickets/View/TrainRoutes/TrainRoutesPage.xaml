@@ -10,9 +10,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TrainRoutesPage" l:HelpProvider.HelpKey="Forma">
     
-    <Page.CommandBindings>
-        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
-    </Page.CommandBindings>
+
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -77,6 +75,10 @@
 
         <StackPanel x:Name="addRoutePanel" Visibility="Hidden" Grid.Row="1" RenderTransformOrigin="0.503,0.516" Background="White"
                     ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <StackPanel.CommandBindings>
+                <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+            </StackPanel.CommandBindings>
 
             <Frame x:Name="NameAndDepartureFrame" NavigationUIVisibility="Hidden"/>
 
@@ -148,7 +150,7 @@
                         Width="125"
                         Binding="{Binding AdditionalTime}"/>
                     <DataGridTextColumn
-                        Header="Dodatna cena [din]"
+                        Header="Dodatna cena"
                         MinWidth="40"
                         Width="*"
                         IsReadOnly="False"
