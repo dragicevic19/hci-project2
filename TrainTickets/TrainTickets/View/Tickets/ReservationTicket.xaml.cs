@@ -30,7 +30,6 @@ namespace TrainTickets.View.Tickets
         private TicketService ticService = new TicketService();
 
 
-
         public ReservationTicket(User u, RoutesForViewWithPriceDTO rfv)
         {
             InitializeComponent();
@@ -38,15 +37,11 @@ namespace TrainTickets.View.Tickets
             for (int i = 0; i < 7; i++)
             {
                 comboBox1.Items.Add(d.AddDays(i).ToString("dd/MM/yyyy"));
-
             }
             this.rfv = rfv;
             Textblock.Text = "Rezervisi kartu za: " + rfv.start + " - " + rfv.end + " u " + rfv.startTime + ".\n" + "Izaberi datum:";
 
-
             this.u = u;
-
-
         }
 
 
@@ -58,6 +53,12 @@ namespace TrainTickets.View.Tickets
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Morate izabrati vreme polaska", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             String t = comboBox1.SelectedItem.ToString() + " " + rfv.startTime.ToString(@"hh\:mm");
             DateTime dt = DateTime.ParseExact(t, "g", new System.Globalization.CultureInfo("fr-FR"));
             if (dt > DateTime.Now)
@@ -71,19 +72,16 @@ namespace TrainTickets.View.Tickets
                 }
                 if (ticService.createTicket(rfv, u, dwp.Id, false))
                 {
-                    MessageBox.Show("Uspesno rezervisana karta");
+                    MessageBox.Show("Uspešno rezervisana karta", "Karta rezervisana", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Greska pri rezervaciji");
-
+                    MessageBox.Show("Nema više slobodnih mesta", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Ova ruta je vec prosla.");
-
-
+                MessageBox.Show("Ova ruta je vec prosla.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             this.Close();
         }

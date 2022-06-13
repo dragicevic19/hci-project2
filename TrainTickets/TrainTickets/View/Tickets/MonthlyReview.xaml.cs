@@ -43,6 +43,7 @@ namespace TrainTickets.View.Tickets
             textBlock.Text = "Sve kupljene karte za izabrani mesec: ";
             DateTime LastMonthLastDate = DateTime.Today.AddDays(0 - DateTime.Today.Day);
             DateTime LastMonthFirstDate = LastMonthLastDate.AddDays(1 - LastMonthLastDate.Day);
+            LastMonthFirstDate = LastMonthFirstDate.AddMonths(1);
             for (int i = 0; i < 12; i++)
             {
                 comboBox3.Items.Add(LastMonthFirstDate);
@@ -61,36 +62,26 @@ namespace TrainTickets.View.Tickets
             LV.ItemsSource = Lista;
             
             DataContext = this;
-
-
-
         }
 
         private void OnClick(object sender, RoutedEventArgs e)
         {
-
             Station start = (Station)comboBox1.SelectedItem;
             Station end = (Station)comboBox2.SelectedItem;
             if (comboBox3.SelectedItem == null)
-                MessageBox.Show("MORATE IZABRATI MESEC");
+            {
+                MessageBox.Show("Morate izabrati mesec!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-                Lista.Clear();
-                foreach (var v in ticketService.listToDTOList(ticketService.allTicketsMon(start, end,(DateTime) comboBox3.SelectedItem)))
-                    Lista.Add(v);
-                DataContext = this;
+            Lista.Clear();
+            foreach (var v in ticketService.listToDTOList(ticketService.allTicketsMon(start, end,(DateTime) comboBox3.SelectedItem)))
+                Lista.Add(v);
+            DataContext = this;
 
-                LV.Items.Refresh();
+            LV.Items.Refresh();
             comboBox1.SelectedItem = null;
             comboBox2.SelectedItem  = null;
-
-
-
-
-                //metoda koja ce vracati sve rute koje odgovaraju za prikaz
         }
-
-        
- 
-        
     }
 }

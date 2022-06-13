@@ -35,12 +35,10 @@ namespace TrainTickets.View.UserTickets
             InitializeComponent();
             this.mainPage = mainPage;
             this.userService = userService;
-            textBlock.Text = "Sve kupljene karte korisnika: " + userService.logUser.Email.ToString();
+            textBlock.Text = "Sve rezervisane karte korisnika: " + userService.logUser.Email.ToString();
             this.nap();
-
-
-
         }
+
         private void nap()
         {
             Lista = new ObservableCollection<TicketViewDTO>();
@@ -56,11 +54,10 @@ namespace TrainTickets.View.UserTickets
             if (ticketService.purished(rowItem.ticket.Id))
             {
                 this.nap();
-                MessageBox.Show("Uspesno kupljena karta"); }
+                MessageBox.Show("Uspešno kupljena karta", "Karta kupljena", MessageBoxButton.OK, MessageBoxImage.Information); }
 
             else
-                MessageBox.Show("Greska pri kupovini.");
-
+                MessageBox.Show("Greska pri kupovini.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

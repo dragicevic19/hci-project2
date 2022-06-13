@@ -44,9 +44,6 @@ namespace TrainTickets.View.TimeTable
                 Lista.Add(l);
             LV.ItemsSource = Lista;
             DataContext = this;
-            
-
-
         }
     }
 }

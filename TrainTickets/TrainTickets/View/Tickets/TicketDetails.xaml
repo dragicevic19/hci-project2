@@ -60,7 +60,7 @@
                             Binding="{Binding AdditionalTime}"/>
                     <DataGridTextColumn
                             Header="Dodatna cena [din]"
-                            Width="*"
+                            Width="110"
                             Binding="{Binding AdditionalPrice}"/>
                 </DataGrid.Columns>
             </DataGrid>

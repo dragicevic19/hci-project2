@@ -35,7 +35,7 @@
 
             <Setter Property="Placement" Value="Right"/>
             <Setter Property="Height" Value="50"/>
-            <Setter Property="Width" Value="100"/>
+            <Setter Property="Width" Value="150"/>
             <Setter Property="Margin" Value="20,0,0,0"/>
             <Setter Property="Background" Value="#3aa9ad"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -90,7 +90,6 @@
                 <Frame x:Name="mainPage" Grid.Column="1" NavigationUIVisibility="Hidden" />
 
             </Grid>
-
 
             <Grid x:Name="nav_pnl"
                   HorizontalAlignment="Left"
