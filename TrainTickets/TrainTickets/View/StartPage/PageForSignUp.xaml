@@ -1,0 +1,36 @@
+﻿<Page x:Class="TrainTickets.PageForSignUp"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TrainTickets"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageForSignUp">
+
+    <Grid>
+        <Border CornerRadius="10 0 0 10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#3aa9ad" Offset="0"/>
+                    <GradientStop Color="#3aada1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Canvas>
+                    <Polygon Points="0, 20 230, 140 0, 270" Fill="#4eb1b6"/>
+                    <Polygon Points="100, 400 200, 370 180, 470" Fill="#4eb1b6"/>
+                    <Ellipse Margin="250 450 0 0" Width="40" Height="40" Fill="#4eb1b6"/>
+                    <Ellipse Margin="50 400 0 0" Width="20" Height="20" Fill="#4eb1b6"/>
+                </Canvas>
+
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Registracija" Style="{StaticResource TitleText}"/>
+                    <TextBlock Text="Unesite lične informacije i koristite naše usluge!" Style="{StaticResource NormalText}" Opacity="0.8" Margin="20 30 20 30"/>
+                    <Button Content="Registruj se" Style="{StaticResource button}" Click="Button_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

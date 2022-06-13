@@ -1,0 +1,109 @@
+﻿<Page x:Class="TrainTickets.View.Trains.TrainsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TrainTickets.View.Trains"
+      mc:Ignorable="d"
+      Title="TrainsPage" Height="1100" Width="1920">
+
+    <Grid Background="White" HorizontalAlignment="Center" Width="1920" Margin="0,0,0,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="addNewTrainBtn" Background="#3aa9ad" Grid.Row="0" Foreground="White" FontWeight="Bold" Click="addNewTrainBtn_Click" Grid.ColumnSpan="2" Margin="0,0,1412,0">Dodajte Novi Voz</Button>
+
+        <StackPanel x:Name="showRoutesPanel" Grid.Row="1" RenderTransformOrigin="0.503,0.516" Background="White" Grid.ColumnSpan="2" Margin="0,0,1412,0" Height="1050" VerticalAlignment="Top">
+
+            <Border BorderBrush="#ACB0AF" BorderThickness="1" Margin="20 7" CornerRadius="5">
+                <Grid Margin="7 9">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="/Images/search.png" Height="20" />
+                    <TextBlock x:Name="textSearch" MouseDown="textSearch_MouseDown" Text="Search" Style="{StaticResource textHint}" />
+                    <TextBox x:Name="searchBox" TextChanged="searchBox_TextChanged" Style="{StaticResource textBox}" />
+                </Grid>
+            </Border>
+
+            <ListView Background="Transparent" x:Name="TrainList"
+                  Height="939" Width="504" PreviewMouseLeftButtonUp="TrainClicked" 
+                  ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="480">
+                                <StackPanel Height="80" ToolTip="Selektujte voz kako biste videli raspored sedenja">
+                                    <TextBlock FontSize="18" Foreground="Red" Text="{Binding Name}" FontWeight="Bold"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="16" Text="Kapacitet: " FontWeight="Bold"/>
+                                        <TextBlock FontSize="16" Text="{Binding Capacity}" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+    
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 0" Height="57" Width="508">
+                <Button Visibility="Hidden" Height="55" Width="254" Foreground="White" FontWeight="Bold" Background="#3aa9ad" Name="btn_editTrain" Content="Izmeni" Click="btn_editTrain_Click" />
+                <Button Visibility="Hidden" Width="254" Height="55" Foreground="White" FontWeight="Bold" Background="Red" Name="btn_deleteTrain" Content="Obriši" Click="btn_deleteTrain_Click" />
+            </StackPanel>
+        </StackPanel>
+
+
+        <Grid Margin="0,0,1412,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="277*"/>
+                <ColumnDefinition Width="231*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Image x:Name="img_bg"
+                            Source="/Images/wallpaper2.jpg"
+                            Stretch="UniformToFill"
+                            Opacity="0.3" Margin="228,0,-1412,-1051" Grid.Column="1"/>
+
+
+            <TextBlock FontSize="40" Text="Raspored sedišta" FontWeight="SemiBold" FontStyle="Italic" Margin="789,34,-932,-57" Grid.Column="1"/>
+
+
+            <Image Name="trainSeatsLayout24" Grid.Column="1" Margin="596,102,-1049,-984" Visibility="Hidden">
+                <Image.Source>
+                    <BitmapImage UriSource="/Images/Layout24.png" />
+                </Image.Source>
+            </Image>
+
+            <Image Name="trainSeatsLayout26" Grid.Column="1" Margin="596,102,-1049,-984" Visibility="Hidden">
+                <Image.Source>
+                    <BitmapImage UriSource="/Images/Layout26.png" />
+                </Image.Source>
+            </Image>
+
+            <Image Name="trainSeatsLayout27" Grid.Column="1" Margin="596,102,-1049,-984" Visibility="Hidden">
+                <Image.Source>
+                    <BitmapImage UriSource="/Images/Layout27.png" />
+                </Image.Source>
+            </Image>
+
+            <Image Name="trainSeatsLayout31" Grid.Column="1" Margin="596,102,-1049,-984" Visibility="Hidden">
+                <Image.Source>
+                    <BitmapImage UriSource="/Images/Layout31.png" />
+                </Image.Source>
+            </Image>
+
+
+        </Grid>
+
+    </Grid>
+</Page>

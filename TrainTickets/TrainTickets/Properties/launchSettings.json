@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TrainTickets": {
+      "commandName": "Project",
+      "sqlDebugging": false
+    }
+  }
+}
