@@ -139,7 +139,7 @@
                     <DataGridTextColumn
                         Header="Stanica"
                         IsReadOnly="True"
-                        Width="120"
+                        Width="80"
                         Binding="{Binding Station.Name}"/>
                     <DataGridTextColumn
                         Header="Dodatno vreme [min]"
