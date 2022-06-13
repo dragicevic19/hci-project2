@@ -136,6 +136,14 @@ namespace TrainTickets.View.HomePage
 
         }
 
+        private void RezervisaneKarteHandler(object sender, MouseButtonEventArgs e)
+        {
+
+            img_bg.Opacity = 0.3;
+            mainPage.Content = new UserReservations(mainPage, userService);   // ovde stranica sa kartama koje je korisnik kupio/rez?
+
+        }
+
         private void OdjavaPressedHandler(object sender, MouseButtonEventArgs e)
         {
             this.Close();

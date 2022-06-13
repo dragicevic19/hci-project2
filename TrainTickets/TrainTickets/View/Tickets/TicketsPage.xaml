@@ -49,10 +49,8 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             x:Name="LV"
-
             ItemsSource="{Binding RoutesForView}"
             FontSize ="23"
-
             FontWeight="Bold"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"

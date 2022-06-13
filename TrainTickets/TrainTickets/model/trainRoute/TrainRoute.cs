@@ -106,24 +106,28 @@ namespace TrainTickets.model.trainRoute
         public double routeTime(Station start, Station end)
         {
             bool firstFound = false;
+        
             double time = 0;
+            double firstAddTime = 0;
             foreach (var t in this.Stations)
             {
                 if (t.Station.Name.Equals(start.Name))
                 {
                     firstFound = true;
-                    continue;
+                    firstAddTime = t.AdditionalTime;
+                   
                 }
-                else if (t.Station.Name.Equals(end.Name))
+               if (t.Station.Name.Equals(end.Name))
                 {
+
                     time += t.AdditionalTime;
                     break;
                 }
-                else
+                if(firstFound == true)
                     time += t.AdditionalTime;
 
             }
-            return time;
+            return time- firstAddTime;
         }
 
         public override bool Equals(object obj)
