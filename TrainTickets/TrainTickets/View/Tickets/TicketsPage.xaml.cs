@@ -116,5 +116,21 @@ namespace TrainTickets.View.Tickets
         {
 
         }
+
+        private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBox2.SelectedValue != null)
+            {
+                btn.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void comboBox2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBox1.SelectedValue != null)
+            {
+                btn.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
