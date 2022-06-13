@@ -10,7 +10,7 @@
     <Grid>
         <Image Source="/Images/close.png" Panel.ZIndex="1" Height="20" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
 
-        <Border Background="#FFFFFF" CornerRadius="0 10 10 0">
+        <Border Background="WhiteSmoke" CornerRadius="0 10 10 0">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock x:Name="Textblock" Text="Dodatne informacije o izabranoj stanici" FontSize="20" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
 
