@@ -17,6 +17,9 @@ namespace TrainTickets.dto
         public String timeShopping { get; set; }
         public DateTime datetimeofroute { get; set; }
 
+        public String mail { get; set; }
+        public bool kupljena { get; set; }
+
         public TicketViewDTO(Station start, Station end, double price, string date, string startTime, Ticket ticket, string timeShopping, DateTime datetimeofroute)
         {
             this.start = start;

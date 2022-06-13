@@ -31,6 +31,11 @@ namespace TrainTickets.model
 
         public User() { }
 
+        public override string ToString()
+        {
+            return Email;
+        }
+
         public User(string firstName, string lastName, string email, string password, UserType userType)
         {
             FirstName = firstName;

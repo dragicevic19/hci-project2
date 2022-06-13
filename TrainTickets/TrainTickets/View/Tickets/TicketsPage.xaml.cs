@@ -28,13 +28,14 @@ namespace TrainTickets.View.Tickets
     public partial class TicketsPage : Page
     {
         private Frame mainPage;
-        private List<Station> stations;                 //visak kasnije kad budemo zakucali stanice
+        private List<Station> stations;
+        public BindableCollection<Station> Stations { get; set; }//visak kasnije kad budemo zakucali stanice
 
         private StationService stationService = new StationService();
         private RouteService routeService = new RouteService();
         private UserService userService;
 
-        public BindableCollection<Station> Stations { get; set; }
+         
         public ObservableCollection<RoutesForViewWithPriceDTO> Lista { get; set; }
 
         public TicketsPage()

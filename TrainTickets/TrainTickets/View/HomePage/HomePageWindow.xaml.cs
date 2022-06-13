@@ -131,7 +131,13 @@ namespace TrainTickets.View.HomePage
         private void KartePressedHandler(object sender, MouseButtonEventArgs e)
         {
             img_bg.Opacity = 0.3;
-            mainPage.Content = new TicketsPageForAdmin(mainPage);
+            mainPage.Content = new MonthlyReview(mainPage, userService);
+        }
+        
+        private void ProsliMesecHandler(object sender, MouseButtonEventArgs e)
+        {
+            img_bg.Opacity = 0.3;
+            mainPage.Content = new MonthlyReview(mainPage, userService);
         }
 
         private void OdjavaPressedHandler(object sender, MouseButtonEventArgs e)
