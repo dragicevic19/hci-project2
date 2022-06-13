@@ -10,8 +10,6 @@ namespace TrainTickets.dto
 {
     public class RoutesForViewWithPriceDTO
     {
-        
-
         public TrainRoute Tr { get; set; }
         public Station start { get; set; }
 
