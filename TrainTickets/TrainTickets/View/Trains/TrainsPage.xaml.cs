@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrainTickets.Database;
 using TrainTickets.dto;
+using TrainTickets.model;
 using TrainTickets.model.train;
 using TrainTickets.Services;
 
@@ -26,6 +27,8 @@ namespace TrainTickets.View.Trains
     public partial class TrainsPage : Page
     { 
         public Frame MainPage { get; }
+
+        private User currentUser;
 
         private TrainService TrainService;
 
@@ -39,10 +42,11 @@ namespace TrainTickets.View.Trains
             InitializeComponent();
         }
 
-        public TrainsPage(Frame mainPage)
+        public TrainsPage(Frame mainPage, UserService userService)
         {
             InitializeComponent();
             MainPage = mainPage;
+            this.currentUser = userService.logUser;
             this.TrainService = new TrainService();
             this.Trains = new ObservableCollection<TrainDTO>();
 
@@ -51,6 +55,7 @@ namespace TrainTickets.View.Trains
 
             TrainList.ItemsSource = this.Trains;
             DataContext = this;
+            addNewTrainBtn.Visibility = (currentUser.UserType == UserType.Client) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void textSearch_MouseDown(object sender, MouseButtonEventArgs e)
@@ -141,8 +146,8 @@ namespace TrainTickets.View.Trains
 
                 if (selectedTrain == null) return;
 
-                btn_deleteTrain.Visibility = Visibility.Visible;
-                btn_editTrain.Visibility = Visibility.Visible;
+                btn_deleteTrain.Visibility = (currentUser.UserType == UserType.Client) ? Visibility.Collapsed : Visibility.Visible;
+                btn_editTrain.Visibility = (currentUser.UserType == UserType.Client) ? Visibility.Collapsed : Visibility.Visible;
 
                 switch (selectedTrain.Capacity) 
                 {

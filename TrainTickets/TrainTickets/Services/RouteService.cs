@@ -18,23 +18,17 @@ namespace TrainTickets.Services
             {
                 foreach (var route in db.TrainRoutes)
                 {
-
-                     
-                    
+                    if (route.Deleted) continue;
                     if(route.containsRoute(start, end))
                     {
                         foreach(var time in route.DepartureTimes)
                         {
                             routes.Add(new RoutesForViewWithPriceDTO(route, start, end, route.routePrice(start, end), time.Time+TimeSpan.FromMinutes(route.sumAddTime(start)), route.routeTime(start, end)));
                         }    
-
                     }
-                     
                 }
             }
-
             return routes;
-
         }
 
 
@@ -45,14 +39,11 @@ namespace TrainTickets.Services
             {
                 foreach (var route in db.TrainRoutes)
                 {
-
+                    if (route.Deleted) continue;
                     foreach (var time in route.DepartureTimes)
                     {
                         routes.Add(new RoutesForViewWithPriceDTO(route, route.Stations[0].Station, route.Stations[^1].Station, route.routePrice(route.Stations[0].Station, route.Stations[^1].Station), time.Time, route.routeTime(route.Stations[0].Station, route.Stations[^1].Station)));
                     }
-
-                    
-
                 }
             }
 

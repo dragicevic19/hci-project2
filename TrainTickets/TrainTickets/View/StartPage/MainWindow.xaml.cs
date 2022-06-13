@@ -25,7 +25,9 @@ namespace TrainTickets
         {
             InitializeComponent();
             //FillDB();
-            using(var db = new DatabaseContext()) { }
+            this.Title = "HCI Voz";
+            Uri iconUri = new Uri("../../../Images/train1.png", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(iconUri);
             pageLeft.Content = new PageForSignUp(pageLeft, pageRight, this);
             pageRight.Content = new LoginPage(pageLeft, pageRight, this);
         }

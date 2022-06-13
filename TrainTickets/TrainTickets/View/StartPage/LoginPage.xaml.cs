@@ -63,7 +63,8 @@ namespace TrainTickets
 
                 if (isLogin == false)
                 {
-                    MessageBox.Show("Nepostojeće korisničko ime ili lozinka.");
+
+                    MessageBox.Show("Netačna lozinka ili email!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
