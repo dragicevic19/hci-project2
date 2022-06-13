@@ -1,0 +1,20 @@
+﻿<Window x:Class="HelpSystem.HelpViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="HelpViewer" Height="650" Width="900" Closing="Window_Closing">
+    <Window.CommandBindings>
+        <CommandBinding Command="NavigationCommands.BrowseBack" CanExecute="BrowseBack_CanExecute" Executed="BrowseBack_Executed" />
+        <CommandBinding Command="NavigationCommands.BrowseForward" CanExecute="BrowseForward_CanExecute" Executed="BrowseForward_Executed" />
+    </Window.CommandBindings>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top" Foreground="White" Background="#3aa9ad" Height="30">
+            <Button Command="NavigationCommands.BrowseBack" Foreground="White">
+                
+            </Button>
+            <Button Command="NavigationCommands.BrowseForward" Foreground="White">
+                
+            </Button>
+        </ToolBar>
+        <WebBrowser Name="wbHelp" Navigating="wbHelp_Navigating"></WebBrowser>
+    </DockPanel>
+</Window>

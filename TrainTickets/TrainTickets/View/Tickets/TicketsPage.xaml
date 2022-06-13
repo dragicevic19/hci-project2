@@ -23,7 +23,7 @@
 
         <Label VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="label1" FontSize="20"  Content="Početna stanica:"  Grid.Row="0" Grid.Column="0"/>
         <ComboBox VerticalAlignment="Center"  FontSize="15" Margin="10,5,0,0" HorizontalAlignment="Left" Name="comboBox1"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="1" Width="220" Height="25">
+                  ItemsSource="{Binding Stations}"  Grid.Row="0" Grid.Column="1" Width="220" Height="25" ToolTip="Ovde unesite početnu stanicu" SelectionChanged="comboBox1_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -34,7 +34,7 @@
 
         <Label VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="label2" FontSize="20" Content="Krajnja stanica:"  Grid.Row="0" Grid.Column="2"/>
         <ComboBox Margin="10,5,0,0" VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Left" Name="comboBox2"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
-                  ItemsSource="{Binding Stations}" Grid.Row="0" Grid.Column="3" Width="220" Height="25">
+                  ItemsSource="{Binding Stations}" Grid.Row="0" Grid.Column="3" Width="220" Height="25" ToolTip="Ovde unesite krajnju stanicu" SelectionChanged="comboBox2_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" />
@@ -42,7 +42,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Name="btn" Click="OnClick" ClickMode="Release" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,170,0" Content="Pretraži" Grid.Row="0" Grid.Column="4" Style="{StaticResource mainButton}"/>
+        <Button Name="btn" Click="OnClick" ClickMode="Release" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,170,0" Content="Pretraži" Grid.Row="0" Grid.Column="4" Style="{StaticResource mainButton}" Visibility="Hidden"/>
         <ListView
             Grid.Row="1"
             Grid.ColumnSpan="5"

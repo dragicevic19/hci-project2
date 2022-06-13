@@ -3,12 +3,17 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:l="clr-namespace:HelpSystem"
       xmlns:local="clr-namespace:TrainTickets.View.TrainRoutes"
       xmlns:gmaps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
-      
-      mc:Ignorable="d" 
+     
+
+    mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TrainRoutesPage">
+      Title="TrainRoutesPage" l:HelpProvider.HelpKey="Forma">
+    <Page.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </Page.CommandBindings>
 
     <Grid Background="White">
         <Grid.RowDefinitions>
@@ -20,7 +25,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="addNewRouteBtn" Background="#3aa9ad" Grid.Row="0" Click="NewRouteBtnClick">Add New Route</Button>
+        <Button x:Name="addNewRouteBtn" Foreground="White" Background="#3aa9ad" Grid.Row="0" Click="NewRouteBtnClick">Dodajte novu liniju</Button>
 
         <StackPanel x:Name="showRoutesPanel" Grid.Row="1" RenderTransformOrigin="0.503,0.516" Background="White">
             
@@ -33,7 +38,7 @@
 
                     <Image Source="/Images/search.png" Height="20" />
                     <TextBlock x:Name="textSearch" MouseDown="textSearch_MouseDown" Text="Search" Style="{StaticResource textHint}" />
-                    <TextBox x:Name="searchBox" TextChanged="searchBox_TextChanged" Style="{StaticResource textBox}" />
+                    <TextBox x:Name="searchBox" TextChanged="searchBox_TextChanged" Style="{StaticResource textBox}"/>
                 </Grid>
             </Border>
 
@@ -98,7 +103,7 @@
 
                     <Image Source="/Images/search.png" Height="20" />
                     <TextBlock x:Name="textSearchStations" MouseDown="textSearchStations_MouseDown" Text="Search" Style="{StaticResource textHint}" />
-                    <TextBox x:Name="searchBoxStations" TextChanged="searchBoxStations_TextChanged" Style="{StaticResource textBox}" />
+                    <TextBox x:Name="searchBoxStations" TextChanged="searchBoxStations_TextChanged" Style="{StaticResource textBox}"/>
                 </Grid>
             </Border>
 
@@ -112,13 +117,14 @@
                     <DataTemplate>
                         <WrapPanel>
                             <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="315" ToolTip="Prevucite grad na mapu da biste dodali stanicu u rutu">
-                                <StackPanel Height="40">
+                                <StackPanel Height="40" ToolTip="Pritisnite F1 za pomoć">
                                     <TextBlock Text="{Binding Name}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,0"/>
                                 </StackPanel>
                             </Border>
                         </WrapPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                
             </ListView>
 
             <DataGrid

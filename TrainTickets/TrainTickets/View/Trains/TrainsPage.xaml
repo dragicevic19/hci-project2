@@ -75,7 +75,7 @@
                             Opacity="0.3" Margin="228,0,-1412,-1051" Grid.Column="1"/>
 
 
-            <TextBlock FontSize="40" Text="Raspored sedista" FontWeight="SemiBold" FontStyle="Italic" Margin="789,34,-932,-57" Grid.Column="1"/>
+            <TextBlock FontSize="40" Text="Raspored sedišta" FontWeight="SemiBold" FontStyle="Italic" Margin="789,34,-932,-57" Grid.Column="1"/>
 
 
             <Image Name="trainSeatsLayout24" Grid.Column="1" Margin="596,102,-1049,-984" Visibility="Hidden">

@@ -8,8 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\arrow.jpg" />
     <None Remove="Images\close.png" />
     <None Remove="Images\download.png" />
+    <None Remove="Images\drag.png" />
     <None Remove="Images\Email.png" />
     <None Remove="Images\Layout24.png" />
     <None Remove="Images\Layout26.png" />
@@ -18,12 +20,14 @@
     <None Remove="Images\Lock.png" />
     <None Remove="Images\logout1.png" />
     <None Remove="Images\map1.png" />
+    <None Remove="Images\MapView.png" />
     <None Remove="Images\maximize.png" />
     <None Remove="Images\minimize.png" />
     <None Remove="Images\PeopleAbout-Icon-Transparent-300x300.png" />
     <None Remove="Images\price.png" />
     <None Remove="Images\search.png" />
     <None Remove="Images\station1.png" />
+    <None Remove="Images\StationsList.png" />
     <None Remove="Images\tgBtn_default.png" />
     <None Remove="Images\ticket1.png" />
     <None Remove="Images\time.png" />
@@ -45,10 +49,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\arrow.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\close.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\download.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\drag.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Email.png">
@@ -75,6 +85,9 @@
     <Resource Include="Images\map1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\MapView.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\maximize.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -91,6 +104,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\station1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\StationsList.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\tgBtn_default.png">
