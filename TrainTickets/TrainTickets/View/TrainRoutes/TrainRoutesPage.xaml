@@ -139,17 +139,16 @@
                     <DataGridTextColumn
                         Header="Stanica"
                         IsReadOnly="True"
-                        MinWidth="70"
-                        Width="*"
+                        Width="120"
                         Binding="{Binding Station.Name}"/>
                     <DataGridTextColumn
-                        Header="Dodatno vreme"
+                        Header="Dodatno vreme [min]"
                         MinWidth="40"
                         IsReadOnly="False"
-                        Width="*"
+                        Width="125"
                         Binding="{Binding AdditionalTime}"/>
                     <DataGridTextColumn
-                        Header="Dodatna cena"
+                        Header="Dodatna cena [din]"
                         MinWidth="40"
                         Width="*"
                         IsReadOnly="False"
@@ -164,9 +163,7 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-
             <Button x:Name="addRoute" Background="Green" Foreground="White" FontWeight="Bold" Height="40" Click="addRoute_Click" Margin="0, 0, 0, 0">Završi</Button>
-
 
         </StackPanel>
 

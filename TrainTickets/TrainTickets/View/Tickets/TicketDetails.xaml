@@ -1,0 +1,71 @@
+﻿<Window x:Class="TrainTickets.View.Tickets.TicketDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainTickets.View.Tickets" xmlns:gmaps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
+        mc:Ignorable="d"
+        Title="AdditionalDataForRouteModal" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
+        Background="White">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="1" Source="/Images/close.png" Panel.ZIndex="1" Height="20" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
+
+        <StackPanel Grid.Row="0" Background="#3AB19B">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Naziv linije: " Margin="5, 10, 5, 10" HorizontalAlignment="Left" FontSize="15" Foreground="white" Style="{StaticResource TitleText}" />
+                <TextBlock x:Name="routeNameTxt" Text="" Margin="2, 10, 5, 10" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Style="{StaticResource TitleText}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Vremena polaska: " Margin="5, 5, 5, 10" HorizontalAlignment="Left" FontSize="15" Foreground="white" Style="{StaticResource TitleText}" />
+                <TextBlock x:Name="departureTimesTxt" Text="" Margin="2, 5, 5, 10" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Style="{StaticResource TitleText}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Voz: " Margin="5, 5, 5, 10" HorizontalAlignment="Left" FontSize="15" Foreground="white" Style="{StaticResource TitleText}" />
+                <TextBlock x:Name="trainTxt" Text="" Margin="2, 5, 5, 10" HorizontalAlignment="Left" FontSize="15" Foreground="Black" Style="{StaticResource TitleText}" />
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Background="White" Grid.Row="1">
+            <DataGrid
+                Height="490"
+                CanUserSortColumns="False"
+                x:Name="DataGrid"
+                ItemsSource="{Binding selectedStations}"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                IsReadOnly="True"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                            Header="Stanica"
+                            MinWidth="70"
+                            Width="110"
+                            Binding="{Binding Station.Name}"/>
+                    <DataGridTextColumn
+                            Header="Dodatno vreme [min]"
+                            Width="125"
+                            Binding="{Binding AdditionalTime}"/>
+                    <DataGridTextColumn
+                            Header="Dodatna cena [din]"
+                            Width="*"
+                            Binding="{Binding AdditionalPrice}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <gmaps:GMapControl Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" x:Name="mapView" Loaded="mapView_Loaded"/>
+
+    </Grid>
+</Window>
