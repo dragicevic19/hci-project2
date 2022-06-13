@@ -37,7 +37,7 @@
 
                         <Image Source="/Images/time.png" Height="20" />
                         <TextBlock x:Name="textDepTimes" MouseDown="textDepTimes_MouseDown" Text="Vremena: (08:00; 10:00; 14:00; ...)" Style="{StaticResource textHint}" 
-                                               ToolTip="Unesite vreme polazaka voza. Format: HH:mm; HH:mm; ... (00:50; 04:30; 15:32)"/>
+                                               ToolTip="Unesite vreme polazaka voza.&#x0a;Format: HH:mm; HH:mm;&#x0a;Primer: 00:50; 04:30; 15:32"/>
                         <TextBox Name="depTimesBox" TextChanged="depTimesBox_TextChanged" Style="{StaticResource textBox}" />
                     </Grid>
                 </Border>

@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TrainTickets.model;
 using TrainTickets.Services;
-using TrainTickets.View.Stations;
 using TrainTickets.View.Tickets;
 using TrainTickets.View.TimeTable;
 using TrainTickets.View.TrainRoutes;

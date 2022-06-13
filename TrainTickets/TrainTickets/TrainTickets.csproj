@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="HelpSystem\Resources\index.htm" />
     <None Remove="Images\arrow.jpg" />
     <None Remove="Images\close.png" />
     <None Remove="Images\download.png" />
@@ -49,6 +50,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="HelpSystem\Resources\index.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\arrow.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

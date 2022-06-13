@@ -92,32 +92,32 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 1)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 1)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('14:00:00.00', 1)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('19:00:00.00', 1)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('23:00:00.00', 1)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('15:00:00.00', 1)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('16:00:00.00', 1)");
 
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 2)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 2)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('14:00:00.00', 2)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('19:00:00.00', 2)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('23:00:00.00', 2)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('14:30:00.00', 2)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('15:10:00.00', 2)");
 
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 3)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 3)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('14:00:00.00', 3)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('19:00:00.00', 3)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('23:00:00.00', 3)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('12:00:00.00', 3)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('13:22:00.00', 3)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('15:11:00.00', 3)");
 
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 4)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 4)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('14:00:00.00', 4)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('19:00:00.00', 4)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('23:00:00.00', 4)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('12:11:00.00', 4)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('13:14:00.00', 4)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('15:15:00.00', 4)");
 
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('08:00:00.00', 5)");
                 db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('10:00:00.00', 5)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('14:00:00.00', 5)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('19:00:00.00', 5)");
-                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('23:00:00.00', 5)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('12:22:00.00', 5)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('13:13:00.00', 5)");
+                db.Database.ExecuteSqlCommand("Insert into DepartureTimes (Time, RouteId) Values('15:16:00.00', 5)");
 
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(3, 1, 0, 0)");
                 db.Database.ExecuteSqlCommand("Insert into StationOnRoutes (StationId, TrainRouteId, AdditionalTime, AdditionalPrice) Values(13, 1, 54, 1000)");

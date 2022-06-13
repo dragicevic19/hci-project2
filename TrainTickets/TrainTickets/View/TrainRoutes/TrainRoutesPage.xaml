@@ -6,11 +6,10 @@
       xmlns:l="clr-namespace:HelpSystem"
       xmlns:local="clr-namespace:TrainTickets.View.TrainRoutes"
       xmlns:gmaps="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation"
-     
-
-    mc:Ignorable="d" 
+      mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TrainRoutesPage" l:HelpProvider.HelpKey="Forma">
+    
     <Page.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
     </Page.CommandBindings>
@@ -116,8 +115,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="315" ToolTip="Prevucite grad na mapu da biste dodali stanicu u rutu">
-                                <StackPanel Height="40" ToolTip="Pritisnite F1 za pomoć">
+                            <Border BorderBrush="LightBlue" BorderThickness="0 0 0 1" Width="315"  ToolTip="Prevucite grad na mapu da biste dodali stanicu u rutu.&#x0a;Pritisnite F1 za pomoć">
+                                <StackPanel Height="40">
                                     <TextBlock Text="{Binding Name}" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,0"/>
                                 </StackPanel>
                             </Border>

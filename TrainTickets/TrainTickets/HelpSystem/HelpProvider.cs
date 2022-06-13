@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -31,13 +32,26 @@ namespace HelpSystem
         public static void ShowHelp(string key, TrainRoutesPage originator)
         {
             HelpViewer hh = new HelpViewer(key, originator);
-            //hh.Show();    mode preko prozora (ako bude negde bio potreban)
-            var psi = new ProcessStartInfo      //web mode
+            // hh.Show();    //mode preko prozora (ako bude negde bio potreban)
+
+
+            //web mode
+            string curDir = Directory.GetCurrentDirectory();
+            curDir = curDir.Substring(0, curDir.IndexOf("\\bin"));
+            string path = String.Format("{0}\\HelpSystem\\Resources\\{1}.htm", curDir, key);
+            ProcessStartInfo psi = new ProcessStartInfo      
             {
-                FileName = "file:///C:/Users/sovil/Downloads/index.htm",        //ovo je sad samo za test, na odbrani cemo imati drugu putanju na lokalu
+                FileName = path,
                 UseShellExecute = true
             };
-            Process.Start(psi);   
+            try
+            {
+                Process.Start(psi);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }
