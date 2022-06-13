@@ -115,7 +115,9 @@ namespace TrainTickets.View.Tickets
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
+            var rowItem = (sender as Button).DataContext as RoutesForViewWithPriceDTO;
+            TicketDetails model = new TicketDetails(this.userService.logUser, rowItem);
+            model.ShowDialog();
         }
 
         private void comboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)

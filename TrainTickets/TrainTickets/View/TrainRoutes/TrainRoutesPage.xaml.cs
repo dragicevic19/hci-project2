@@ -86,7 +86,6 @@ namespace TrainTickets.View.TrainRoutes
             DataContext = this;
 
             addNewRouteBtn.Visibility = (currentUser.UserType == UserType.Client) ? Visibility.Collapsed : Visibility.Visible;
-
         }
 
         private void mapView_Loaded(object sender, RoutedEventArgs e)

@@ -47,7 +47,16 @@ namespace TrainTickets.model.trainRoute
             this.Deleted = false;
         }
 
-        // public double Price { get; set; } racunamo kao zbir additionalPrices u StationOnRoute
+        public string depTimesToStr()
+        {
+            string retStr = "";
+
+            foreach (var time in DepartureTimes)
+            {
+                retStr += time.Time.Hours + ":" + time.Time.Minutes + "; ";
+            }
+            return retStr;
+        }
 
 
         public bool containsRoute(Station start, Station end)
