@@ -70,14 +70,15 @@ namespace TrainTickets.View.Tickets
                 }
                 else
                 {
-                    MessageBox.Show("Greska pri rezervaciji", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Nema više slobodnih mesta", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
                 MessageBox.Show("Ova ruta je vec prosla.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
+            this.Close();
         }
+      
     }
 }

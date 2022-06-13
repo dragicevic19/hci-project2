@@ -13,7 +13,7 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock x:Name="textBlock"  Padding="20" Text="fdfdf" Grid.Row="0" FontSize="40" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
+        <TextBlock x:Name="textBlock"  Padding="10" Text="fdfdf" Grid.Row="0" FontSize="40" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
         <ListView
           
             Grid.Row="1"
@@ -21,20 +21,20 @@
             VerticalAlignment="Top"
             x:Name="LV"
             ItemsSource="{Binding Lista}"
-            FontSize ="25"
+            FontSize ="22"
+            Foreground="Black"
             FontWeight="Bold"
             HorizontalContentAlignment="Center"
-            
             >
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Polazak iz" Width="250"  DisplayMemberBinding="{Binding start}" />
-                    <GridViewColumn Header="Dolazak u" Width="250" DisplayMemberBinding="{Binding end}" />
+                    <GridViewColumn Header="Početna" Width="250"  DisplayMemberBinding="{Binding start}" />
+                    <GridViewColumn Header="Krajnja" Width="250" DisplayMemberBinding="{Binding end}" />
                     <GridViewColumn Header="Datum polaska" Width="250" DisplayMemberBinding="{Binding date}" />
                     <GridViewColumn Header="Vreme polaska" Width="250" DisplayMemberBinding="{Binding startTime}" />
-                    <GridViewColumn Header="cena" Width="150" DisplayMemberBinding="{Binding price}" />
-                    <GridViewColumn Header="vreme kupovine karte" Width="250" DisplayMemberBinding="{Binding timeShopping}" />
+                    <GridViewColumn Header="Cena" Width="150" DisplayMemberBinding="{Binding price}" />
+                    <GridViewColumn Header="Vreme kupovine karte" Width="260" DisplayMemberBinding="{Binding timeShopping}" />
 
                 </GridView>
             </ListView.View>

@@ -26,11 +26,14 @@ namespace TrainTickets.Services
 
         public void createDeparture(TrainRoute tr, DateTime dt)
         {
-            Departure d = new Departure();
-            d.RouteId = tr.Id;
-            d.DepartureTime = dt;
+
+
             using (var db = new DatabaseContext())
             {
+                Departure d = new Departure();
+                d.RouteId = tr.Id;
+                d.DepartureTime = dt;
+                d.AvailableSeats = db.Trains.Find(tr.TrainId).Capacity;
                 db.Departures.Add(d);
                 db.SaveChanges();
             }

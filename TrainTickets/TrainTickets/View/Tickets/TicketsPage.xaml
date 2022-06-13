@@ -64,14 +64,14 @@
                     <GridViewColumn Header="Cena" Width="80" DisplayMemberBinding="{Binding price}" />
                     <GridViewColumn Header="Vreme" Width="120" DisplayMemberBinding="{Binding time}" />
                     <GridViewColumn Header="Vreme polaska" Width="200" DisplayMemberBinding="{Binding startTime}" />
-                    <GridViewColumn>
+                    <GridViewColumn x:Name="kupiColumn">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Margin="0,5,0,5" Content="Kupi" Click="Button_Click" Style="{StaticResource mainButton}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn >
+                    <GridViewColumn x:Name="rezColumn">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Margin="0,5,0,5" Content="Rezerviši" Click="Button_Click_1" Style="{StaticResource mainButton}"/>

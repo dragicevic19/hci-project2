@@ -58,6 +58,7 @@ namespace TrainTickets.View.HomePage
                 tt_messages.Visibility = Visibility.Collapsed;
                 tt_settings.Visibility = Visibility.Collapsed;
                 tt_signout.Visibility = Visibility.Collapsed;
+                tt_map.Visibility = Visibility.Collapsed;
             }
 
             else
@@ -67,6 +68,7 @@ namespace TrainTickets.View.HomePage
                 tt_messages.Visibility = Visibility.Visible;
                 tt_settings.Visibility = Visibility.Visible;
                 tt_signout.Visibility = Visibility.Visible;
+                tt_map.Visibility = Visibility.Visible;
             }
         }
 

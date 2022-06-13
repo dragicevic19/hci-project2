@@ -35,7 +35,7 @@ namespace TrainTickets.View.UserTickets
             InitializeComponent();
             this.mainPage = mainPage;
             this.userService = userService;
-            textBlock.Text = "Sve kupljene karte korisnika: " + userService.logUser.Email.ToString();
+            textBlock.Text = "Sve rezervisane karte korisnika: " + userService.logUser.Email.ToString();
             this.nap();
         }
 

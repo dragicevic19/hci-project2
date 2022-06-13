@@ -18,6 +18,14 @@ namespace TrainTickets.Services
         {
             try
             {
+                using(var db = new DatabaseContext())
+                {
+                    Departure departure = db.Departures.Find(departureID);
+                    if (departure.AvailableSeats == 0) return false;
+                    departure.AvailableSeats--;
+                    db.SaveChanges();
+                }
+
                 Ticket tic = new Ticket();
                 tic.UserId = user.Id;
                 tic.DepartureID = departureID;
@@ -64,7 +72,7 @@ namespace TrainTickets.Services
             {
                 foreach(var ticket in db.Tickets)
                 {
-                    if (ticket.DepartureID == departureId)
+                    if (ticket.DepartureID == departureId && ticket.IsPurchased)
                     {
                         retList.Add(ticket);
                     }
@@ -73,16 +81,17 @@ namespace TrainTickets.Services
             return retList;
         }
 
-        public List<Ticket> allTicketsMon(Station start, Station end, bool kupljena)
+        public List<Ticket> allTicketsMon(Station start, Station end, DateTime datumpoc)
         {
-            DateTime mesecdana = DateTime.Today.AddMonths(-1);
+            DateTime mesecdana = datumpoc.AddMonths(1);
+
             
             List<Ticket> ticketList = new List<Ticket>();
             using (var db = new DatabaseContext())
             {
                 foreach (var ticket in db.Tickets)
                 {
-                    if (mesecdana < ticket.PurchaseDateTime)
+                    if (datumpoc < ticket.PurchaseDateTime && ticket.PurchaseDateTime < mesecdana)
                     {
                         bool d = false;
                         if (start == null && end == null)
@@ -156,7 +165,7 @@ namespace TrainTickets.Services
                     DateTime datetime = d.DepartureTime;
                     TimeSpan tp = datetime.TimeOfDay;
                     String startTime = (tp + TimeSpan.FromMinutes(d.Route.sumAddTime(start))).ToString(@"hh\:mm");
-                    String timeshopping = t.PurchaseDateTime.ToString();
+                    String timeshopping = t.PurchaseDateTime.ToString("dd/MM/yyyy hh:mm");
                     TicketViewDTO tv = new TicketViewDTO(start, end, price, date, startTime, t,timeshopping, datetime);
                     tv.mail = db.Users.Find(t.UserId).Email;
                     tv.kupljena = t.IsPurchased;
