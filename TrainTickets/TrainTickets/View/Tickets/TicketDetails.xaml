@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AdditionalDataForRouteModal" Height="600" Width="800"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Background="White">
+        Background="White" BorderThickness="2" BorderBrush="Black">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="110"/>

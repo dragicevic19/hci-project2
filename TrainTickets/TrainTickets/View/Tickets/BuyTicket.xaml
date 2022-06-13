@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TrainTickets.View.Tickets"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True"
-        Title="BuyTicket" Height="300" Width="500">
+        Title="BuyTicket" Height="300" Width="500" BorderThickness="2" BorderBrush="Black">
     <Grid>
         <Image Source="/Images/close.png" Panel.ZIndex="1" Height="20" MouseUp="Image_MouseUp" Style="{StaticResource imgClose}"/>
         
