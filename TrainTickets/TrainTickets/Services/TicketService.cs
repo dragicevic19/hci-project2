@@ -60,16 +60,17 @@ namespace TrainTickets.Services
 
 
 
-        public List<Ticket> allTicketsMon(Station start, Station end, bool kupljena)
+        public List<Ticket> allTicketsMon(Station start, Station end, DateTime datumpoc)
         {
-            DateTime mesecdana = DateTime.Today.AddMonths(-1);
+            DateTime mesecdana = datumpoc.AddMonths(1);
+
             
             List<Ticket> ticketList = new List<Ticket>();
             using (var db = new DatabaseContext())
             {
                 foreach (var ticket in db.Tickets)
                 {
-                    if (mesecdana < ticket.PurchaseDateTime)
+                    if (datumpoc < ticket.PurchaseDateTime && ticket.PurchaseDateTime < mesecdana)
                     {
                         bool d = false;
                         if (start == null && end == null)

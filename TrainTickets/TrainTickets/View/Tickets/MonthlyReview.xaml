@@ -17,6 +17,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -34,7 +36,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        
+
 
 
         <Label VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="label2" FontSize="20" Content="Krajnja stanica:"  Grid.Row="1" Grid.Column="2"/>
@@ -46,13 +48,22 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+        <ComboBox Margin="10,5,0,0" VerticalAlignment="Center" FontSize="15" HorizontalAlignment="Left" Name="comboBox3"  IsTextSearchEnabled="True" IsTextSearchCaseSensitive="False"
+                  ItemsSource="{Binding t}" Grid.Row="1" Grid.Column="5" Width="220" Height="25" ToolTip="Ovde unesite krajnju stanicu" >
       
-        <Button Name="btn" Click="OnClick" ClickMode="Release" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,170,0" Content="Pretraži" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" Style="{StaticResource mainButton}" />
+        </ComboBox>
+
+
+
+        <Label VerticalAlignment="Center" HorizontalAlignment="Right" x:Name="label3" FontSize="20" Content="mesec:"  Grid.Row="1" Grid.Column="4"/>
+
+        <Button Name="btn" Click="OnClick" ClickMode="Release" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,170,0" Content="Pretraži" Grid.Row="1" Grid.Column="7" Grid.ColumnSpan="2" Style="{StaticResource mainButton}" />
         <TextBlock x:Name="textBlock"  Padding="20" Text="fdfdf" Grid.Row="0" FontSize="40" Grid.ColumnSpan="6" Foreground="#3AB19B" Style="{StaticResource TitleText}" />
         <ListView
           
             Grid.Row="2"
-            Grid.ColumnSpan="7"
+            Grid.ColumnSpan="9"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             x:Name="LV"
@@ -72,7 +83,7 @@
                     <GridViewColumn Header="cena" Width="150" DisplayMemberBinding="{Binding price}" />
                     <GridViewColumn Header="vreme kupovine karte" Width="300" DisplayMemberBinding="{Binding timeShopping}" />
                     <GridViewColumn Header="putnik" Width="150" DisplayMemberBinding="{Binding mail}" />
-                  
+
                 </GridView>
             </ListView.View>
 

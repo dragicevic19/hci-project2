@@ -85,7 +85,8 @@ namespace TrainTickets.View.Tickets
 
 
             }
-
+            this.Close();
         }
+      
     }
 }

@@ -27,14 +27,13 @@ namespace TrainTickets.View.Tickets
         private TicketService ticketService = new TicketService();
         public ObservableCollection<TicketViewDTO> Lista { get; set; }
         private UserService userService;
-       
+
         public BindableCollection<Station> Stations { get; set; }
+        public BindableCollection<DateTime> t { get; set; }
+
 
         private StationService stationService = new StationService();
-        public MonthlyReview()
-        {
-            InitializeComponent();
-        }
+       
 
         public MonthlyReview(Frame mainPage, UserService userService)
         {
@@ -42,12 +41,22 @@ namespace TrainTickets.View.Tickets
             this.mainPage = mainPage;
             this.userService = userService;
             textBlock.Text = "Sve kupljene karte za izabrani mesec: ";
+            DateTime LastMonthLastDate = DateTime.Today.AddDays(0 - DateTime.Today.Day);
+            DateTime LastMonthFirstDate = LastMonthLastDate.AddDays(1 - LastMonthLastDate.Day);
+            for (int i = 0; i < 12; i++)
+            {
+                comboBox3.Items.Add(LastMonthFirstDate);
+                
+
+                LastMonthFirstDate = LastMonthFirstDate.AddMonths(-1);
+
+            }
             
             Stations = new BindableCollection<Station>(stationService.AllStations());
     
              
             Lista = new ObservableCollection<TicketViewDTO>();
-            foreach (var l in ticketService.listToDTOList(ticketService.allTicketsMon(null,null,true)))
+            foreach (var l in ticketService.listToDTOList(ticketService.allTicketsMon(null,null,(DateTime)comboBox3.Items[0])))
                 Lista.Add(l);
             LV.ItemsSource = Lista;
             
@@ -62,16 +71,18 @@ namespace TrainTickets.View.Tickets
 
             Station start = (Station)comboBox1.SelectedItem;
             Station end = (Station)comboBox2.SelectedItem;
-            
+            if (comboBox3.SelectedItem == null)
+                MessageBox.Show("MORATE IZABRATI MESEC");
 
                 Lista.Clear();
-                foreach (var v in ticketService.listToDTOList(ticketService.allTicketsMon(start, end, true)))
+                foreach (var v in ticketService.listToDTOList(ticketService.allTicketsMon(start, end,(DateTime) comboBox3.SelectedItem)))
                     Lista.Add(v);
                 DataContext = this;
 
                 LV.Items.Refresh();
             comboBox1.SelectedItem = null;
             comboBox2.SelectedItem  = null;
+
 
 
 
