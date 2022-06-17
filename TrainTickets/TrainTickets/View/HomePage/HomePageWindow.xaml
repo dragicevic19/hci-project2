@@ -311,7 +311,7 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230" MouseDown="ProsliMesecHandler">
 
-                                <Image Source="../../Images/ticket1.png"
+                                <Image Source="../../Images/twoTickets.png"
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 

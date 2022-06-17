@@ -95,14 +95,14 @@ namespace TrainTickets.View.Trains
             }
             else
             {
-                MessageBox.Show("Voz je izabran u nekoj od voznih linija i ne moze se menjati!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Voz je izabran u nekoj od voznih linija i ne moze se menjati!", "Izmena voza", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
 
         private void btn_deleteTrain_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Da li ste sigurni da želite da obrišete voz?", "Brisanje", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show("Da li ste sigurni da želite da obrišete voz?", "Brisanje voza", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 return;
 
             TrainDTO row = (TrainDTO)TrainList.SelectedItem;
@@ -110,13 +110,13 @@ namespace TrainTickets.View.Trains
             {
                 if (!TrainService.deleteTrain(row))
                 {
-                    MessageBox.Show("Greška pri brisanju linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Greška pri brisanju linije!", "Brisanje voza", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("Voz je izabran u nekoj od voznih linija! Morate prvo obrisati tu liniju!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Voz je izabran u nekoj od voznih linija! Morate prvo obrisati tu liniju!", "Brisanje voza", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

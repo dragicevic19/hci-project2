@@ -56,7 +56,7 @@ namespace TrainTickets.View.Tickets
         {
             if(comboBox1.SelectedItem == null)
             {
-                MessageBox.Show("Morate izabrati vreme polaska", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Morate izabrati vreme polaska", "Kupovina karte", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -74,16 +74,16 @@ namespace TrainTickets.View.Tickets
 
                 if (ticService.createTicket(rfv, u, dwp.Id, true))
                 {
-                    MessageBox.Show("Uspešno kupljena karta.", "Kupljena karta", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Uspešno kupljena karta.", "Kupovina karte", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    MessageBox.Show("Nema više slobodnih mesta.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Nema više slobodnih mesta.", "Kupovina karte", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Ovaj ruta je vec prošla!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ovaj ruta je vec prošla!", "Kupovina karte", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             this.Close();
         }

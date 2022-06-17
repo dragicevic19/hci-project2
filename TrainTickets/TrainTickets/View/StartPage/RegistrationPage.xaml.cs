@@ -58,7 +58,7 @@ namespace TrainTickets
                 }
                 else
                 {
-                    MessageBox.Show("Uneta email adresa već postoji u sistemu!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Uneta email adresa već postoji u sistemu!", "Registracija", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         } 
@@ -69,7 +69,7 @@ namespace TrainTickets
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confPassword) ||
                 string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastName))
             {
-                MessageBox.Show("Sva polja su obavezna!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Sva polja su obavezna!", "Registracija", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -79,25 +79,25 @@ namespace TrainTickets
             }
             catch (FormatException)
             {
-                MessageBox.Show("Neispravan format email adrese!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Neispravan format email adrese!", "Registracija", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (confPassword != password)   // ubaciti neke poruke u .xaml fajl pa ih ovde prikazati samo
             {
-                MessageBox.Show("Lozinke se ne poklapaju!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Lozinke se ne poklapaju!", "Registracija", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
             {
-                MessageBox.Show("U polje <ime> je moguće uneti samo slova!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("U polje <ime> je moguće uneti samo slova!", "Registracija", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
             if (!Regex.IsMatch(lastName, @"^[a-zA-Z]+$"))
             {
-                MessageBox.Show("U polje <prezime> je moguće uneti samo slova!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("U polje <prezime> je moguće uneti samo slova!", "Registracija", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 

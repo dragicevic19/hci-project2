@@ -283,7 +283,7 @@
                                        Stretch="None"
                                        Margin="12,0,0,0"/>
 
-                                <TextBlock Text="Karte"
+                                <TextBlock Text="Kupljene karte"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 
@@ -291,7 +291,7 @@
 
                             <ListViewItem.ToolTip>
                                 <ToolTip x:Name="tt_settings"
-                                         Content="Karte"
+                                         Content="Kupljene karte"
                                          Style="{StaticResource tt_style}"/>
                             </ListViewItem.ToolTip>
 
@@ -303,12 +303,12 @@
                             <StackPanel Orientation="Horizontal"
                                         Width="230" MouseDown="RezervisaneKarteHandler">
 
-                                <Image Source="../../Images/ticket1.png"
+                                <Image Source="../../Images/reservation1.png"
                                        Stretch="None"
                                        Margin="12,0,0,0"
                                        />
 
-                                <TextBlock Text="Rezervisanje karte"
+                                <TextBlock Text="Rezervisane karte"
                                            Margin="25,0,0,0"
                                            Style="{StaticResource font_style}"/>
 

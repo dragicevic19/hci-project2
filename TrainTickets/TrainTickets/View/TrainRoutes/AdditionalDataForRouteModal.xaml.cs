@@ -73,7 +73,7 @@ namespace TrainTickets.View.TrainRoutes
 
             } catch(Exception ex)
             {
-                MessageBox.Show("Neispravno uneti podaci!");
+                MessageBox.Show("Neispravno uneti podaci!", "Nova linija", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -72,10 +72,10 @@ namespace TrainTickets.View.Tickets
             Station end = (Station)comboBox2.SelectedItem;
             if (start == null || end == null)
             {
-                MessageBox.Show("Popuni oba polja!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Popuni oba polja!", "Red vožnje", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (start.Equals(end))
-                MessageBox.Show("Početna i krajnja stanica ne mogu biti iste", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Početna i krajnja stanica ne mogu biti iste", "Red vožnje", MessageBoxButton.OK, MessageBoxImage.Error);
             else
             {
                 Lista.Clear();

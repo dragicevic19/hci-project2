@@ -28,6 +28,7 @@
     <None Remove="Images\minimize.png" />
     <None Remove="Images\PeopleAbout-Icon-Transparent-300x300.png" />
     <None Remove="Images\price.png" />
+    <None Remove="Images\reservation1.png" />
     <None Remove="Images\search.png" />
     <None Remove="Images\smallArrow.png" />
     <None Remove="Images\station1.png" />
@@ -41,6 +42,7 @@
     <None Remove="Images\timetable1.png" />
     <None Remove="Images\title.png" />
     <None Remove="Images\train.png" />
+    <None Remove="Images\twoTickets.png" />
     <None Remove="Images\underground.png" />
     <None Remove="Images\wallpaper1jpg.jpg" />
     <None Remove="Images\wallpaper2.jpg" />
@@ -116,6 +118,9 @@
     <Resource Include="Images\price.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\reservation1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\search.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -153,6 +158,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\train.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\twoTickets.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\underground.png">

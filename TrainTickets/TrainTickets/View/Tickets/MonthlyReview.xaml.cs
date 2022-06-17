@@ -70,7 +70,7 @@ namespace TrainTickets.View.Tickets
             Station end = (Station)comboBox2.SelectedItem;
             if (comboBox3.SelectedItem == null)
             {
-                MessageBox.Show("Morate izabrati mesec!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Morate izabrati mesec!", "Mesečni pregled prodatih karata", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 

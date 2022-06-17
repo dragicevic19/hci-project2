@@ -161,11 +161,11 @@ namespace TrainTickets.View.Trains
 
             if (TrainName.Text == null)
             {
-                MessageBox.Show("Ime voza je obavezno!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Ime voza je obavezno!", "Dodavanje voza", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (TrainCapacity.Text == null)
             {
-                MessageBox.Show("Kapacitet voza je obavezan!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Kapacitet voza je obavezan!", "Dodavanje voza", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -173,11 +173,11 @@ namespace TrainTickets.View.Trains
                 {
                     if (this.TrainService.editTrain(TrainName.Text, TrainCapacity.Text))
                     {
-                        MessageBox.Show("Uspešno ste izmenili voz!", "Voz izmenjen", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Uspešno ste izmenili voz!", "Izmena voza", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Greška pri izmeni voza!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Greška pri izmeni voza!", "Izmena voza", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
@@ -185,12 +185,12 @@ namespace TrainTickets.View.Trains
                 {
                     if (!this.TrainService.addTrain(TrainName.Text, TrainCapacity.Text))
                     {
-                        MessageBox.Show("Voz sa unetim imenom već postoji!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Voz sa unetim imenom već postoji!", "Dodavanje voza", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     else
                     {
-                        MessageBox.Show("Uspešno ste dodali novi voz!", "Voz dodat", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Uspešno ste dodali novi voz!", "Dodavanje voza", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
 

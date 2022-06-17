@@ -267,7 +267,7 @@ namespace TrainTickets.View.TrainRoutes
 
         private void btn_deleteLine_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Da li ste sigurni da želite da obrišete liniju?", "Brisanje", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            if (MessageBox.Show("Da li ste sigurni da želite da obrišete liniju?", "Brisanje linije", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                 return;
 
             TrainRouteDTO row = (TrainRouteDTO) RoutesList.SelectedItem;
@@ -275,7 +275,7 @@ namespace TrainTickets.View.TrainRoutes
             {
                 if (!TrainRouteService.deleteRoute(row))
                 {
-                    MessageBox.Show("Greška pri brisanju linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Greška pri brisanju linije!", "Brisanje linije", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -288,7 +288,7 @@ namespace TrainTickets.View.TrainRoutes
             }
             else
             {
-                MessageBox.Show("Trenutno je nemoguće izbrisati liniju jer je kupljena/rezervisana od strane klijenta!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Trenutno je nemoguće izbrisati liniju jer je kupljena/rezervisana od strane klijenta!", "Brisanje linije", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }
@@ -353,7 +353,7 @@ namespace TrainTickets.View.TrainRoutes
 
             if (!TrainRouteService.CanEditOrDelete(selectedRoute))
             {
-                MessageBox.Show("Karta za ovu liniju je rezervisana ili kupljena. Nije moguca izmena podataka već samo pregled!", "Info" ,MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Karta za ovu liniju je rezervisana ili kupljena. Nije moguca izmena podataka već samo pregled!", "Izmena linije" ,MessageBoxButton.OK, MessageBoxImage.Information);
             }
             setUpMapView();
         }
@@ -497,7 +497,7 @@ namespace TrainTickets.View.TrainRoutes
                 Station station = e.Data.GetData("myFormat") as Station;
                 if (IsStationInSelectedStations(station))
                 {
-                    MessageBox.Show("Ovu stanicu ste vec dodali!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Ovu stanicu ste vec dodali!", "Dodavanje stanice", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -562,17 +562,13 @@ namespace TrainTickets.View.TrainRoutes
         {
             nameAndDepTimesControl.ParseDepTimes();
 
-            if (DepartureTimesForRoute.name == null || DepartureTimesForRoute.name.Length == 0)
+            if (!DepartureTimesForRoute.valid)
             {
-                MessageBox.Show("Ime linije je obavezno!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (DepartureTimesForRoute.departureTimes.Count == 0)
-            {
-                MessageBox.Show("Vreme polazaka je obavezno!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             else if (selectedStations.Count < 2)
             {
-                MessageBox.Show("Morate odabrati bar 2 stanice za liniju", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Morate odabrati bar 2 stanice za liniju", "Nova linija", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -586,22 +582,22 @@ namespace TrainTickets.View.TrainRoutes
                         }
                         else
                         {
-                            MessageBox.Show("Greška pri izmeni linije!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Greška pri izmeni linije!", "Izmena linije", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Karta za ovu linija je kupljena/rezervisana i nemoguće je izmeniti je!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Karta za ovu linija je kupljena/rezervisana i nemoguće je izmeniti je!", "Izmena linije", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                 }
                 else
                 {
-                    Train train = (Train) comboTrain.SelectedItem;
+                    Train train = (Train)comboTrain.SelectedItem;
                     if (!TrainRouteService.addRoute(selectedStations, DepartureTimesForRoute.name, DepartureTimesForRoute.departureTimes, train))
                     {
-                        MessageBox.Show("Linija sa unetim imenom već postoji!", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Linija sa unetim imenom već postoji!", "Nova linija", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
                     else
@@ -630,7 +626,7 @@ namespace TrainTickets.View.TrainRoutes
 
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Da li ste sigurni da želite da obrišete stanicu?", "Brisanje", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            if (MessageBox.Show("Da li ste sigurni da želite da obrišete stanicu?", "Brisanje stanice", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                 return;
 
             StationOnRouteDTO row = (StationOnRouteDTO) DataGrid.SelectedItem;

@@ -54,10 +54,10 @@ namespace TrainTickets.View.UserTickets
             if (ticketService.purished(rowItem.ticket.Id))
             {
                 this.nap();
-                MessageBox.Show("Uspešno kupljena karta", "Karta kupljena", MessageBoxButton.OK, MessageBoxImage.Information); }
+                MessageBox.Show("Uspešno kupljena karta", "Kupovina karte", MessageBoxButton.OK, MessageBoxImage.Information); }
 
             else
-                MessageBox.Show("Greska pri kupovini.", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Greska pri kupovini.", "Kupovina karte", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

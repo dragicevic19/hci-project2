@@ -22,7 +22,7 @@ namespace TrainTickets.View.TrainRoutes
 
         public static List<DepartureTime> departureTimes = new List<DepartureTime>();
         public static string name;
-
+        public static bool valid { get; set; }
 
         public DepartureTimesForRoute()
         {
@@ -32,6 +32,7 @@ namespace TrainTickets.View.TrainRoutes
         public DepartureTimesForRoute(TrainRoutesPage w)
         {
             InitializeComponent();
+            valid = false;
         }
 
         private void textDepTimes_MouseDown(object sender, MouseButtonEventArgs e)
@@ -64,6 +65,20 @@ namespace TrainTickets.View.TrainRoutes
         {
             try
             {
+                name = nameBox.Text;
+
+                if (name == null || name.Length == 0)
+                {
+                    MessageBox.Show("Ime linije je obavezno!", "Nova linija", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                else if (depTimesBox.Text == null || depTimesBox.Text.Length == 0)
+                {
+                    MessageBox.Show("Vreme polazaka je obavezno!", "Nova linija", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 departureTimes.Clear();
                 string input = depTimesBox.Text;
                 input = input.Trim();
@@ -79,12 +94,11 @@ namespace TrainTickets.View.TrainRoutes
                     TimeSpan ts = new TimeSpan(hours, minutes, 0);
                     departureTimes.Add(new DepartureTime(ts));
                 }
-
-                name = nameBox.Text;
+                valid = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Neispravno uneti podaci!");
+                MessageBox.Show("Neispravno uneti podaci!\nUnesite vremena polaska u sledećem formatu: 12:00;13:00;14:00", "Nova linija", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

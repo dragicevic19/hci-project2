@@ -145,6 +145,10 @@ namespace TrainTickets
                 db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(31, 'Flamingo', 'false')");
                 db.Database.ExecuteSqlCommand("Insert into Trains (Capacity, Name, Deleted) Values(26, 'Golub', 'false')");
 
+                db.Database.ExecuteSqlCommand("Insert into Users (FirstName, LastName, Email, Password, UserType) Values('Pera', 'Peric', 'pera@gmail.com','pera123',1)");
+                db.Database.ExecuteSqlCommand("Insert into Users (FirstName, LastName, Email, Password, UserType) Values('Vanja', 'Vanjic', 'vanja@gmail.com','vanja123',0)");
+
+
                 db.SaveChanges();
             }
         }
