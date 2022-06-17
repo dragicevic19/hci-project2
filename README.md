@@ -9,4 +9,5 @@ Koraci za pokretanje aplikacije:
   - Morate imati instaliran .NET Core 3.1
   - Aplikacija se pokreće tako što se .sln fajl otvori u Visual Studio IDE-u i pritisne run dugme.
   - Ukoliko želite da ubacite početne podatke u bazu, otkomentarišite poziv funkcije FillDb u View/StartPage/MainWindow.xaml.cs
-
+  - Klijent: pera@gmail.com (pera123)
+  - Menadzer: vanja@gmail.com (vanja123)
